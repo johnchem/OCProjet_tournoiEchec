@@ -1,0 +1,8 @@
+# virtual environment
+
+venv/
+
+# sublime text
+
+*.sublime-project
+*.sublime-workspace
