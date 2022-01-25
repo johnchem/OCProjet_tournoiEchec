@@ -13,7 +13,7 @@ def test_joueur():
 	for nom, prenom, date_de_naissance, sexe in nvxJoueur:
 		test = joueur.joueur(nom, prenom, date_de_naissance, sexe)
 		print(test)
-	return None 
+	return None
 
 if __name__ == "__main__":
 	test_joueur()
