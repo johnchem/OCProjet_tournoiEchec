@@ -39,11 +39,14 @@ class round():
 	'''
 	def __init__(self, nom, dateDebut, dateFin):
 		self.nom = nom
-		self.dateDebut = datetime.nom()
+		self.dateDebut = datetime.now()
 		self.match = []
 
 	def addMatch(self, match):
 		self.match.append(match)
+
+	def endRound(self):
+		self.dateFin = datetime.now()
 
 
 class match():
@@ -52,8 +55,15 @@ class match():
 	score : ([joueur, int], [joueur, int])
 	'''
 	def __init__(self, joueur_1, score_joueur_1, joueur_2, score_joueur_2):
-		self.score_final = ([joueur_1, score_joueur_1],
-							[joueur_2, score_joueur_2])
+		self.joueur_1 = joueur_1
+		self.joueur_2 = joueur_2
+		self.score_joueur_1 = score_joueur_1
+		self.score_joueur_2 = score_joueur_2
+		self.score_final = ([self.joueur_1, self.score_joueur_1],
+							[self.joueur_2, self.score_joueur_2])
+
+	def __repr__(self):
+		return f"{self.joueur_1.nom} {self.score_joueur_1} : {self.score_joueur_2} {self.joueur_2.nom}"
 
 	
 

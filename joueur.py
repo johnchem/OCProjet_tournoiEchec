@@ -1,12 +1,12 @@
 
 class joueur():
-	def __init__(self, nom, prenom, date_de_naissance, sexe, classement = 0):
-		self.nom = nom
-		self.prenom = prenom
-		self.date_de_naissance = date_de_naissance
+	def __init__(self, name, forname, birth_date, sexe, rank = 0):
+		self.name = name
+		self.forname = forname
+		self.birth_date = birth_date
 		self.sexe = sexe
-		self.classement = classement
+		self.rank = rank
 
-	def __repr__(self):
-		return f"{self.prenom} {self.nom} ({self.sexe}) née le {self.date_de_naissance} : {self.classement}"
+	def __str__(self):
+		return f"{self.forname} {self.name} ({self.sexe}) née le {self.date_de_naissance} : {self.classement}"
 
