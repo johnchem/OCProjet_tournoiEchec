@@ -8,5 +8,5 @@ class joueur():
 		self.rank = rank
 
 	def __str__(self):
-		return f"{self.forname} {self.name} ({self.sexe}) née le {self.date_de_naissance} : {self.classement}"
+		return f"{self.forname} {self.name} ({self.sexe}) née le {self.birth_date} : {self.classement}"
 
