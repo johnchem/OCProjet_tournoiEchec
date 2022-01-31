@@ -1,6 +1,6 @@
 from datetime import datetime
 
-class round():
+class Round():
 	'''
 	_________________________
 	nom : str
@@ -27,5 +27,5 @@ class round():
 	def getMatchList(self):
 		pass
 
-	def setResult(self)
+	def setResult(self):
 		pass
