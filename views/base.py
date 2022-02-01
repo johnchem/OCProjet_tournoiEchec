@@ -44,8 +44,14 @@ class Views:
 		value_dict["description"] = input("Desciption : \n")
 		return value_dict
 
-	def create_tournament(self):
-		pass
+	def tournament_created(self, tournois):
+		os.system(CLEAN_SCREEN)
+		print("Le tournois à bien été crée")
+		print("Rappel : ")
+		print(f"Nom : {tournois.name}")
+		print(f"Lieu : {tournois.location}")
+		print(f"A partir du {tournois.date} pendant {tournois.duration} jours")
+		print(f"{tournois.number_of_round} tours avec la régle {tournois.time_control}")
 
 	def new_player(self):
 		pass

@@ -38,6 +38,7 @@ class Controller:
 		print("test start function")
 		tournament_data = self.views.get_tournament_data()
 		self.tournament = self._tournament_cls(**tournament_data)
+		self.views.tournament_created(self.tournament)
 
 	def add_player(self):
 		if self.tournament.isFull():

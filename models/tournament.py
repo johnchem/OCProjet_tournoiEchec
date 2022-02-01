@@ -9,7 +9,7 @@ class Tournament():
 	date : datetime
 	players : [persone]
 	rounds : [round]
-	time_control : ["bullet", "blitz", "coup rapide"] defaut : bullet
+	time_control : ["bullet", "blitz", "coup rapide"]
 	nbr_of_round : int
 	description : str
 	'''
@@ -33,7 +33,6 @@ class Tournament():
 		self.description = description
 		
 		self.currentRound = 0
-		print("Nouveau tournois crée")
 
 	def addPlayer(self, player):
 		self.players.append(player)
