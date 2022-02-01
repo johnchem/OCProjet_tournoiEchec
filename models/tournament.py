@@ -1,3 +1,6 @@
+
+TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
+
 class Tournament():
 	'''
 	_________________________
@@ -10,16 +13,18 @@ class Tournament():
 	nbr_of_round : int
 	description : str
 	'''
-	TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
-
-	def __init__(self, name : str, location : str, date, 
-						rounds : list, time_control, 
-						  nbr_de_tours = 4, description = ""):
+	def __init__(self, *, name : str, location : str, 
+						date,
+						duration,
+						time_control : str, 
+						number_of_round = 4, 
+						description = ""):
 		self.name = name
 		self.location = location
 		self.date = date
-		self.nbr_of_round = nbr_of_round
-		self.rounds = rounds
+		self.duration = duration
+		self.number_of_round = number_of_round
+		self.rounds = []
 		self.players = []
 		
 		assert time_control in TIME_CONTROLE_STANDARD, \
@@ -28,6 +33,7 @@ class Tournament():
 		self.description = description
 		
 		self.currentRound = 0
+		print("Nouveau tournois crée")
 
 	def addPlayer(self, player):
 		self.players.append(player)

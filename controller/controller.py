@@ -37,7 +37,7 @@ class Controller:
 	def start_new_tournament(self):
 		print("test start function")
 		tournament_data = self.views.get_tournament_data()
-		self.tournament = method[self._tournament_cls](**tournament_data)
+		self.tournament = self._tournament_cls(**tournament_data)
 
 	def add_player(self):
 		if self.tournament.isFull():
