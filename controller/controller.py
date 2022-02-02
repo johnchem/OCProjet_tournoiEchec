@@ -39,14 +39,21 @@ class Controller:
 		tournament_data = self.views.get_tournament_data()
 		self.tournament = self._tournament_cls(**tournament_data)
 		self.views.tournament_created(self.tournament)
+		self.main_menu()
 
 	def add_player(self):
-		if self.tournament.isFull():
-			view.max_number_players_reach()
+		if self.tournament:
+			print("oups j'ai rien à faire là")
+			if self.tournament.isFull():
+				self.view.max_number_players_reach()
+				self.main_menu()
+			else:
+				player_data = self.views.new_player_page()
+				newPlayer = player.joueur(**player_data)
+				self.tournament.addPlayer(newPlayer)
 		else:
-			player_data = self.views.get_player_data()
-			newPlayer = player.joueur(**player_data)
-			self.tournament.addPlayer(newPlayer)
+			self.views.ask_to_create_tournament()
+			self.main_menu()
 		
 	def group_generation(self):
 		self.tournament.player_group_generation()

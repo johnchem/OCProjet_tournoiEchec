@@ -13,12 +13,11 @@ class Views:
 	def welcome_page(self):
 		os.system(CLEAN_SCREEN)
 		print("Bienvenue dans Chess Manager")
-		input("---- appuyer sur 'Enter' pour continuer ----")
-		os.system(CLEAN_SCREEN)
-		pass
+		os.system("pause")
 
 	def main_menu_page(self, menu_item_list):
 		i = 1
+		os.system(CLEAN_SCREEN)
 		print("________MENU PRINCIPAL________")
 		for menu_item in menu_item_list:
 			print(f"{i} : {menu_item}")
@@ -35,7 +34,7 @@ class Views:
 		value_dict["date"] = input("Date : ")
 		value_dict["duration"] = input("Durée : ")
 		round_nbr = input("Nombre de tours (defaut 4) : ")
-		if round_nbr == "":
+		if not round_nbr == "":
 			value_dict["number_of_round"] = round_nbr
 		print("Quel gestion du temps voullez vous appliquer ? :")
 		print("1: Bullet   2: Blitz   3: Coup rapide")
@@ -46,21 +45,39 @@ class Views:
 
 	def tournament_created(self, tournois):
 		os.system(CLEAN_SCREEN)
-		print("Le tournois à bien été crée")
+		print("Le tournois à bien été crée \n")
 		print("Rappel : ")
 		print(f"Nom : {tournois.name}")
 		print(f"Lieu : {tournois.location}")
 		print(f"A partir du {tournois.date} pendant {tournois.duration} jours")
 		print(f"{tournois.number_of_round} tours avec la régle {tournois.time_control}")
+		print("")
+		os.system("pause")
 
-	def new_player(self):
-		pass
+	def new_player_page(self):
+		value_dict = {}
+		os.system(CLEAN_SCREEN)
+		print("_Creation d'un nouveau joueur_")
+		value_dict["name"] = input("Nom : ")
+		value_dict["forname"] = input("Prénom : ")
+		value_dict["sexe"] = input("Sexe (H/F) : ").upper()
+		value_dict["birth_date"] = input("Date de naissance : ")
+		value_dict["rank"] = input("Classement : ")
+		return value_dict
 
 	def max_number_players_reach(self):
-		pass
+		os.system(CLEAN_SCREEN)
+		print("vous avez atteint le nombre maximal de joueur dans cette partie")
+		os.system("pause")
+
+	def ask_to_create_tournament(self):
+		os.system(CLEAN_SCREEN)
+		print("vous devez créer un nouveau tournois avant d'ajouter des joueurs")
+		os.system("pause")		
 
 	def not_implemented(self):
 		print("cette fonction n'est pas encore implementée")
+		os.system("pause")
 
 	def exit_message(self):
 		os.system(CLEAN_SCREEN)
