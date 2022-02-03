@@ -45,12 +45,13 @@ class Controller:
 		if self.tournament:
 			print("oups j'ai rien à faire là")
 			if self.tournament.isFull():
-				self.view.max_number_players_reach()
+				self.views.max_number_players_reach()
 				self.main_menu()
 			else:
 				player_data = self.views.new_player_page()
-				newPlayer = player.joueur(**player_data)
+				newPlayer = Player(**player_data)
 				self.tournament.addPlayer(newPlayer)
+				self.main_menu()
 		else:
 			self.views.ask_to_create_tournament()
 			self.main_menu()

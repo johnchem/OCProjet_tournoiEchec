@@ -1,5 +1,6 @@
-import tournois
-import joueur
+from models.tournament import Tournament
+#from models.tournament import TournamentSwiss
+from models.player import Player
 import random
 
 def test_tournois():
@@ -7,6 +8,12 @@ def test_tournois():
 
 def test_round():
 	pass
+
+def create_round(tournament, round_nb):
+	tournament.player_group_generation()
+	assert is tournament.round, "truc" 
+	for match in tournament.round[round_nb]:
+		print(match)
 
 def test_match(liste_joueur):
 	liste_match = []
@@ -19,19 +26,28 @@ def test_match(liste_joueur):
 	pass
 
 if __name__ == "__main__":
-	nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F"),
-				("Connie", "Lam", "10/06/1986", "F"),
-				("Cleveland","Noon","03/11/1938","M"),
-				("Disalvo","Aaron","13/09/1967","M"),
-				("Digiacomo","David","13/09/1944","M"),
-				("Adela","Scanlon","10/01/1951","F"),
-				("Galbraith","Rosemary","03/11/1970","F"),
-				("Burroughs","Eric","03/09/1967","M")]
+	tournament_data = {"name" : "test", 
+						"location" : "nantes", 
+						"date" : "15Jan2021",
+						"duration" :  "1",
+						"time_control" : "blitz", 
+						"number_of_round" : 5, 
+						"description" : ""}
+
+	nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F", 15),
+				("Connie", "Lam", "10/06/1986", "F", 12),
+				("Cleveland","Noon","03/11/1938","M", 5),
+				("Disalvo","Aaron","13/09/1967","M", 65),
+				("Digiacomo","David","13/09/1944","M", 41),
+				("Adela","Scanlon","10/01/1951","F", 11),
+				("Galbraith","Rosemary","03/11/1970","F", 8),
+				("Burroughs","Eric","03/09/1967","M",3)]
 	
+	tournois = TournamentSwiss(**tournament_data)
 	liste_joueur = []
-	for nom, prenom, date_de_naissance, sexe in nvxJoueur:
+	for nom, prenom, date_de_naissance, sexe, classement in nvxJoueur:
 		liste_joueur.append(
-			joueur.joueur(nom, prenom, date_de_naissance, sexe)
+			joueur.joueur(nom, prenom, date_de_naissance, sexe, classement)
 			)
 
 	test_match(liste_joueur)
