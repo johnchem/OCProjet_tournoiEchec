@@ -1,7 +1,11 @@
 
 from models.player import Player
+from models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
+from models.property import Property, DateProperty
+from string import ascii_lowercase, ascii_uppercase
 import os
 
+STRING_TESTING = ascii_lowercase + ascii_uppercase + " -_"
 class Controller:
 	"""controlleur principal """
 
@@ -35,15 +39,25 @@ class Controller:
 		function_called_by_user()
 
 	def start_new_tournament(self):
-		print("test start function")
-		tournament_data = self.views.get_tournament_data()
+		name = Property("Nom : ")
+		location = Property("Lieu : ")
+		location.set_control(lambda x: x.isalpha(), 
+			"introduite seulement des lettres merci")
+		date = DateProperty("Date (JJ/MM/YYYY): ")
+		duration = Property("Durée : ")
+		duration.set_control(lambda x: x.isnumeric(),
+			"introduire seulement un nombre entier de jours")
+		round_nbr = Property("Nombre de tours (defaut 4) : ")
+		round_nbr.set_control(lambda x: x.isnumeric(),
+			"introduire seulement un nombre entier de tours")
+		parameter_list = [name, location, date, duration, round_nbr]
+		tournament_data = self.views.get_tournament_data(parameter_list)
 		self.tournament = self._tournament_cls(**tournament_data)
 		self.views.tournament_created(self.tournament)
 		self.main_menu()
 
 	def add_player(self):
 		if self.tournament:
-			print("oups j'ai rien à faire là")
 			if self.tournament.isFull():
 				self.views.max_number_players_reach()
 				self.main_menu()
