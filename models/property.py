@@ -5,7 +5,7 @@ class Property:
 	
 	.message : message pour l'usager
 	.error_message : message en cas d'erreur sur la valeur introduite
-	.value : velur de la propriété 
+	.value : valeur de la propriété 
 	._control_function : fonction de controle de la valeur
 	
 	# en implementation
@@ -68,23 +68,37 @@ class DateProperty(Property):
 			return False
 
 
-class MultipleChoicesProperty(Property)
-	def __init__(self, text, list_value):
-		super().__init__(text):
+class MultipleChoicesProperty(Property):
+	def __init__(self, prelim_text, list_value, text):
+		super().__init__(text)
 		self.list_value = list_value
-		self._range = range(1, len(list_value)+1)
+		self.message = self._format_message(prelim_text, 
+											list_value, 
+											text)
+
+	def _format_message(self, header, list_value, message):
+		i = 1
+		text_temp = "\n" + header + "\n"
+		for item in list_value:
+			text_temp += f"{i} : {item} \n"
+			i += 1
+		text_temp += message
+		return text_temp
 
 	def set_value(self, value):
+		i = 1
 		input_wrong = True
-		for 
-		while input_wrong:
-			if value.isnumeric() : user_input = int(user_input)
-			if user_input in :
-				input_conform = True
-		return user_input
+		if value.isnumeric() and value in range(1, len(self.list_value)+1): 
+			value = int(value) 
+			self.value = self.list_value[value-1]
+			return True
+		else : 
+			print(f"la valeur un nombre doit être comprise entre 1 et {len(self.list_value)}")
+			return False
 
 
 if __name__ == "__main__":
+	"""
 	message = "test de l'introduction d'une date : "
 	error_message = "pas de tournois dans le passé"
 	DATE_LIMITE = dt.strptime("01/01/2000", "%d/%m/%Y")
@@ -99,3 +113,11 @@ if __name__ == "__main__":
 	prop2 = Property("je m'en fou de la valeur : ")
 	while not prop2.set_value(input(prop2.message)):
 		pass
+	"""
+	prelim_text = "Quel gestion du temps voullez vous appliquer ? :"
+	list_choix = ["Bullet","Blitz","Coup rapide"]
+	text = "choix : "
+	prop = MultipleChoicesProperty(prelim_text, list_choix, text)
+	while not prop.set_value(input(prop.message)):
+		pass
+	print(prop.value)
