@@ -87,13 +87,20 @@ class MultipleChoicesProperty(Property):
 
 	def set_value(self, value):
 		i = 1
-		input_wrong = True
-		if value.isnumeric() and value in range(1, len(self.list_value)+1): 
+		""" vérifie que la valeur est un nombre avant de le convertir en int"""
+		if value.isnumeric():
+			value = int(value)
+		else:
+			print(f"la valeur doit être un nombre")
+			return False
+		""" vérifie que la valeur est bien dans la liste de choix"""  
+		if value in range(1, len(self.list_value)+1): 
 			value = int(value) 
+			""" """
 			self.value = self.list_value[value-1]
 			return True
 		else : 
-			print(f"la valeur un nombre doit être comprise entre 1 et {len(self.list_value)}")
+			print(f"la valeur doit être comprise entre 1 et {len(self.list_value)}")
 			return False
 
 

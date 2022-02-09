@@ -39,6 +39,7 @@ class Controller:
 		function_called_by_user()
 
 	def start_new_tournament(self):
+		""" creation des property pour la creation de tournois"""
 		name = Property("Nom : ")
 		location = Property("Lieu : ")
 		location.set_control(lambda x: x.isalpha(), 
@@ -50,8 +51,16 @@ class Controller:
 		round_nbr = Property("Nombre de tours (defaut 4) : ")
 		round_nbr.set_control(lambda x: x.isnumeric(),
 			"introduire seulement un nombre entier de tours")
-		parameter_list = [name, location, date, duration, round_nbr]
+		prelim_text = "Quel gestion du temps voullez vous appliquer ? :"
+		text = "choix : "
+		time_control = MultipleChoicesProperty(prelim_text, 
+			TIME_CONTROLE_STANDARD, text)
+		description = Property("Desciption : \n")
+		""" envoie des proprety à la vue """
+		parameter_list = [name, location, date, duration, 
+		round_nbr, time_control, description]
 		tournament_data = self.views.get_tournament_data(parameter_list)
+		""" creation de tournois """	
 		self.tournament = self._tournament_cls(**tournament_data)
 		self.views.tournament_created(self.tournament)
 		self.main_menu()
