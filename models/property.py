@@ -1,4 +1,3 @@
-from datetime import datetime as dt
 
 class Property:
 	""" gere le tranfert et le controle des valeurs au modele

@@ -6,11 +6,18 @@ from models.dateProperty import DateProperty
 from models.multipleChoicesProperty import MultipleChoicesProperty
 from models.genderProperty import GenderProperty
 
+from controller.dbManager import save_player_data, load_player_data, 
+								save_tournament_data, load_tournament_data
+
 from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
 import os
+import pathlib
 
 STRING_TESTING = ascii_lowercase + ascii_uppercase + " -_"
+DB_FILE_NAME = "" # name of the file
+DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath(DB_FILE_NAME) # absolule path
+
 class Controller:
 	"""controlleur principal """
 
@@ -74,6 +81,8 @@ class Controller:
 		""" creation de tournois """	
 		self.tournament = self._tournament_cls(**tournament_data)
 		self.views.tournament_created(self.tournament)
+		if save_tournament_data(self.tournament, DB_ADDRESS)
+			print("donnée sauvegardé")
 		self.main_menu()
 
 	def add_player(self):
@@ -102,6 +111,8 @@ class Controller:
 				player_data = self.views.new_player_page(parameter_dict)
 				newPlayer = Player(**player_data)
 				self.tournament.addPlayer(newPlayer)
+				if save_player_data(newPlayer.serialize, DB_ADDRESS):
+					print("joueur sauvegardé")
 				self.main_menu()
 		else:
 			self.views.ask_to_create_tournament()

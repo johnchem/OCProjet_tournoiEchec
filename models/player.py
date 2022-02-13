@@ -1,6 +1,9 @@
+from models.property import Property
+from models.dateProperty import DateProperty
+from models.genderProperty import GenderProperty
 
 class Player:
-	def __init__(self, name, forname, birth_date, gender, rank = 0):
+	def __init__(self, name, forname, birth_date, gender, rank):
 		self.name = name.value
 		self.forname = forname.value
 		self.birth_date = birth_date.value
@@ -14,7 +17,25 @@ class Player:
 	def is_opponent_already_faced(self, player):
 		return player in self.opponent
 
+	def serialize(self):
+		return vars(self)
+
 	def __str__(self):
 		return f"{self.forname} {self.name} ({self.gender}) née le {self.birth_date} : {self.classement}"
 
 
+if __name__ == "__main__":
+	from datetime import datetime as dt
+	name = Property("name")
+	name.set_value("paul")
+	forname = Property("forname")
+	forname.set_value("michel")
+	birth_date = DateProperty("birth_date")
+	birth_date.set_value("01/01/2001")
+	gender = GenderProperty("gender")
+	gender.set_value("H")
+	rank = Property("rank")
+	rank.set_value(0)
+
+	joueur = Player(name, forname, birth_date, gender, rank)
+	print(vars(joueur))

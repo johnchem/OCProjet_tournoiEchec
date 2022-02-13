@@ -1,4 +1,4 @@
-from models.property import Property
+from property import Property
 
 class GenderProperty(Property):
 	""" gere le tranfert et le controle des valeurs au modele
