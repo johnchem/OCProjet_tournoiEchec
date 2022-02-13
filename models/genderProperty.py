@@ -1,7 +1,9 @@
-from datetime import datetime as dt
+from models.property import Property
 
-class Property:
+class GenderProperty(Property):
 	""" gere le tranfert et le controle des valeurs au modele
+	propriété pour le genre du joueur
+	Force la valeur à être en majuscule 
 
 	Attribut
 	----------- 	
@@ -25,25 +27,13 @@ class Property:
 	set_defaut_value(value):
 		mise en place d'une valeur par defaut
 	"""
-	def __init__(self, text):
-		""" initialisation avec le message pour l'usager
-		"""
-		self.message = text
-
-	def set_control(self, function, errorText):
-		"""stock les information necessaire pour controler
-		la valeur d'entree
-		"""
-		self._control_function = function
-		self.error_message = errorText
-
 	def set_value(self, value):
-		"""
-		controle la conformite de la valeur,
+		"""controle la conformite de la valeur,
 		renvoie True et enregistre la valeur si conforme
 		sinon renvoie False
 		"""
 		#test si la valeur a une fonction de controle
+		value = value.upper()
 		if hasattr(self, "_control_function"):
 			# test la conformité de la valeur non vide
 			if self._control_function(value) and value != "":
@@ -66,31 +56,3 @@ class Property:
 		else:
 			self.value = value
 			return True
-
-	def set_defaut_value(self, value):
-		self._defaut_value = value
-
-if __name__ == "__main__":
-	"""
-	message = "test de l'introduction d'une date : "
-	error_message = "pas de tournois dans le passé"
-	DATE_LIMITE = dt.strptime("01/01/2000", "%d/%m/%Y")
-	control_function = lambda x: x>DATE_LIMITE
-
-	prop = Property(message)
-	prop.set_control(control_function, error_message)
-	while not prop.set_value(input(prop.message)):
-		print(prop.error_message)
-
-	print(prop.value)
-	prop2 = Property("je m'en fou de la valeur : ")
-	while not prop2.set_value(input(prop2.message)):
-		pass
-	"""
-	prelim_text = "Quel gestion du temps voullez vous appliquer ? :"
-	list_choix = ["Bullet","Blitz","Coup rapide"]
-	text = "choix : "
-	prop = MultipleChoicesProperty(prelim_text, list_choix, text)
-	while not prop.set_value(input(prop.message)):
-		pass
-	print(prop.value)

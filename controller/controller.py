@@ -1,7 +1,12 @@
 
 from models.player import Player
 from models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
-from models.property import Property, DateProperty
+from models.property import Property
+from models.dateProperty import DateProperty
+from models.multipleChoicesProperty import MultipleChoicesProperty
+from models.genderProperty import GenderProperty
+
+from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
 import os
 
@@ -51,15 +56,21 @@ class Controller:
 		round_nbr = Property("Nombre de tours (defaut 4) : ")
 		round_nbr.set_control(lambda x: x.isnumeric(),
 			"introduire seulement un nombre entier de tours")
+		round_nbr.set_defaut_value(4)
 		prelim_text = "Quel gestion du temps voullez vous appliquer ? :"
 		text = "choix : "
 		time_control = MultipleChoicesProperty(prelim_text, 
 			TIME_CONTROLE_STANDARD, text)
 		description = Property("Desciption : \n")
 		""" envoie des proprety à la vue """
-		parameter_list = [name, location, date, duration, 
-		round_nbr, time_control, description]
-		tournament_data = self.views.get_tournament_data(parameter_list)
+		parameter_dict = {"name": name, 
+						"location": location, 
+						"date": date, 
+						"duration": duration,
+						"number_of_round": round_nbr,
+						"time_control": time_control,
+						"description": description}
+		tournament_data = self.views.get_tournament_data(parameter_dict)
 		""" creation de tournois """	
 		self.tournament = self._tournament_cls(**tournament_data)
 		self.views.tournament_created(self.tournament)
@@ -71,7 +82,24 @@ class Controller:
 				self.views.max_number_players_reach()
 				self.main_menu()
 			else:
-				player_data = self.views.new_player_page()
+				name = Property("Nom : ")
+				forname = Property("Prénom : ")
+				gender = GenderProperty("Genre (H/F) : ")
+				gender.set_control(lambda x : x in "HF",
+					"le genre du joueur doit être H ou F")
+				birth_date = DateProperty("Date de naissance : ")
+				birth_date.set_control(lambda x : (dt.today() - x).days >= 10*365.25,
+					"les joueurs doivent avoir plus de 10 ans")
+				rank = Property("Classement : ")
+				rank.set_defaut_value(0)
+				""" envoie des propriétés à la vue"""
+				parameter_dict = {"name": name,
+					"forname": forname,
+					"birth_date": birth_date,
+					"gender": gender,
+					"rank": rank
+				}
+				player_data = self.views.new_player_page(parameter_dict)
 				newPlayer = Player(**player_data)
 				self.tournament.addPlayer(newPlayer)
 				self.main_menu()

@@ -1,11 +1,11 @@
 
 class Player:
-	def __init__(self, name, forname, birth_date, sexe, rank = 0):
-		self.name = name
-		self.forname = forname
-		self.birth_date = birth_date
-		self.sexe = sexe
-		self.rank = rank
+	def __init__(self, name, forname, birth_date, gender, rank = 0):
+		self.name = name.value
+		self.forname = forname.value
+		self.birth_date = birth_date.value
+		self.gender = gender.value
+		self.rank = rank.value
 		self.opponents = []
 
 	def add_opponent(self, player):
@@ -15,6 +15,6 @@ class Player:
 		return player in self.opponent
 
 	def __str__(self):
-		return f"{self.forname} {self.name} ({self.sexe}) née le {self.birth_date} : {self.classement}"
+		return f"{self.forname} {self.name} ({self.gender}) née le {self.birth_date} : {self.classement}"
 
 

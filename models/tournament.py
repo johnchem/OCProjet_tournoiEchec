@@ -4,32 +4,33 @@ TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
 class Tournament():
 	'''
 	_________________________
-	name : str
-	location : str
-	date : datetime
-	players : [persone]
+	name.value : str
+	location.value : str
+	date.value : datetime
+	players.value : [persone]
 	rounds : [round]
-	time_control : ["bullet", "blitz", "coup rapide"]
-	nbr_of_round : int
-	description : str
+	time_control.value : ["bullet", "blitz", "coup rapide"]
+	number_of_round.value : int
+	description.value : str
 	'''
-	def __init__(self, *, name : str, location : str, 
+	def __init__(self, *, name, location, 
 						date,
 						duration,
-						time_control : str, 
+						time_control, 
 						number_of_round = 4, 
 						description = ""):
-		self.name = name
-		self.location = location
-		self.date = date
-		self.duration = duration
-		self.number_of_round = number_of_round
+		self.name = name.value
+		self.location = location.value
+		self.date = date.value
+		self.duration = duration.value
+		self.number_of_round = number_of_round.value
+		self.time_control = time_control.value
 		self.rounds = []
 		self.players = []
 		
-		assert time_control in TIME_CONTROLE_STANDARD, \
-			"le temps est toujours contrôlé selon un bullet, un blitz ou un coup rapide"
-		self.time_control = time_control
+		assert time_control.value in TIME_CONTROLE_STANDARD, \
+			f"le temps est toujours contrôlé selon un bullet, un blitz ou un coup rapide. recu : {time_control}"
+		self.time_control = time_control.value
 		self.description = description
 		
 		self.currentRound = 0

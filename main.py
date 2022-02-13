@@ -2,6 +2,7 @@
 from views.base import Views
 
 """ modeles """
+from models import *
 from models.player import Player
 from models.tournament import TournamentSwiss
 from models.round import Round

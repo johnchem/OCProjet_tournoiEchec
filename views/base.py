@@ -24,19 +24,15 @@ class Views:
 			i +=1
 		return user_choices("indiquer votre choix : ", range(1,i+1))
 		
-	def get_tournament_data(self, parameter_list):
+	def get_tournament_data(self, parameter_dict):
 		os.system(CLEAN_SCREEN)
-		value_dict = {}
 		print("CREATION D UN NOUVEAU TOURNOI")
 		print("Veuillez remplir les champs ci-dessous \n")
-		for item in parameter_list:
-			item.set_value()
-		print("Quel gestion du temps voullez vous appliquer ? :")
-		print("1: Bullet   2: Blitz   3: Coup rapide")
-		time_control_choices = user_choices("Choix : ", range(1,4))-1
-		value_dict["time_control"] = TIME_CONTROLE_STANDARD[time_control_choices]
-		value_dict["description"] = input("Desciption : \n")
-		return value_dict
+		for item in parameter_dict.values():
+			""" demande à l'utilisateur la valeur tant que 
+			celle-ci n'est pas conforme """
+			while not item.set_value(input(item.message)): pass
+		return parameter_dict
 
 	def tournament_created(self, tournois):
 		os.system(CLEAN_SCREEN)
@@ -44,26 +40,19 @@ class Views:
 		print("Rappel : ")
 		print(f"Nom : {tournois.name}")
 		print(f"Lieu : {tournois.location}")
-		print(f"A partir du {tournois.date} pendant {tournois.duration} jours")
+		print(f"A partir du {tournois.date.strftime('%d/%m/%Y')} pendant {tournois.duration} jours")
 		print(f"{tournois.number_of_round} tours avec la régle {tournois.time_control}")
 		print("")
 		os.system("pause")
 
-	def new_player_page(self, ):
-		value_dict = {}
+	def new_player_page(self, parameter_dict):
 		os.system(CLEAN_SCREEN)
 		print("_Creation d'un nouveau joueur_")
-		value_dict["name"] = input("Nom : ")
-		value_dict["forname"] = input("Prénom : ")
-		value_dict["sexe"] = input("Sexe (H/F) : ").upper()
-		value_dict["birth_date"] = input("Date de naissance : ")
-		value_dict["rank"] = input("Classement : ")
-		return value_dict
-
-	def print_message(text):
-		os.system(CLEAN_SCREEN)
-		print(text)
-		os.system("pause")
+		for item in parameter_dict.values():
+			""" demande à l'utilisateur la valeur tant que 
+			celle-ci n'est pas conforme """
+			while not item.set_value(input(item.message)): pass
+		return parameter_dict
 
 	def ask_to_create_tournament(self):
 		print_message("vous devez créer un nouveau tournois avant d'ajouter des joueurs")		
@@ -79,13 +68,20 @@ class Views:
 		print("Au revoir et bonne journée")
 
 
+def print_message(text):
+		os.system(CLEAN_SCREEN)
+		print(text)
+		os.system("pause")
+
+
 def user_choices(text, range):
 	input_wrong = True
 	while input_wrong:
 		user_input = input(text)
-		if user_input.isnumeric() : user_input = int(user_input)
+		if user_input.isnumeric(): 
+			user_input = int(user_input)
 		if user_input in range:
-			input_conform = True
+			input_wrong = False
 	return user_input
 
 
