@@ -1,4 +1,4 @@
-from property import Property
+from models.property import Property
 from datetime import datetime as dt
 
 

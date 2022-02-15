@@ -68,6 +68,8 @@ class Tournament():
 		]
 		return "\n".join(a)
 
+	def serialize(self):
+		return vars(self)
 
 class TournamentSwiss(Tournament):
 	""" tournament with the swiss systeme """

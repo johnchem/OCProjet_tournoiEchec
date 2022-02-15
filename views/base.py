@@ -54,6 +54,15 @@ class Views:
 			while not item.set_value(input(item.message)): pass
 		return parameter_dict
 
+	def load_tournament_page(self, tournament_list):
+		os.system(CLEAN_SCREEN)
+		print("Chargement d'un ancien tournois")
+		i = 1
+		for item in tournament_list:
+			print(f"{i} : {item}")
+			i +=1
+		return user_choices("indiquer votre choix : ", range(1,i+1))
+
 	def ask_to_create_tournament(self):
 		print_message("vous devez créer un nouveau tournois avant d'ajouter des joueurs")		
 
@@ -62,6 +71,26 @@ class Views:
 
 	def max_number_players_reach(self):
 		print_message("vous avez atteint le nombre maximal de joueur dans cette partie")
+
+	def database_not_found(self):
+		print_message("aucune base de donnée trouvée")
+
+	def issues_database(self, error = None):
+		if error != None:
+			print_message(f"Problème lors de l'importation de la base de donnée \
+			 				\n erreur rencontré : {error}")
+		else:
+			print_message("Problème lors de l'importation de la base de donnée")
+
+	def save_performed_page(self):
+		print_message("Données sauvegardé")
+
+	def error_save_page(self, error = None):
+		if error != None:
+			print_message(f"Echec de la sauvegarde des données \
+			 				\n erreur rencontré : {error}")
+		else : 
+			print_message("Echec de la sauvegarde des données")
 
 	def exit_message(self):
 		os.system(CLEAN_SCREEN)

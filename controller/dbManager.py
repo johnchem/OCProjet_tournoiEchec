@@ -22,16 +22,18 @@ def save_tournament_data(tournament, dbFile):
 		tournament_table.truncate()	# clear the table first
 		tournament_table.insert_multiple(serialized_players)
 		return True
-	except:
-		return False	
+	except BaseException as err:
+		return err
 
-def load_tournament_data(tournament, dbFile):
-	db = TinyDB(dbFile)
-	players_table = db.table('tournament')
-	return players_table.all()
+def load_tournament_data(dbFile):
+	try :
+		db = TinyDB(dbFile)
+		players_table = db.table('tournament')
+		return players_table.all()
+	except BaseException as err:
+		return err
 
 if __name__ == "__main__":
 	import os
 	import pathlib
-	print(pathlib.Path(__file__).parent.absolute().joinpath("tutu.py"))
 

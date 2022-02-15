@@ -6,7 +6,7 @@ from models.dateProperty import DateProperty
 from models.multipleChoicesProperty import MultipleChoicesProperty
 from models.genderProperty import GenderProperty
 
-from controller.dbManager import save_player_data, load_player_data, 
+from controller.dbManager import save_player_data, load_player_data, \
 								save_tournament_data, load_tournament_data
 
 from datetime import datetime as dt
@@ -15,16 +15,15 @@ import os
 import pathlib
 
 STRING_TESTING = ascii_lowercase + ascii_uppercase + " -_"
-DB_FILE_NAME = "" # name of the file
-DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath(DB_FILE_NAME) # absolule path
 
 class Controller:
 	"""controlleur principal """
 
-	def __init__(self, views, tournament):
+	def __init__(self, views, tournament, database_name):
 		self._tournament_cls = tournament
 		self.tournament = None
 		self.views = views
+		self.DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath(database_name) # absolule path
 
 	def welcome_page(self):
 		print("welcome page")
@@ -34,7 +33,7 @@ class Controller:
 		MENU_ITEM_DICT = {
 			"Creation d'un nouveau tournois" : self.start_new_tournament,
 			"Ajout d'un nouveau joueur" : self.add_player,
-			"Charger un tournois précedent" : self.views.not_implemented,
+			"Charger un tournois précedent" : self.load_tournament,
 			"Importer un joueur" : self.views.not_implemented,
 			"Quitter" : self.quit
 			}
@@ -69,6 +68,7 @@ class Controller:
 		time_control = MultipleChoicesProperty(prelim_text, 
 			TIME_CONTROLE_STANDARD, text)
 		description = Property("Desciption : \n")
+		
 		""" envoie des proprety à la vue """
 		parameter_dict = {"name": name, 
 						"location": location, 
@@ -78,11 +78,17 @@ class Controller:
 						"time_control": time_control,
 						"description": description}
 		tournament_data = self.views.get_tournament_data(parameter_dict)
+		
 		""" creation de tournois """	
 		self.tournament = self._tournament_cls(**tournament_data)
 		self.views.tournament_created(self.tournament)
-		if save_tournament_data(self.tournament, DB_ADDRESS)
-			print("donnée sauvegardé")
+		
+		""" sauvegarde du tournois"""
+		save_result = save_tournament_data(self.tournament.serialize, self.DB_ADDRESS)
+		if save_result:
+			self.views.save_performed_page()
+		else :
+			self.views.error_save_page(save_result)
 		self.main_menu()
 
 	def add_player(self):
@@ -111,13 +117,35 @@ class Controller:
 				player_data = self.views.new_player_page(parameter_dict)
 				newPlayer = Player(**player_data)
 				self.tournament.addPlayer(newPlayer)
-				if save_player_data(newPlayer.serialize, DB_ADDRESS):
+				if save_player_data(newPlayer.serialize, self.DB_ADDRESS):
 					print("joueur sauvegardé")
 				self.main_menu()
 		else:
 			self.views.ask_to_create_tournament()
 			self.main_menu()
 		
+	def load_tournament(self):
+		if self.DB_ADDRESS.exists():
+			print(self.DB_ADDRESS)
+			history_tournament = load_tournament_data(self.DB_ADDRESS)
+			if isinstance(history_tournament, list):
+				tournament_name_formated = self.tournament_historic(history_tournament)
+				user_choices = self.views.load_tournament_page(tournament_name_formated)
+				print(type(history_tournament[user_choices]))
+				print(history_tournament[user_choices])
+			else :
+				self.views.issues_database(history_tournament)
+				self.main_menu()
+		else : 
+			self.views.database_not_found()
+			self.main_menu()
+
+	def tournament_historic(self, tournament_list):
+		output_list = []
+		for tournament in tournament_list:
+			output_list.append(f"{tournament.name}")
+		return output_list
+
 	def group_generation(self):
 		self.tournament.player_group_generation()
 
