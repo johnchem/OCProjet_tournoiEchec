@@ -1,6 +1,6 @@
-from models.tournament import Tournament
+from chess_tournament.models.tournament import Tournament
 #from models.tournament import TournamentSwiss
-from models.player import Player
+from chess_tournament.models.player import Player
 import random
 
 def test_tournois():

@@ -1,5 +1,5 @@
-import tournois
-import joueur
+from chess_tournament.models.tournament import Tournament
+from player import Player
 
 def test_joueur():
 	nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F"),

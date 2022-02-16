@@ -1,4 +1,4 @@
-from models.property import Property
+from chess_tournament.models.property import Property
 
 class GenderProperty(Property):
 	""" gere le tranfert et le controle des valeurs au modele

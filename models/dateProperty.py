@@ -1,4 +1,4 @@
-from models.property import Property
+from chess_tournament.models.property import Property
 from datetime import datetime as dt
 
 

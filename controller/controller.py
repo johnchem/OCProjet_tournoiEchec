@@ -1,12 +1,12 @@
 
-from models.player import Player
-from models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
-from models.property import Property
-from models.dateProperty import DateProperty
-from models.multipleChoicesProperty import MultipleChoicesProperty
-from models.genderProperty import GenderProperty
+from chess_tournament.models.player import Player
+from chess_tournament.models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
+from chess_tournament.models.property import Property
+from chess_tournament.models.dateProperty import DateProperty
+from chess_tournament.models.multipleChoicesProperty import MultipleChoicesProperty
+from chess_tournament.models.genderProperty import GenderProperty
 
-from controller.dbManager import save_player_data, load_player_data, \
+from chess_tournament.controller.dbManager import save_player_data, load_player_data, \
 								save_tournament_data, load_tournament_data
 
 from datetime import datetime as dt

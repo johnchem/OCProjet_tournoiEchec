@@ -1,6 +1,6 @@
 
 import os
-from models.tournament import TIME_CONTROLE_STANDARD
+from chess_tournament.models.tournament import TIME_CONTROLE_STANDARD
 """ terminal commandes """
 CLEAN_SCREEN = "CLS"
 

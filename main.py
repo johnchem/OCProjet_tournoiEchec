@@ -1,14 +1,14 @@
 """ views """
-from views.base import Views
+from chess_tournament.views.base import Views
 
 """ modeles """
-from models.player import Player
-from models.tournament import TournamentSwiss
-from models.round import Round
-from models.match import Match
+from chess_tournament.models.player import Player
+from chess_tournament.models.tournament import TournamentSwiss
+from chess_tournament.models.round import Round
+from chess_tournament.models.match import Match
 
 """ controller """
-from controller.controller import Controller
+from chess_tournament.controller.controller import Controller
 
 def main(database_name):
 	views = Views()

@@ -1,6 +1,6 @@
-from models.property import Property
-from models.dateProperty import DateProperty
-from models.genderProperty import GenderProperty
+from chess_tournament.models.property import Property
+from chess_tournament.models.dateProperty import DateProperty
+from chess_tournament.models.genderProperty import GenderProperty
 
 class Player:
 	def __init__(self, name, forname, birth_date, gender, rank):

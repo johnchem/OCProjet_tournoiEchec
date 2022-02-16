@@ -1,7 +1,5 @@
-
-
 # from models.property import Property
-from tournoisEchecs.models.property import Property
+from chess_tournament.models.property import Property
 
 def test_num(message, errorMessage, controlfunction):
 	prop = Property()
