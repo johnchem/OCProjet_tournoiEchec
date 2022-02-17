@@ -18,6 +18,8 @@ class Player:
 		return player in self.opponent
 
 	def serialize(self):
+		serialized_player = vars(self)
+		serialized_player["birth_date"] = serialized_player["birth_date"].strftime("%d/%m/%Y")
 		return vars(self)
 
 	def __str__(self):

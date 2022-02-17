@@ -24,9 +24,10 @@ class Property:
 	set_defaut_value(value):
 		mise en place d'une valeur par defaut
 	"""
-	def __init__(self, text):
-		""" initialisation avec le message pour l'usager
-		"""
+	def __init__(self):
+		""" initialisation """ 
+	def set_message(self, text):
+		""" le message pour l'usager"""
 		self.message = text
 
 	def set_control(self, function, errorText):
