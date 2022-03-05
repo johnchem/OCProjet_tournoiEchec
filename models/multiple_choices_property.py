@@ -29,8 +29,7 @@ class MultipleChoicesProperty(Property):
 	set_defaut_value(value):
 		mise en place d'une valeur par defaut
 	"""
-	def __init__(self, prelim_text, list_value, text):
-		super().__init__(text)
+	def set_message(self, prelim_text, list_value, text):
 		self.list_value = list_value
 		self.message = self._format_message(prelim_text, 
 											list_value, 

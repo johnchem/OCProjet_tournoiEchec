@@ -1,1 +1,35 @@
-{"players": {"1": {"name": "paul", "forname": "michel", "birth_date": "01/01/2001", "gender": "H", "rank": 0, "opponents": []}, "2": {"name": "george", "forname": "louis", "birth_date": "10/05/1995", "gender": "H", "rank": 10, "opponents": []}, "3": {"name": "paulette", "forname": "vuiton", "birth_date": "15/11/1955", "gender": "F", "rank": 100, "opponents": []}}}
+{
+    "players":
+    {
+        "1":
+        {
+            "name": "paul",
+            "forname": "michel",
+            "birth_date": "01/01/2001",
+            "gender": "H",
+            "rank": 0,
+            "opponents":
+            []
+        },
+        "2":
+        {
+            "name": "george",
+            "forname": "louis",
+            "birth_date": "10/05/1995",
+            "gender": "H",
+            "rank": 10,
+            "opponents":
+            []
+        },
+        "3":
+        {
+            "name": "paulette",
+            "forname": "vuiton",
+            "birth_date": "15/11/1955",
+            "gender": "F",
+            "rank": 100,
+            "opponents":
+            []
+        }
+    }
+}

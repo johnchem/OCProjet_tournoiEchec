@@ -8,6 +8,9 @@ from chess_tournament.models.gender_property import GenderProperty
 
 from chess_tournament.controller.db_manager import save_player_data, load_player_data, \
 								save_tournament_data, load_tournament_data
+from chess_tournament.controller.deserializer import deserialize_tournament, \
+								deserialize_player
+
 
 from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
@@ -51,23 +54,35 @@ class Controller:
 
 	def start_new_tournament(self):
 		""" creation des property pour la creation de tournois"""
-		name = Property("Nom : ")
-		location = Property("Lieu : ")
+		name = Property()
+		name.set_message("Nom : ")
+		
+		location = Property()
+		location.set_message("Lieu : ")
 		location.set_control(lambda x: x.isalpha(), 
 			"introduite seulement des lettres merci")
-		date = DateProperty("Date (JJ/MM/YYYY): ")
-		duration = Property("Durée : ")
+		
+		date = DateProperty()
+		date.set_message("Date (JJ/MM/YYYY): ")
+		
+		duration = Property()
+		duration.set_message("Durée : ")
 		duration.set_control(lambda x: x.isnumeric(),
 			"introduire seulement un nombre entier de jours")
-		round_nbr = Property("Nombre de tours (defaut 4) : ")
+		
+		round_nbr = Property()
+		round_nbr.set_message("Nombre de tours (defaut 4) : ")
 		round_nbr.set_control(lambda x: x.isnumeric(),
 			"introduire seulement un nombre entier de tours")
 		round_nbr.set_defaut_value(4)
+		
 		prelim_text = "Quel gestion du temps voullez vous appliquer ? :"
 		text = "choix : "
-		time_control = MultipleChoicesProperty(prelim_text, 
-			TIME_CONTROLE_STANDARD, text)
-		description = Property("Desciption : \n")
+		time_control = MultipleChoicesProperty()
+		time_control.set_message(prelim_text, TIME_CONTROLE_STANDARD, text)
+		
+		description = Property()
+		description.set_message("Desciption : \n")
 		
 		""" envoie des proprety à la vue """
 		parameter_dict = {"name": name, 
@@ -92,21 +107,30 @@ class Controller:
 		self.main_menu()
 
 	def add_player(self):
+		# controle la présence d'un tournois actif
 		if self.tournament:
+			# controle si on peut ajouter des joueurs
 			if self.tournament.isFull():
 				self.views.max_number_players_reach()
 				self.main_menu()
 			else:
-				name = Property("Nom : ")
-				forname = Property("Prénom : ")
-				gender = GenderProperty("Genre (H/F) : ")
+				# creation des propriétés du nouveau joueur
+				name = Property()
+				name.set_message("Nom : ")
+				forname = Property()
+				forname.set_message("Prénom : ")
+				gender = GenderProperty()
+				gender.set_message("Genre (H/F) : ")
 				gender.set_control(lambda x : x in "HF",
 					"le genre du joueur doit être H ou F")
-				birth_date = DateProperty("Date de naissance : ")
+				birth_date = DateProperty()
+				birth_date.set_message("Date de naissance : ")
 				birth_date.set_control(lambda x : (dt.today() - x).days >= 10*365.25,
 					"les joueurs doivent avoir plus de 10 ans")
-				rank = Property("Classement : ")
+				rank = Property()
+				rank.set_message("Classement : ")
 				rank.set_defaut_value(0)
+
 				""" envoie des propriétés à la vue"""
 				parameter_dict = {"name": name,
 					"forname": forname,
@@ -115,8 +139,11 @@ class Controller:
 					"rank": rank
 				}
 				player_data = self.views.new_player_page(parameter_dict)
+				""" creation du nouveau joueur"""
 				newPlayer = Player(**player_data)
 				self.tournament.addPlayer(newPlayer)
+
+				""" sauvegarde du joueur dans la db joueur"""
 				if save_player_data(newPlayer.serialize, self.DB_ADDRESS):
 					print("joueur sauvegardé")
 				self.main_menu()
@@ -125,14 +152,21 @@ class Controller:
 			self.main_menu()
 		
 	def load_tournament(self):
+		# controle la présence d'une base de données
 		if self.DB_ADDRESS.exists():
 			print(self.DB_ADDRESS)
+			# chargement de l'ensemble des tournois enregistré
 			history_tournament = load_tournament_data(self.DB_ADDRESS)
+			# gestion de la reception d'erreur lors de l'importation de la db
+			print(history_tournament)
 			if isinstance(history_tournament, list):
+				# mise en forme et affichage les tournois sauvegardés
 				tournament_name_formated = self.tournament_historic(history_tournament)
+				#reception du choix de l'utilisateur
 				user_choices = self.views.load_tournament_page(tournament_name_formated)
+				# importation des données 
 				print(type(history_tournament[user_choices]))
-				print(history_tournament[user_choices])
+				self.tournament = deserialize_tournament(history_tournament[user_choices])
 			else :
 				self.views.issues_database(history_tournament)
 				self.main_menu()

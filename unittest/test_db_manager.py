@@ -11,10 +11,16 @@ from chess_tournament.models.multiple_choices_property import MultipleChoicesPro
 from chess_tournament.models.gender_property import GenderProperty
 
 #importation du controlleur
-from chess_tournament.controller.db_manager import save_player_data
+from chess_tournament.controller.db_manager import save_player_data, save_tournament_data
 
-def test_save_tournament(tournament):
-	pass
+def test_save_tournament(tournament, db_file):
+	serialized_tournament = tournament.serialize()
+	try:
+		save_tournament_data(serialized_tournament, db_file)
+		print(serialized_tournament)
+	except BaseException as err:
+		return err
+
 
 def test_save_players(players, db_file):
 	players_serialized = []
@@ -23,38 +29,41 @@ def test_save_players(players, db_file):
 	print(players_serialized)
 	save_player_data(players_serialized, db_file)
 
+
 def create_dummy_tournament():
-	name = Property("Nom : ")
-	location = Property("Lieu : ")
-	date = DateProperty("Date (JJ/MM/YYYY): ")
-	duration = Property("Durée : ")
-	round_nbr = Property("Nombre de tours (defaut 4) : ")
-	time_control = MultipleChoicesProperty("test", 
-			"blitz", "test")
-	description = Property("Desciption : \n")
+	name = Property()
+	location = Property()
+	date = DateProperty()
+	duration = Property()
+	round_nbr = Property()
+	time_control = MultipleChoicesProperty()
+	description = Property()
 	
 	name.set_value("toto")
 	location.set_value("tours")
 	date.set_value("12/05/2021")
 	duration.set_value(1)
 	round_nbr.set_value(4)
-	time_control.set_value("blitz")
+	time_control.list_value = TIME_CONTROLE_STANDARD
+	time_control.set_value("1")
 	description.set_value("test1")
 
 	tournois = TournamentSwiss(name = name, 
 							location = location, 
 							date = date,
 							duration = duration,
+							time_control = time_control,
 							number_of_round = round_nbr,
 							description = description)
 	return tournois
 
+
 def create_dummy_player():
-	name = Property("name")
-	forname = Property("forname")
-	birth_date = DateProperty("birth_date")
-	gender = GenderProperty("gender")
-	rank = Property("rank")
+	name = Property()
+	forname = Property()
+	birth_date = DateProperty()
+	gender = GenderProperty()
+	rank = Property()
 	
 	name.set_value("paul")
 	forname.set_value("michel")
@@ -82,3 +91,4 @@ def create_dummy_player():
 if __name__ == "__main__":
 	DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath("DB_unitest.json") # absolule path
 	test_save_players(create_dummy_player(), DB_ADDRESS)
+	test_save_tournament(create_dummy_tournament(), DB_ADDRESS)

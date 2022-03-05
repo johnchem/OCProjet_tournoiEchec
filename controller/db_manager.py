@@ -20,7 +20,7 @@ def save_tournament_data(tournament, dbFile):
 	try : 
 		db = TinyDB(dbFile)
 		tournament_table = db.table('tournament')
-		tournament_table.truncate()	# clear the table first
+		#tournament_table.truncate()	# clear the table first
 		tournament_table.insert_multiple(tournament)
 		return True
 	except BaseException as err:

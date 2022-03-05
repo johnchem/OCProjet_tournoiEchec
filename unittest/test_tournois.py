@@ -33,6 +33,22 @@ if __name__ == "__main__":
 						"time_control" : "blitz", 
 						"number_of_round" : 5, 
 						"description" : ""}
+						
+	mockData1 = {"name" : "riri",
+				"location" : "paris",
+				"date" : "15Feb2022",
+				"duration" : "2",
+				"time_control" : "blitz",
+				"number_of_round" : 5,
+				"description" : ""}
+
+	mockData2 : {"name" : "loulou",
+				"location" : "nantes",
+				"date" : "30Mar2022",
+				"duration" : "1",
+				"time_control" : "coup rapide",
+				"number_of_round" : 4,
+				"description" : ""}
 
 	nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F", 15),
 				("Connie", "Lam", "10/06/1986", "F", 12),
