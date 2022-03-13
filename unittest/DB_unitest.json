@@ -31,5 +31,38 @@
             "opponents":
             []
         }
+    },
+    "tournament":
+    {
+        "1":
+        {
+            "name": "toto",
+            "location": "tours",
+            "date": "12/05/2021",
+            "duration": 1,
+            "number_of_round": 4,
+            "time_control": "bullet",
+            "rounds":
+            [],
+            "players":
+            [],
+            "description": "test1",
+            "currentRound": 0
+        },
+        "2":
+        {
+            "name": "toto",
+            "location": "tours",
+            "date": "12/05/2021",
+            "duration": 1,
+            "number_of_round": 4,
+            "time_control": "bullet",
+            "rounds":
+            [],
+            "players":
+            [],
+            "description": "test1",
+            "currentRound": 0
+        }
     }
 }

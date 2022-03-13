@@ -99,7 +99,7 @@ class Controller:
 		self.views.tournament_created(self.tournament)
 		
 		""" sauvegarde du tournois"""
-		save_result = save_tournament_data(self.tournament.serialize, self.DB_ADDRESS)
+		save_result = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
 		if save_result:
 			self.views.save_performed_page()
 		else :
@@ -154,19 +154,18 @@ class Controller:
 	def load_tournament(self):
 		# controle la présence d'une base de données
 		if self.DB_ADDRESS.exists():
-			print(self.DB_ADDRESS)
 			# chargement de l'ensemble des tournois enregistré
 			history_tournament = load_tournament_data(self.DB_ADDRESS)
 			# gestion de la reception d'erreur lors de l'importation de la db
-			print(history_tournament)
 			if isinstance(history_tournament, list):
 				# mise en forme et affichage les tournois sauvegardés
 				tournament_name_formated = self.tournament_historic(history_tournament)
 				#reception du choix de l'utilisateur
 				user_choices = self.views.load_tournament_page(tournament_name_formated)
-				# importation des données 
-				print(type(history_tournament[user_choices]))
-				self.tournament = deserialize_tournament(history_tournament[user_choices])
+				# importation des données
+				chosen_tournament = history_tournament[user_choices-1]
+				print(chosen_tournament)
+				self.tournament = deserialize_tournament(**chosen_tournament)
 			else :
 				self.views.issues_database(history_tournament)
 				self.main_menu()
@@ -177,7 +176,7 @@ class Controller:
 	def tournament_historic(self, tournament_list):
 		output_list = []
 		for tournament in tournament_list:
-			output_list.append(f"{tournament.name}")
+			output_list.append(f"{tournament['name']}")
 		return output_list
 
 	def group_generation(self):

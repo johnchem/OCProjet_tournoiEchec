@@ -7,48 +7,38 @@ from chess_tournament.models.gender_property import GenderProperty
 
 
 def deserialize_tournament(**kwarg):
-	if kwarg.has_key("name"):
-		name = Property()
-		name.set_value(kwarg["name"])
+	name = Property()
+	name.set_value(kwarg["name"])
 	
-	if kwarg.has_key("location"):
-		location = Property()
-		location.set_value(kwarg["location"])
+	location = Property()
+	location.set_value(kwarg["location"])
 	
-	if kwarg.has_key("date"):
-		date = DateProperty()
-		date.set_value(kwarg["date"])
+	date = DateProperty()
+	date.set_value(kwarg["date"])
 	
-	if kwarg.has_key("duration"):
-		duration = Property()
-		duration.set_value(kwarg["duration"])
+	duration = Property()
+	duration.set_value(kwarg["duration"])
 	
-	if kwarg.has_key("number_of_round"):
-		number_of_round = Property()
-		number_of_round.set_value(kwarg["number_of_round"])
+	number_of_round = Property()
+	number_of_round.set_value(kwarg["number_of_round"])
 
-	if kwarg.has_key("time_control"):
-		time_control = MultipleChoicesProperty()
-		time_control.set_value(kwarg["time_control"])
+	time_control = MultipleChoicesProperty()
+	time_control._set_value(kwarg["time_control"])
 
-	if kwarg.has_key("duration"):
-		description = Property()
-		description.set_value(kwarg["description"])
+	description = Property()
+	description.set_value(kwarg["description"])
 
 	tournament = TournamentSwiss(name = name, 
 			date = date,
 			duration = duration,
 			number_of_round = number_of_round,
-			description = description)
+			description = description,
+			location = location,
+			time_control = time_control)
 
-	if kwarg.has_key("currentRound"):
-		 tournament.currentRound = kwarg["currentRound"]
-
-	if kwarg.has_key("rounds"):
-		tournament.round = kwarg["rounds"]
-
-	if kwarg.has_key("players"):
-		tournament.players = kwarg["players"]
+	tournament.currentRound = kwarg["currentRound"]
+	tournament.round = kwarg["rounds"]
+	tournament.players = kwarg["players"]
 	return tournament
 
 def deserialize_player(**kwarg):

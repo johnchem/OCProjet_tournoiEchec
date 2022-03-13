@@ -28,7 +28,7 @@ class Tournament():
 		self.rounds = []
 		self.players = []
 		self.time_control = time_control.value
-		self.description = description
+		self.description = description.value
 		self.currentRound = 0
 
 	def addPlayer(self, player):
@@ -51,7 +51,6 @@ class Tournament():
 	def player_group_generation(self):
 		pass
 	
-
 	def __str__(self):
 		a = [f"Nom : {self.name}",
 			f"Lieu : {self.location}",
@@ -61,6 +60,8 @@ class Tournament():
 		return "\n".join(a)
 
 	def serialize(self):
+		serialized_tournament = vars(self)
+		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
 		return vars(self)
 
 class TournamentSwiss(Tournament):

@@ -61,3 +61,6 @@ class MultipleChoicesProperty(Property):
 		else : 
 			print(f"la valeur doit être comprise entre 1 et {len(self.list_value)}")
 			return False
+
+	def _set_value(self, value):
+		self.value = value

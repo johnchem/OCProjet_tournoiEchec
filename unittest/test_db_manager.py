@@ -11,7 +11,8 @@ from chess_tournament.models.multiple_choices_property import MultipleChoicesPro
 from chess_tournament.models.gender_property import GenderProperty
 
 #importation du controlleur
-from chess_tournament.controller.db_manager import save_player_data, save_tournament_data
+from chess_tournament.controller.db_manager import save_player_data, \
+		save_tournament_data, load_tournament_data, load_player_data
 
 def test_save_tournament(tournament, db_file):
 	serialized_tournament = tournament.serialize()
@@ -29,6 +30,9 @@ def test_save_players(players, db_file):
 	print(players_serialized)
 	save_player_data(players_serialized, db_file)
 
+def test_read_tournament_data(db_file):
+	list_tournament = load_tournament_data(db_file)
+	print(list_tournament)
 
 def create_dummy_tournament():
 	name = Property()
@@ -90,5 +94,6 @@ def create_dummy_player():
 
 if __name__ == "__main__":
 	DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath("DB_unitest.json") # absolule path
-	test_save_players(create_dummy_player(), DB_ADDRESS)
-	test_save_tournament(create_dummy_tournament(), DB_ADDRESS)
+	#test_save_players(create_dummy_player(), DB_ADDRESS)
+	#test_save_tournament(create_dummy_tournament(), DB_ADDRESS)
+	test_read_tournament_data(DB_ADDRESS)
