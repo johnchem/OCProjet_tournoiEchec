@@ -15,13 +15,15 @@ class Views:
 		print("Bienvenue dans Chess Manager")
 		os.system("pause")
 
-	def main_menu_page(self, menu_item_list):
+	def main_menu_page(self, menu_item_list, tournament_name = None):
 		i = 1
 		os.system(CLEAN_SCREEN)
+		if tournament_name:
+			print(f"tournois actuel : {tournament_name}")
 		print("________MENU PRINCIPAL________")
 		for menu_item in menu_item_list:
 			print(f"{i} : {menu_item}")
-			i +=1
+			i += 1
 		return user_choices("indiquer votre choix : ", range(1,i+1))
 		
 	def get_tournament_data(self, parameter_dict):

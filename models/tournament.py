@@ -62,7 +62,8 @@ class Tournament():
 	def serialize(self):
 		serialized_tournament = vars(self)
 		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
-		return vars(self)
+		serialized_tournament["players"] = [x.serialize for x in self.players]
+		return serialized_tournament
 
 class TournamentSwiss(Tournament):
 	""" tournament with the swiss systeme """

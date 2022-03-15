@@ -44,7 +44,11 @@ class Controller:
 		menu_item_list = [x for x in MENU_ITEM_DICT.keys()]
 
 		#get the answer from the user
-		user_answer = self.views.main_menu_page(menu_item_list)-1
+		if self.tournament:
+			user_answer = self.views.main_menu_page(menu_item_list, 
+				tournament_name = self.tournament.name)-1
+		else:	
+			user_answer = self.views.main_menu_page(menu_item_list)-1
 		print(user_answer)
 		print(menu_item_list)
 		# convert the answer to the function 
@@ -168,10 +172,9 @@ class Controller:
 				self.tournament = deserialize_tournament(**chosen_tournament)
 			else :
 				self.views.issues_database(history_tournament)
-				self.main_menu()
 		else : 
 			self.views.database_not_found()
-			self.main_menu()
+		self.main_menu()
 
 	def tournament_historic(self, tournament_list):
 		output_list = []

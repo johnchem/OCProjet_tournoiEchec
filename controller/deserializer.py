@@ -6,27 +6,27 @@ from chess_tournament.models.tournament import TournamentSwiss
 from chess_tournament.models.gender_property import GenderProperty
 
 
-def deserialize_tournament(**kwarg):
+def deserialize_tournament(**kwargs):
 	name = Property()
-	name.set_value(kwarg["name"])
+	name.set_value(kwargs["name"])
 	
 	location = Property()
-	location.set_value(kwarg["location"])
+	location.set_value(kwargs["location"])
 	
 	date = DateProperty()
-	date.set_value(kwarg["date"])
+	date.set_value(kwargs["date"])
 	
 	duration = Property()
-	duration.set_value(kwarg["duration"])
+	duration.set_value(kwargs["duration"])
 	
 	number_of_round = Property()
-	number_of_round.set_value(kwarg["number_of_round"])
+	number_of_round.set_value(kwargs["number_of_round"])
 
 	time_control = MultipleChoicesProperty()
-	time_control._set_value(kwarg["time_control"])
+	time_control._set_value(kwargs["time_control"])
 
 	description = Property()
-	description.set_value(kwarg["description"])
+	description.set_value(kwargs["description"])
 
 	tournament = TournamentSwiss(name = name, 
 			date = date,
@@ -36,34 +36,44 @@ def deserialize_tournament(**kwarg):
 			location = location,
 			time_control = time_control)
 
-	tournament.currentRound = kwarg["currentRound"]
-	tournament.round = kwarg["rounds"]
-	tournament.players = kwarg["players"]
+	tournament.currentRound = kwargs["currentRound"]
+	tournament.round = kwargs["rounds"]
+	tournament.players = kwargs["players"]
 	return tournament
 
-def deserialize_player(**kwarg):
-	if kwarg.has_key("name"):
-		name = Property()
-		name.set_value(kwarg["name"])
+def deserialize_player(**kwargs):
+	name = Property()
+	name.set_value(kwargs["name"])
 	
-	if kwarg.has_key("forname"):
-		forname = Property()
-		forname.set_value(kwarg["forname"])
+	forname = Property()
+	forname.set_value(kwargs["forname"])
 	
-	if kwarg.has_key("birth_date"):
-		birth_date = DateProperty()
-		birth_date.set_value(kwarg["birth_date"])
+	birth_date = DateProperty()
+	birth_date.set_value(kwargs["birth_date"])
 	
-	if kwarg.has_key("gender"):
-		gender = Property()
-		gender.set_value(kwarg["gender"])
+	gender = Property()
+	gender.set_value(kwargs["gender"])
 	
-	if kwarg.has_key("rank"):
-		rank = Property()
-		rank.set_value(kwarg["forname"])
+	rank = Property()
+	rank.set_value(kwargs["forname"])
 	
 	player = Player(name, forname, birth_date, gender, rank)
 
-	if kwarg.has_key("opponents"):
-		player.opponents = kwarg["opponents"]
+	player.opponents = kwargs["opponents"]
+	
 	return player
+
+def deserialize_round(**kwargs):
+	name = Property()
+	name.set_value(kwargs["name"])
+
+	restored_round = Round(name)
+
+	begin_date_time = datetime.strptime(kwargs["begin_date_time"], "%d/%m/%Y %X")
+	restored_round.begin_date_time = begin_date_time 
+
+	end_date_time = datetime.strptime(kwargs["end_date_time"], "%d/%m/%Y %X")
+	restored_round.end_date_time = end_date_time
+
+	end_round = kwargs["done"]
+	match = [deserialize_match(x) for x in kwargs["match"]]

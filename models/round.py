@@ -14,6 +14,7 @@ class Round():
 	def __init__(self, name : str, beginDateTime, endDateTime):
 		self.name = name
 		self.beginDateTime = datetime.now()
+		self.endDateTime = endDateTime
 		self.match = []
 		self.done = False
 
@@ -29,3 +30,10 @@ class Round():
 
 	def setResult(self):
 		pass
+
+	def serialize(self):
+		serialized_round = vars(self)
+		serialized_round["beginDateTime"] = serialized_round["beginDateTime"].strftime("%d/%m/%Y")
+		serialized_round["endDateTime"] = serialized_round["endDateTime"].strftime("%d/%m/%Y")
+		serialized_round["match"] = [x.serialize for x in self.match]
+		return serialized_round
