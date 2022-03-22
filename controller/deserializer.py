@@ -1,7 +1,13 @@
+#import modole
+from datetime import datetime
+
 from chess_tournament.models.property import Property
 from chess_tournament.models.date_property import DateProperty
 from chess_tournament.models.multiple_choices_property import MultipleChoicesProperty
 from chess_tournament.models.tournament import TournamentSwiss
+from chess_tournament.models.match import Match
+from chess_tournament.models.round import Round
+from chess_tournament.models.player import Player
 
 from chess_tournament.models.gender_property import GenderProperty
 
@@ -55,17 +61,14 @@ def deserialize_player(**kwargs):
 	gender.set_value(kwargs["gender"])
 	
 	rank = Property()
-	rank.set_value(kwargs["forname"])
+	rank.set_value(kwargs["rank"])
 	
 	player = Player(name, forname, birth_date, gender, rank)
-
-	player.opponents = kwargs["opponents"]
 	
 	return player
 
 def deserialize_round(**kwargs):
-	name = Property()
-	name.set_value(kwargs["name"])
+	name = kwargs["name"]
 
 	restored_round = Round(name)
 
@@ -75,5 +78,23 @@ def deserialize_round(**kwargs):
 	end_date_time = datetime.strptime(kwargs["end_date_time"], "%d/%m/%Y %X")
 	restored_round.end_date_time = end_date_time
 
-	end_round = kwargs["done"]
-	match = [deserialize_match(x) for x in kwargs["match"]]
+	round_is_done = kwargs["is_done"]
+	restored_round.is_done = round_is_done
+
+	match = [deserialize_match(**x) for x in kwargs["match"]]
+	restored_round.match = match
+
+	return restored_round
+
+def deserialize_match(**kwargs):
+	dict_player_1 = kwargs["player_1"]
+	dict_player_1["player"] = deserialize_player(**dict_player_1["player"])
+
+	dict_player_2 = kwargs["player_2"]
+	dict_player_2["player"] = deserialize_player(**dict_player_2["player"])
+
+	restored_match = Match(dict_player_1["player"], dict_player_2["player"])
+	restored_match.player_1 = dict_player_1
+	restored_match.player_2 = dict_player_2
+
+	return restored_match

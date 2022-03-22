@@ -26,6 +26,12 @@ class Property:
 	"""
 	def __init__(self):
 		""" initialisation """ 
+		self.message = None
+		self.value = None
+		self._control_function = None
+		self.error_message = None
+		self._defaut_value = None
+
 	def set_message(self, text):
 		""" le message pour l'usager"""
 		self.message = text
@@ -44,13 +50,13 @@ class Property:
 		sinon renvoie False
 		"""
 		#test si la valeur a une fonction de controle
-		if hasattr(self, "_control_function"):
+		if self._control_function:
 			# test la conformité de la valeur non vide
 			if self._control_function(value) and value != "":
 				self.value = value
 				return True
 			# test si une valeur par defaut existe et que la chaine est vide
-			elif hasattr(self, "_defaut_value") and value == "":
+			elif not self._defaut_value and value == "":
 				self.value = self._defaut_value
 				print(f"{self.value} appliqué par défaut")
 				return True
@@ -59,7 +65,7 @@ class Property:
 				print(self.error_message)
 				return False
 		# test si une valeur par defaut existe
-		elif hasattr(self, "_defaut_value") and value == "":
+		elif not self._defaut_value and value == "":
 			self.value = self._defaut_value
 			print(f"{self.value} appliqué par défaut")
 			return True

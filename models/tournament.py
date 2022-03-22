@@ -27,9 +27,8 @@ class Tournament():
 		self.time_control = time_control.value
 		self.rounds = []
 		self.players = []
-		self.time_control = time_control.value
 		self.description = description.value
-		self.currentRound = 0
+		self.current_round = 0
 
 	def addPlayer(self, player):
 		"""add a new player in the tournament"""
@@ -43,14 +42,20 @@ class Tournament():
 			return False
 
 	def endRound(self):
-		self.rounds[self.currentRound].endRound()
+		self.rounds[self.current_round].endRound()
 	
 	def setResult(self):
-		self.rounds[self.currentRound].setResult()
+		self.rounds[self.current_round].setResult()
 
 	def player_group_generation(self):
 		pass
 	
+	def serialize(self):
+		serialized_tournament = vars(self)
+		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
+		serialized_tournament["players"] = [x.serialize for x in self.players]
+		return serialized_tournament
+
 	def __str__(self):
 		a = [f"Nom : {self.name}",
 			f"Lieu : {self.location}",
@@ -59,12 +64,6 @@ class Tournament():
 		]
 		return "\n".join(a)
 
-	def serialize(self):
-		serialized_tournament = vars(self)
-		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
-		serialized_tournament["players"] = [x.serialize for x in self.players]
-		return serialized_tournament
-
 class TournamentSwiss(Tournament):
 	""" tournament with the swiss systeme """
 	
@@ -72,7 +71,7 @@ class TournamentSwiss(Tournament):
 		if len(self.players) < 8:
 			return None
 		else: 
-			if self.currentRound == 1:
+			if self.current_round == 1:
 				pass
 			else:
 				pass

@@ -34,13 +34,13 @@ class GenderProperty(Property):
 		"""
 		#test si la valeur a une fonction de controle
 		value = value.upper()
-		if hasattr(self, "_control_function"):
+		if not self._control_function:
 			# test la conformité de la valeur non vide
 			if self._control_function(value) and value != "":
 				self.value = value
 				return True
 			# test si une valeur par defaut existe et que la chaine est vide
-			elif hasattr(self, "_defaut_value") and value == "":
+			elif not self._defaut_value and value == "":
 				self.value = self._defaut_value
 				print(f"{self.value} appliqué par défaut")
 				return True
@@ -49,7 +49,7 @@ class GenderProperty(Property):
 				print(self.error_message)
 				return False
 		# test si une valeur par defaut existe
-		elif hasattr(self, "_defaut_value") and value == "":
+		elif not self._defaut_value and value == "":
 			self.value = self._defaut_value
 			print(f"{self.value} appliqué par défaut")
 			return True

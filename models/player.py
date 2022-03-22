@@ -9,7 +9,6 @@ class Player:
 		self.birth_date = birth_date.value
 		self.gender = gender.value
 		self.rank = rank.value
-		self.opponents = []
 
 	def add_opponent(self, player):
 		self.opponent.append(player)
@@ -25,6 +24,15 @@ class Player:
 	def __str__(self):
 		return f"{self.forname} {self.name} ({self.gender}) née le {self.birth_date} : {self.classement}"
 
+	def __eq__(self, other):
+		if not isinstance(other, Player):
+			# don't attempt to compare against unrelated types
+			return NotImplemented
+		list_compare = [self.name == other.name,
+						self.forname == other.forname,
+						self.birth_date == other.birth_date]
+		return any(list_compare)
+		
 
 if __name__ == "__main__":
 	from datetime import datetime as dt

@@ -32,7 +32,7 @@ class DateProperty(Property):
 	def set_value(self, value, format = "%d/%m/%Y"):
 		try : 
 			value = dt.strptime(value, format)
-			if hasattr(self, "_control_function"):
+			if self._control_function:
 				if self._control_function(value):
 					self.value = value
 					return True

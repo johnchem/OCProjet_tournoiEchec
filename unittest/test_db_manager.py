@@ -30,9 +30,11 @@ def test_save_players(players, db_file):
 	print(players_serialized)
 	save_player_data(players_serialized, db_file)
 
+
 def test_read_tournament_data(db_file):
 	list_tournament = load_tournament_data(db_file)
 	print(list_tournament)
+
 
 def create_dummy_tournament():
 	name = Property()
