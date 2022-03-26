@@ -64,6 +64,41 @@ class Tournament():
 		]
 		return "\n".join(a)
 
+	def __eq__(self, other):
+		if not isinstance(other, type(self)):
+			# don't attempt to compare against unrelated types
+			return NotImplemented
+		
+		'''
+		compare the rounda, as there are ordered, 
+		they can be compare side to side
+		'''
+		for x, y in (self.rounds, other.rounds):
+			if x != y : return False
+
+		''' 
+		iterate through the players list and record if 
+		they are a match or not
+		'''
+		player_compare = []
+		for x in self.players:
+			player_not_found = True
+			for y in other.players:
+				if x == y : player_not_found = False
+			player_compare.append(player_not_found)
+		
+		list_compare = [self.name != other.name,
+						self.location != other.location,
+						self.date != other.date,
+						self.duration != other.duration,
+						self.number_of_round != other.number_of_round,
+						self.time_control != other.time_control,
+						*player_compare,
+						self.description != other.description,
+						self.current_round != other.current_round]
+		# return False if any difference exist between self and other
+		return not any(list_compare)
+
 class TournamentSwiss(Tournament):
 	""" tournament with the swiss systeme """
 	

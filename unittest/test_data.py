@@ -280,16 +280,25 @@ round_2.end_date_time = datetime.strptime("15/10/2005 18:36:45", "%d/%m/%Y %X")
 round_2.match = [match_1, match_3, match_4, match_6]
 round_2.is_done = True
 
+#_________Set up Tournament variable_________
+name = Property()
+location = Property()
+date = DateProperty()
+duration = Property()
+number_of_round = Property()
+time_control = MultipleChoicesProperty()
+time_control.list_value = TIME_CONTROLE_STANDARD
+description = Property()
 
 #_________TOURNAMENT 1___________
 serialised_tournament_1 = {"name":"test1",
-						"localtion":"montpelier",
+						"location":"montpelier",
 						"date":"15/12/1988",
 						"duration": 1,
 						"number_of_round": 5,
 						"time_control": "blitz",
-						"round":[serialized_round_1],
-						"player":[serialized_player_1,
+						"rounds":[serialized_round_1],
+						"players":[serialized_player_1,
 								serialized_player_2,
 								serialized_player_3,
 								serialized_player_4,
@@ -299,3 +308,62 @@ serialised_tournament_1 = {"name":"test1",
 								serialized_player_8],
 						"description":"truc machin",
 						"current_round": 1}
+
+name.set_value("test1")
+location.set_value("montpelier")
+date.set_value("15/12/1988")
+duration.set_value(1)
+number_of_round.set_value(5)
+time_control.set_value("2")
+description.set_value("truc machin")
+
+tournament_1 = TournamentSwiss(name = name,
+							   location = location,
+							   date = date,
+							   duration = duration,
+							   number_of_round = number_of_round,
+							   time_control = time_control,
+							   description = description)
+tournament_1.rounds = [round_1]
+tournament_1.players = [player_1, player_2, player_3, player_4,
+						player_5, player_6, player_7, player_8]
+tournament_1.current_round = 1
+
+#_________TOURNAMENT 2___________
+serialised_tournament_2 = {"name":"test2",
+						"location":"paris",
+						"date":"10/04/2010",
+						"duration": 2,
+						"number_of_round": 4,
+						"time_control": "bullet",
+						"rounds":[serialized_round_2],
+						"players":[serialized_player_1,
+								serialized_player_2,
+								serialized_player_3,
+								serialized_player_4,
+								serialized_player_5,
+								serialized_player_6,
+								serialized_player_7,
+								serialized_player_8],
+						"description":"bazar",
+						"current_round": 1}
+
+name.set_value("test2")
+location.set_value("paris")
+date.set_value("10/04/2010")
+duration.set_value(2)
+number_of_round.set_value(4)
+time_control.set_value("1")
+description.set_value("bazar")
+
+tournament_2 = TournamentSwiss(name = name,
+							   location = location,
+							   date = date,
+							   duration = duration,
+							   number_of_round = number_of_round,
+							   time_control = time_control,
+							   description = description)
+tournament_2.rounds = [round_2]
+tournament_2.players = [player_1, player_2, player_3, player_4,
+						player_5, player_6, player_7, player_8]
+tournament_2.current_round = 1

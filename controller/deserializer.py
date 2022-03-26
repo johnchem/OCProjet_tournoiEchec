@@ -42,9 +42,10 @@ def deserialize_tournament(**kwargs):
 			location = location,
 			time_control = time_control)
 
-	tournament.currentRound = kwargs["currentRound"]
-	tournament.round = kwargs["rounds"]
-	tournament.players = kwargs["players"]
+	tournament.current_round = kwargs["current_round"]
+	tournament.rounds = [deserialize_round(**x) for x in kwargs["rounds"]]
+	tournament.players = [deserialize_player(**x) for x in kwargs["players"]]
+	
 	return tournament
 
 def deserialize_player(**kwargs):

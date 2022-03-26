@@ -43,7 +43,7 @@ class DateProperty(Property):
 				self.value = value
 				return True
 		except ValueError:
-			print("la date n'est pas correcte")
+			print(f"la date n'est pas correcte {value}")
 			return False
 
 	def __str__():

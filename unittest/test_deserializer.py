@@ -1,8 +1,10 @@
 import copy # module to avoid modify the original testing data
 
+#import function to test
 from chess_tournament.controller.deserializer import deserialize_tournament, \
 deserialize_player, deserialize_round, deserialize_match
 
+#import model
 from chess_tournament.models.date_property import DateProperty
 from chess_tournament.models.gender_property import GenderProperty
 from chess_tournament.models.property import Property
@@ -11,6 +13,9 @@ from chess_tournament.models.tournament import Tournament, TournamentSwiss
 from chess_tournament.models.player import Player
 from chess_tournament.models.round import Round
 from chess_tournament.models.match import Match
+
+#import data for testing
+from chess_tournament.unittest.test_data import *
 
 def test_deserialize_player(players_serialized, player, text = ""):
 	print(text)
@@ -33,13 +38,15 @@ def test_deserialize_round(round_serialized, round, text = ""):
 	assert vars(output) == vars(round), \
 	f"erreur lors de l'import d'un round \n {vars(output)}"	
 
-def test_deserialize_tournament(tournament_serialised, tournament):
-	pass 
-
+def test_deserialize_tournament(tournament_serialised, tournament, text = ""):
+	print(text)
+	round_serialized = copy.deepcopy(tournament_serialised)
+	output = deserialize_tournament(**tournament_serialised)
+	assert vars(output) == vars(tournament), \
+	f"erreur lors de l'import d'un tournois \n {vars(tournament)} \n {vars(output)}"
 
 if __name__ == "__main__":
-	from chess_tournament.unittest.test_data import *
-
+#def run_test_deserializer():
 	list_test_player = [(serialized_player_1, player_1),
 						(serialized_player_2, player_2),
 						(serialized_player_3, player_3),
@@ -58,6 +65,9 @@ if __name__ == "__main__":
 
 	list_test_round = [(serialized_round_1, round_1),
 					   (serialized_round_2, round_2)]
+
+	list_test_tournament = [(serialised_tournament_1, tournament_1),
+							(serialised_tournament_2, tournament_2)]
 
 	i = 1
 	print("_____test_deserialize_player______")
@@ -78,6 +88,14 @@ if __name__ == "__main__":
 		test_deserialize_round(ser_round, rnd, f"round {i}")
 		i += 1
 
+	i = 1
+	print("_____test_deserialize_tournament______")
+	for ser_tournament, tournament in list_test_tournament:
+		test_deserialize_tournament(ser_tournament, tournament, 
+			f"tournament {i}")
+		i += 1
 
+#if __name__ == "__main__":
+#	run_test_deserializer()
 
 

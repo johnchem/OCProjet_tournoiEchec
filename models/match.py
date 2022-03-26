@@ -33,8 +33,9 @@ class Match():
 			   f'{self.player_2["score"]} {self.player_2["player"].name}'
 
 	def __repr__(self):
-		return f'{self.player_1["player"].name} {self.player_1["score"]} : '+\
+		return (f'{self.player_1["player"].name} {self.player_1["score"]} : '
 			   f'{self.player_2["score"]} {self.player_2["player"].name}'
+			   )
 	
 	def __eq__(self, other):
 		if not isinstance(other, Match):
@@ -50,18 +51,19 @@ class Match():
 			''' compare self_player_1 with other_player_1 and  
 			self_player_2 with other_player_2
 			'''
-			list_compare = [self.player_1["score"] == other.player_1["score"],
-							self.player_2["score"] == other.player_2["score"],
-							self.player_1["color"] == other.player_1["color"],
-							self.player_2["color"] == other.player_2["color"]]
+			list_compare = [self.player_1["score"] != other.player_1["score"],
+							self.player_2["score"] != other.player_2["score"],
+							self.player_1["color"] != other.player_1["color"],
+							self.player_2["color"] != other.player_2["color"]]
 		elif player_1_eq_2 and player_2_eq_1:
 			''' compare self_player_1 with other_player_2 and  
 			self_player_2 with other_player_1
 			'''
-			list_compare = [self.player_1["score"] == other.player_2["score"],
-							self.player_2["score"] == other.player_1["score"],
-							self.player_1["color"] == other.player_2["color"],
-							self.player_2["color"] == other.player_1["color"]]
+			list_compare = [self.player_1["score"] != other.player_2["score"],
+							self.player_2["score"] != other.player_1["score"],
+							self.player_1["color"] != other.player_2["color"],
+							self.player_2["color"] != other.player_1["color"]]
 		else:
 			return False
-		return any(list_compare)
+		# return false if any difference exist
+		return not any(list_compare)
