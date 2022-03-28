@@ -14,7 +14,7 @@
             "players":
             [],
             "description": "",
-            "currentRound": 0
+            "current_round": 0
         },
         "2":
         {
@@ -29,7 +29,7 @@
             "players":
             [],
             "description": "",
-            "currentRound": 0
+            "current_round": 0
         },
         "3":
         {
@@ -44,7 +44,22 @@
             "players":
             [],
             "description": "",
-            "currentRound": 0
+            "current_round": 0
+        },
+        "4":
+        {
+            "name": "tutu",
+            "location": "pau",
+            "date": "15/10/2015",
+            "duration": "1",
+            "number_of_round": "4",
+            "time_control": "coup rapide",
+            "rounds":
+            [],
+            "players":
+            [],
+            "description": "test 1",
+            "current_round": 0
         }
     }
 }

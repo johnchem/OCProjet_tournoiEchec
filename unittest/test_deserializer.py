@@ -21,28 +21,28 @@ def test_deserialize_player(players_serialized, player, text = ""):
 	print(text)
 	players_serialized = copy.deepcopy(players_serialized)
 	output = deserialize_player(**players_serialized)
-	assert vars(output) == vars(player), \
-	f"erreur lors de l'import d'un joueur \n {vars(output)}"
+	assert output == player, \
+	f"erreur lors de l'import d'un joueur \n {vars(output)} \n {vars(player)}"
 
 def test_deserialize_match(match_serialized, match, text = ""):
 	print(text)
 	match_serialized = copy.deepcopy(match_serialized)
 	output = deserialize_match(**match_serialized)
-	assert vars(output) == vars(match), \
+	assert output == match, \
 	f"erreur lors de l'import d'un match \n {vars(output)}"
 
 def test_deserialize_round(round_serialized, round, text = ""):
 	print(text)
 	round_serialized = copy.deepcopy(round_serialized)
 	output = deserialize_round(**round_serialized)
-	assert vars(output) == vars(round), \
+	assert output == round, \
 	f"erreur lors de l'import d'un round \n {vars(output)}"	
 
 def test_deserialize_tournament(tournament_serialised, tournament, text = ""):
 	print(text)
-	round_serialized = copy.deepcopy(tournament_serialised)
+	tournament_serialised = copy.deepcopy(tournament_serialised)
 	output = deserialize_tournament(**tournament_serialised)
-	assert vars(output) == vars(tournament), \
+	assert output == tournament, \
 	f"erreur lors de l'import d'un tournois \n {vars(tournament)} \n {vars(output)}"
 
 if __name__ == "__main__":

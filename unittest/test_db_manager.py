@@ -14,16 +14,19 @@ from chess_tournament.models.gender_property import GenderProperty
 from chess_tournament.controller.db_manager import save_player_data, \
 		save_tournament_data, load_tournament_data, load_player_data
 
+#import data for testing
+from chess_tournament.unittest.test_data import *
+
 def test_save_tournament(tournament, db_file):
 	serialized_tournament = tournament.serialize()
 	try:
 		save_tournament_data(serialized_tournament, db_file)
 		print(serialized_tournament)
+		return True
 	except BaseException as err:
 		return err
 
-
-def test_save_players(players, db_file):
+def test_save_player(player, db_file):
 	players_serialized = []
 	for player in players:
 		players_serialized.append(player.serialize())

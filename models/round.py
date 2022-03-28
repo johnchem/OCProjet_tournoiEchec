@@ -4,12 +4,15 @@ class Round():
 	'''
 	_________________________
 	nom : str
-	dataDebut : datetime
-	dateFin : datetime
+	begin_date_time : datetime
+	end_date_time : datetime
 	match : [match]
+	is_done = bool
 
 	-------------------------
 	.addMatch(match) -> None
+	.end_round() -> None
+	.get_match_list() -> none
 	'''
 	def __init__(self, name : str):
 		self.name = name
@@ -18,17 +21,17 @@ class Round():
 		self.match = []
 		self.is_done = False
 
-	def addMatch(self, match):
+	def add_match(self, match):
 		self.match.append(match)
 
-	def endRound(self):
+	def end_round(self):
 		self.end_date_time = datetime.now()
 		self.is_done = True
 
-	def getMatchList(self):
+	def get_match_list(self):
 		pass
 
-	def setResult(self):
+	def set_result(self):
 		pass
 
 	def serialize(self):
@@ -63,7 +66,7 @@ class Round():
 			match_not_found = True
 			for y in other.match:
 				if x == y :	match_not_found = False
-			match_compare.append(result)
+			match_compare.append(match_not_found)
 
 		list_compare = [self.name != other.name,
 					    self.begin_date_time != other.begin_date_time,

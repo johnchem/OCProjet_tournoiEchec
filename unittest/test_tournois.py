@@ -1,12 +1,97 @@
-from chess_tournament.models.tournament import Tournament
-#from models.tournament import TournamentSwiss
-from chess_tournament.models.player import Player
-import random
+import copy
+import random 
 
-def test_tournois():
+from chess_tournament.models.tournament import TournamentSwiss
+from chess_tournament.models.player import Player
+
+from chess_tournament.models.property import Property
+from chess_tournament.models.date_property import DateProperty
+from chess_tournament.models.multiple_choices_property import MultipleChoicesProperty
+
+from chess_tournament.unittest.test_data import *
+
+def test_create_tournament():
+	name = Property()
+	location = Property()
+	date = DateProperty()
+	duration = Property()
+	number_of_round = Property()
+	time_control = MultipleChoicesProperty()
+	time_control.list_value = TIME_CONTROLE_STANDARD
+	description = Property()
+	
+	name.set_value("test1")
+	location.set_value("montpelier")
+	date.set_value("15/12/1988")
+	duration.set_value(1)
+	number_of_round.set_value(5)
+	time_control.set_value("2")
+	description.set_value("truc machin")
+
+	tournament = TournamentSwiss(name = name,
+							   location = location,
+							   date = date,
+							   duration = duration,
+							   number_of_round = number_of_round,
+							   time_control = time_control,
+							   description = description)
+
+	assert isinstance(tournament, TournamentSwiss)
+	assert tournament.name == "test1"
+	assert tournament.location == "montpelier"
+	assert tournament.date == datetime.strptime("15/12/1988", "%d/%m/%Y")
+	assert tournament.duration == 1
+	assert tournament.number_of_round == 5
+	assert tournament.time_control == TIME_CONTROLE_STANDARD[1]
+	assert tournament.description == "truc machin"
+
+def test_add_player():
+	#get testing data
+	tournament == copy.deepcopy(tournament_1)
+	player == copy.deepcopy(player_1)
+
+	#initialise and control the initial setup
+	tournament.players = []
+	assert len(tournament.players) == 0
+	
+	#testing
+	tournament.add_player(player)
+	assert len(tournament.players) == 1
+	assert tournament.players[0] == player
+
+def test_if_tournament_is_full():
+	#get testing data
+	tournament == copy.deepcopy(tournament_1)
+	player == copy.deepcopy(player_1)
+
+	#initialise and control the initial setup
+	assert len(tournament.players) == 8
+	
+	#testing
+	tournament.add_player(player)
+	assert len(tournament.players) == 9
+	assert tournament.players[-1] == player
+
+def test_start_new_round():
+	#get testing data
+	tournament == copy.deepcopy(tournament_1)
+
+	#initia
+
+
+def test_end_a_round():
+	#get testing data
+	tournament == copy.deepcopy(tournament_1)
+
 	pass
 
-def test_round():
+def test_set_result_round():
+	pass
+
+def test_generation_pairs_players():
+	pass
+
+def test_add_round():
 	pass
 
 def create_round(tournament, round_nb):

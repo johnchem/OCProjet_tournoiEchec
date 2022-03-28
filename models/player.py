@@ -31,7 +31,8 @@ class Player:
 		list_compare = [self.name != other.name,
 						self.forname != other.forname,
 						self.birth_date != other.birth_date]
-		return any(list_compare)
+		# return false if any difference exist
+		return not any(list_compare)
 		
 
 if __name__ == "__main__":

@@ -30,22 +30,24 @@ class Tournament():
 		self.description = description.value
 		self.current_round = 0
 
-	def addPlayer(self, player):
+	def add_player(self, player):
 		"""add a new player in the tournament"""
 		self.players.append(player)
 
-	def isFull(self):
+	def is_full(self):
 		""" check if there are 8 and no more players"""
 		if len(self.players) >= 8:
 			return True
 		else : 
 			return False
 
-	def endRound(self):
-		self.rounds[self.current_round].endRound()
+	def end_round(self):
+		self.rounds[self.current_round].end_round()
+
+
 	
-	def setResult(self):
-		self.rounds[self.current_round].setResult()
+	def set_result(self):
+		self.rounds[self.current_round].set_result()
 
 	def player_group_generation(self):
 		pass
@@ -73,7 +75,7 @@ class Tournament():
 		compare the rounda, as there are ordered, 
 		they can be compare side to side
 		'''
-		for x, y in (self.rounds, other.rounds):
+		for x, y in zip(self.rounds, other.rounds):
 			if x != y : return False
 
 		''' 
