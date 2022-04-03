@@ -76,17 +76,52 @@ def test_start_new_round():
 	#get testing data
 	tournament == copy.deepcopy(tournament_1)
 
-	#initia
+	#initialize data
+	tournament.current_round = 1
+	tournament.rounds = []
+	name_round = f'round{tournament.current_round}'
+	round = Round(name_round)
 
+	#testing
+	tournament.start_new_tournament(round)
+	assert tournament[-1].name == "round1"
+	assert (datetime.now - tournament.begin_date_time).seconds < 10
+	assert tournament.end_date_time == None
+	assert len(tournament.match) == 0
+	assert tournament.is_done == False
 
 def test_end_a_round():
 	#get testing data
 	tournament == copy.deepcopy(tournament_1)
 
-	pass
+	#initialize data
+	tournament.current_round = 1
+	tournament.rounds = []
+	name_round = f'round{tournament.current_round}'
+	round = Round(name_round)
+	tournament.start_new_tournament(round)
+
+	#testing
+	tournament.end_round()
+	assert (datetime.now - tournament.end_date_time).seconds < 10
+	assert tournament.is_done == True
 
 def test_set_result_round():
-	pass
+		#get testing data
+	tournament == copy.deepcopy(tournament_1)
+
+	#initialize data
+	tournament.current_round = 1
+	tournament.rounds = []
+	name_round = f'round{tournament.current_round}'
+	round = Round(name_round)
+	tournament.start_new_tournament(round)
+	tournament.end_round()
+
+
+	#testing
+	assert (datetime.now - tournament.end_date_time).seconds < 10
+	assert tournament.is_done == True
 
 def test_generation_pairs_players():
 	pass

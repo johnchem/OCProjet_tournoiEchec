@@ -2,6 +2,9 @@
 
 venv/
 
+#pycache
+__pycache__/
+
 # sublime text
 
 *.sublime-project
