@@ -1,6 +1,6 @@
 # virtual environment
 
-venv/
+.venv/
 
 #pycache
 __pycache__/
