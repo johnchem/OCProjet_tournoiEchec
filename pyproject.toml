@@ -6,6 +6,8 @@ authors = ["jonathan payssan"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+DateTime = "^4.4"
+tinydb = "^4.7.0"
 
 [tool.poetry.dev-dependencies]
 
