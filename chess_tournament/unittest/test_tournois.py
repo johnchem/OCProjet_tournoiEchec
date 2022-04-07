@@ -165,7 +165,7 @@ if __name__ == "__main__":
 	liste_joueur = []
 	for nom, prenom, date_de_naissance, sexe, classement in nvxJoueur:
 		
-		name.set_value(name)
+		name.set_value(nom)
 		forname.set_value(prenom)
 		birth_date.set_value(date_de_naissance)
 		gender.set_value(sexe)
@@ -175,12 +175,12 @@ if __name__ == "__main__":
 			Player(name, forname, birth_date, gender, rank)
 		)
 
-	list_players_sorted = sorted(liste_joueur, key=lambda x : x.classement)
+	list_players_sorted = sorted(liste_joueur, key=lambda x : x.rank)
 
 	for player in liste_joueur:
-		print(f"joueur : {player.name} classement : {player.classement}")
+		print(f"joueur : {player.name} classement : {player.rank}")
 
 	print("\n")
 	
 	for player in list_players_sorted:
-		print(f"joueur : {player.name} classement : {player.classement}")
+		print(f"joueur : {player.name} classement : {player.rank}")

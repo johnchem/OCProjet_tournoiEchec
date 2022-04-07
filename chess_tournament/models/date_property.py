@@ -8,26 +8,11 @@ class DateProperty(Property):
 
 	Attribut
 	----------- 	
-	message : str 
-		message pour l'usager
-	error_message : str
-		message en cas d'erreur sur la valeur introduite
-	value : 
-		valeur de la propriété 
-	_control_function : function
-		fonction de controle de la valeur
-	_defaut_value : 
-		valeur par defaut de la propriété
-
+	
 	Methodes
 	-----------
-	set_control(function, errorText)
-		mise en place de la fonction de control et du message d'erreur
 	set_value(value, format = "%d/%m/%Y")
-		validation de la valeur et enregistre si conforme
-	set_defaut_value(value): Pas implementé
-		mise en place d'une valeur par defaut
-	
+		validation de la valeur et enregistre si conforme	
 	"""
 	def set_value(self, value, format = "%d/%m/%Y"):
 		try : 

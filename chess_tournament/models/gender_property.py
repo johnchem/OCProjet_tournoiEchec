@@ -7,25 +7,11 @@ class GenderProperty(Property):
 
 	Attribut
 	----------- 	
-	message : str 
-		message pour l'usager
-	error_message : str
-		message en cas d'erreur sur la valeur introduite
-	value : 
-		valeur de la propriété 
-	_control_function : function
-		fonction de controle de la valeur
-	_defaut_value : 
-		valeur par defaut de la propriété
 
 	Methodes
 	-----------
-	set_control(function, errorText)
-		mise en place de la fonction de control et du message d'erreur
 	set_value(value)
 		validation de la valeur et enregistre si conforme
-	set_defaut_value(value):
-		mise en place d'une valeur par defaut
 	"""
 	def set_value(self, value):
 		"""controle la conformite de la valeur,
@@ -34,7 +20,7 @@ class GenderProperty(Property):
 		"""
 		#test si la valeur a une fonction de controle
 		value = value.upper()
-		if not self._control_function:
+		if self._control_function:
 			# test la conformité de la valeur non vide
 			if self._control_function(value) and value != "":
 				self.value = value

@@ -34,6 +34,22 @@ class Round():
 	def set_result(self):
 		pass
 
+	def get_players_opponent(self):
+		list_opponent = []
+		for match in self.match:
+			list_opponent.append(match.player_1["player"].name,
+								 match.player_2["player"].name)
+		return list_opponent
+
+	def get_players_score(self):
+		score_player = []
+		for match in self.match:
+			score_player.append(match.player_1["player"].name,
+								match.player_1["player"].score)
+			score_player.append(match.player_2["player"].name,
+								match.player_2["player"].score)
+		return score_player
+
 	def serialize(self):
 		serialized_round = vars(self)
 		serialized_round["begin_date_time"] = serialized_round["begin_date_time"].strftime("%d/%m/%Y %X")

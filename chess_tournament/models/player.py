@@ -3,6 +3,27 @@ from chess_tournament.models.date_property import DateProperty
 from chess_tournament.models.gender_property import GenderProperty
 
 class Player:
+	""" gere le tranfert et le controle des valeurs au modele
+	propriété pour le genre du joueur
+	Force la valeur à être en majuscule 
+
+	Attribut
+	-----------
+	name : str 
+		nom du joueur
+	forname : str
+		prénom du joueur
+	birth_date : datetime
+		date de naissance du joueur 
+	gender : str 
+		sexe du joueur
+	rank : int 
+		classement du joueur 	
+
+	Methodes
+	-----------
+	
+	"""
 	def __init__(self, name, forname, birth_date, gender, rank):
 		self.name = name.value
 		self.forname = forname.value

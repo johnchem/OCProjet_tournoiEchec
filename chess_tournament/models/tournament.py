@@ -28,11 +28,16 @@ class Tournament():
 		self.rounds = []
 		self.players = []
 		self.description = description.value
-		self.current_round = 0
+		self.current_round = 1
+		self.dict_opponent = {}
+		self.dict_score = {}
 
 	def add_player(self, player):
 		"""add a new player in the tournament"""
 		self.players.append(player)
+		# add the player in the tracking dict.
+		self.dict_score[player.name] = 0
+		self.dict_opponent[player.name] = []
 
 	def is_full(self):
 		""" check if there are 8 and no more players"""
@@ -41,11 +46,14 @@ class Tournament():
 		else : 
 			return False
 
+	def start_new_round(self, round):
+		self.rounds.append(Round)
+		self.current_round += 1	
+
+
 	def end_round(self):
 		self.rounds[self.current_round].end_round()
 
-
-	
 	def set_result(self):
 		self.rounds[self.current_round].set_result()
 
@@ -109,9 +117,25 @@ class TournamentSwiss(Tournament):
 			return None
 		else: 
 			if self.current_round == 1:
-				pass
+				#sort the player
+				list_players_sorted = sorted(liste_joueur, key=lambda x : x.rank)
+				#define the middle of the list, which also the number of matches
+				nbr_match = trunc(len(list_players_sorted)/2)
+				#split the list in two
+				upper_half = list_players_sorted[:nbr_match]
+				bottom_half = list_players_sorted[nbr_match:]
+
+				return zip(upper_half, bottom_half)
 			else:
-				pass
+				sort_function = lambda x : x.rank
+					pass
+				except Exception as e:
+					raise
+				else:
+					pass
+				finally:
+					pass
+
 
 if __name__ == "__main__":
 	pass
