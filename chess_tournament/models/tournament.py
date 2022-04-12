@@ -1,4 +1,4 @@
-
+from math import trunc
 TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
 
 class Tournament():
@@ -58,7 +58,30 @@ class Tournament():
 		self.rounds[self.current_round].set_result()
 
 	def player_group_generation(self):
+		""" not implemented from standart tournament"""
 		pass
+
+	def get_players_opponent(self):
+		tmp_list = []
+		for round_played in self.round:
+			tmp_list.append(round_played.get_players_opponent())
+
+		for player, opponent in tmp_list:
+			if player in self.dict_opponent:
+				self.dict_opponent[player].append(opponent)
+			else :
+				self.dict_opponent[player] = [opponent]
+
+	def get_players_score(self):
+		tmp_list = []
+		for round_played in self.round:
+			tmp_list.append(round_played.get_players_score())
+
+		for player, score in tmp_list:
+			if player in self.dict_score:
+				self.dict_score[player] += score
+			else:
+				self.dict_score[player] = score
 	
 	def serialize(self):
 		serialized_tournament = vars(self)
@@ -118,7 +141,7 @@ class TournamentSwiss(Tournament):
 		else: 
 			if self.current_round == 1:
 				#sort the player
-				list_players_sorted = sorted(liste_joueur, key=lambda x : x.rank)
+				list_players_sorted = sorted(self.players, key=lambda x : x.rank)
 				#define the middle of the list, which also the number of matches
 				nbr_match = trunc(len(list_players_sorted)/2)
 				#split the list in two
@@ -128,13 +151,7 @@ class TournamentSwiss(Tournament):
 				return zip(upper_half, bottom_half)
 			else:
 				sort_function = lambda x : x.rank
-					pass
-				except Exception as e:
-					raise
-				else:
-					pass
-				finally:
-					pass
+				pass
 
 
 if __name__ == "__main__":

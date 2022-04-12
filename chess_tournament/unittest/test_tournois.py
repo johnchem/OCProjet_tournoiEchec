@@ -90,8 +90,20 @@ def test_start_new_round():
 	assert len(tournament.match) == 0
 	assert tournament.is_done == False
 
-def test_generation_pairs_players():
-	pass
+def test_generation_pairs_players_round_1():
+	#get testing data
+	tournament = copy.deepcopy(tournament_1)
+
+	#initialize data
+	tournament.current_round = 1
+	tournament.rounds = []
+	name_round = f'round{tournament.current_round}'
+	round = Round(name_round)
+
+	#testing
+	player_list = tournament.player_group_generation()
+	for x,y in player_list:
+		print(f'{x} vs {y}')
 
 
 def test_end_a_round():
@@ -147,6 +159,10 @@ def test_match(liste_joueur):
 	pass
 
 if __name__ == "__main__":
+	
+	test_generation_pairs_players_round_1()
+
+'''
 	nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F", 15),
 				("Connie", "Lam", "10/06/1986", "F", 12),
 				("Cleveland","Noon","03/11/1938","M", 5),
@@ -184,3 +200,4 @@ if __name__ == "__main__":
 	
 	for player in list_players_sorted:
 		print(f"joueur : {player.name} classement : {player.rank}")
+'''

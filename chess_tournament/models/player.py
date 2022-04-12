@@ -43,7 +43,10 @@ class Player:
 		return vars(self)
 
 	def __repr__(self):
-		return f"{self.forname} {self.name} ({self.gender}) née le {self.birth_date} : {self.rank}"
+		return (f'{self.forname} {self.name} ({self.gender})'
+				f' née le {self.birth_date.strftime("%d/%m/%Y")}'
+				f' : {self.rank}'
+				)
 
 	def __eq__(self, other):
 		if not isinstance(other, Player):
