@@ -50,7 +50,6 @@ class Tournament():
 		self.rounds.append(Round)
 		self.current_round += 1	
 
-
 	def end_round(self):
 		self.rounds[self.current_round].end_round()
 
@@ -63,25 +62,25 @@ class Tournament():
 
 	def get_players_opponent(self):
 		tmp_list = []
-		for round_played in self.round:
-			tmp_list.append(round_played.get_players_opponent())
+		for round_played in self.rounds:
+			tmp_list += round_played.get_players_opponent()
 
 		for player, opponent in tmp_list:
-			if player in self.dict_opponent:
-				self.dict_opponent[player].append(opponent)
+			if player.name in self.dict_opponent:
+				self.dict_opponent[player.name].append(opponent)
 			else :
-				self.dict_opponent[player] = [opponent]
+				self.dict_opponent[player.name] = [opponent]
 
 	def get_players_score(self):
 		tmp_list = []
 		for round_played in self.round:
-			tmp_list.append(round_played.get_players_score())
+			tmp_list += round_played.get_players_score()
 
 		for player, score in tmp_list:
-			if player in self.dict_score:
-				self.dict_score[player] += score
+			if player.name in self.dict_score:
+				self.dict_score[player.name] += score
 			else:
-				self.dict_score[player] = score
+				self.dict_score[player.name] = score
 	
 	def serialize(self):
 		serialized_tournament = vars(self)

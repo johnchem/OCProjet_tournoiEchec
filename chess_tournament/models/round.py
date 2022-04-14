@@ -37,16 +37,16 @@ class Round():
 	def get_players_opponent(self):
 		list_opponent = []
 		for match in self.match:
-			list_opponent.append(match.player_1["player"].name,
-								 match.player_2["player"].name)
+			list_opponent.append((match.player_1["player"],
+								  match.player_2["player"]))
 		return list_opponent
 
 	def get_players_score(self):
 		score_player = []
 		for match in self.match:
-			score_player.append(match.player_1["player"].name,
+			score_player.append(match.player_1["player"],
 								match.player_1["player"].score)
-			score_player.append(match.player_2["player"].name,
+			score_player.append(match.player_2["player"],
 								match.player_2["player"].score)
 		return score_player
 

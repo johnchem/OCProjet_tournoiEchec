@@ -105,6 +105,15 @@ def test_generation_pairs_players_round_1():
 	for x,y in player_list:
 		print(f'{x} vs {y}')
 
+def test_get_players_opponent():
+	#get testing data
+	tournament = copy.deepcopy(tournament_1)
+
+	#testing
+	tournament.get_players_opponent()
+	output = tournament.dict_opponent
+	print(output)
+
 
 def test_end_a_round():
 	#get testing data
@@ -160,7 +169,7 @@ def test_match(liste_joueur):
 
 if __name__ == "__main__":
 	
-	test_generation_pairs_players_round_1()
+	test_get_players_opponent()
 
 '''
 	nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F", 15),
