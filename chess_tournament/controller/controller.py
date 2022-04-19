@@ -1,6 +1,8 @@
 
 from chess_tournament.models.player import Player
 from chess_tournament.models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
+from chess_tournament.models.round import Round
+from chess_tournament.models.match import Match
 from chess_tournament.models.property import Property
 from chess_tournament.models.date_property import DateProperty
 from chess_tournament.models.multiple_choices_property import MultipleChoicesProperty
@@ -33,13 +35,35 @@ class Controller:
 		self.views.welcome_page()
 
 	def main_menu(self):
+		if self.tournament is not None:
+			save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
+		
 		MENU_ITEM_DICT = {
+			"Cloture du tour actuel" : self.views.not_implemented,
+			"Commencer un nouveau tour" : self.start_new_round,
 			"Creation d'un nouveau tournois" : self.start_new_tournament,
 			"Ajout d'un nouveau joueur" : self.add_player,
 			"Charger un tournois précedent" : self.load_tournament,
-			"Importer un joueur" : self.views.not_implemented,
+			"Importer un joueur" : self.load_player,
 			"Quitter" : self.quit
 			}
+
+		#remove forbidden element
+		if self.tournament is None:
+			del MENU_ITEM_DICT["Cloture du tour actuel"]
+			del MENU_ITEM_DICT["Commencer un nouveau tour"]
+			del MENU_ITEM_DICT["Ajout d'un nouveau joueur"]
+			del MENU_ITEM_DICT["Importer un joueur"]
+		else:
+			if self.tournament.is_full():
+				del MENU_ITEM_DICT["Ajout d'un nouveau joueur"]
+				del MENU_ITEM_DICT["Importer un joueur"]
+			
+			if len(self.tournament.rounds) == 0:
+				del MENU_ITEM_DICT["Cloture du tour actuel"]
+			elif not self.tournament.rounds[-1].is_done:
+				del MENU_ITEM_DICT["Cloture du tour actuel"]
+
 		#get the list of item for the main menu
 		menu_item_list = [x for x in MENU_ITEM_DICT.keys()]
 
@@ -114,7 +138,7 @@ class Controller:
 		# controle la présence d'un tournois actif
 		if self.tournament:
 			# controle si on peut ajouter des joueurs
-			if self.tournament.isFull():
+			if self.tournament.is_full():
 				self.views.max_number_players_reach()
 				self.main_menu()
 			else:
@@ -176,10 +200,52 @@ class Controller:
 			self.views.database_not_found()
 		self.main_menu()
 
+	def load_player(self):
+		# controle la présence d'une base de données
+		if self.DB_ADDRESS.exists():
+			# chargement de l'ensemble des joueurs enregistré
+			history_players = load_player_data(self.DB_ADDRESS)
+			# gestion de la reception d'erreur lors de l'importation de la db
+			if isinstance(history_players, list):
+				# mise en forme et affichage des joueurs sauvegardés
+				player_name_formated = self.players_historic(history_players)
+				#reception du choix de l'utilisateur
+				user_choices = self.views.load_player_page(player_name_formated)
+				# importation des données
+				chosen_player = history_players[user_choices-1]
+				print(chosen_player)
+				self.tournament.add_player(deserialize_player(**chosen_player))
+			else :
+				self.views.issues_database(history_players)
+		else : 
+			self.views.database_not_found()
+		self.main_menu()
+
+	def start_new_round(self):
+		player_pairs = self.tournament.start_new_round()
+		if player_pairs:
+			#definition du nom du round et creation
+			current_round = self.tournament.current_round
+			next_round_name = f'name{current_round}'
+			next_round = Round(next_round_name)
+			#creation des match et ajout au round
+			for x, y in player_pairs:
+				new_match = Match(x, y)
+				next_round.add_match(new_match)
+			self.tournament.rounds.append(next_round)
+			self.views.round_recap(next_round)
+		#self.main_menu()
+
 	def tournament_historic(self, tournament_list):
 		output_list = []
 		for tournament in tournament_list:
 			output_list.append(f"{tournament['name']}")
+		return output_list
+
+	def players_historic(self, players_list):
+		output_list = []
+		for player in players_list:
+			output_list.append(f"{player['forname']} {player['name']}")
 		return output_list
 
 	def group_generation(self):

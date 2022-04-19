@@ -12,9 +12,13 @@ def save_player_data(players, dbFile):
 		return False
 
 def load_player_data(dbFile):
-	db = TinyDB(dbFile)
-	players_table = db.table('players')
-	return players_table.all()
+	try :
+		db = TinyDB(dbFile)
+		players_table = db.table('players')
+		return players_table.all()
+	except BaseException as err:
+		print(err)
+		return err
 
 def save_tournament_data(tournament, dbFile):
 	try : 

@@ -1,4 +1,5 @@
 from math import trunc
+import datetime
 TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
 
 class Tournament():
@@ -28,7 +29,7 @@ class Tournament():
 		self.rounds = []
 		self.players = []
 		self.description = description.value
-		self.current_round = 1
+		self.current_round = 0
 		self.dict_opponent = {}
 		self.dict_score = {}
 
@@ -46,9 +47,9 @@ class Tournament():
 		else : 
 			return False
 
-	def start_new_round(self, round):
-		self.rounds.append(Round)
-		self.current_round += 1	
+	def start_new_round(self):
+		self.current_round += 1
+		return self.player_group_generation()
 
 	def end_round(self):
 		self.rounds[self.current_round].end_round()

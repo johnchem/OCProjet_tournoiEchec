@@ -1,3 +1,5 @@
+import random
+
 class Match():
 	'''
 	_________________________
@@ -10,9 +12,15 @@ class Match():
 		self.player_2 = {"player": player_2,
 						"score":None,
 						"color":None}
+		self.set_color()
 		
 	def set_color(self):
-		pass
+		pick_color = random.choices(["white", "black"])
+		self.player_1["color"] = pick_color
+		if pick_color == "white":
+			self.player_2["color"] = "black"
+		else:
+			self.player_2["color"] = "white"
 
 	def result(self):
 		return ([self.joueur_1, self.joueur_1["score"]],

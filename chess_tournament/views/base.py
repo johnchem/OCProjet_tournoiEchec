@@ -65,6 +65,48 @@ class Views:
 			i +=1
 		return user_choices("indiquer votre choix : ", range(1,i+1))
 
+	def load_player_page(self, player_list):
+		os.system(CLEAN_SCREEN)
+		print("Chargement d'un joueur enregistré")
+		i = 1
+		for item in player_list:
+			print(f"{i} : {item}")
+			i +=1
+		return user_choices("indiquer votre choix : ", range(1,i+1))
+
+	def round_recap(self, round):
+		clear_screen()
+		if round.is_done:
+			print(f'{round.name}'
+			  	  f' le {round.begin_date_time.strftime("%d/%m/%Y")}'
+				  f' entre {round.begin_date_time.strftime("%X")}'
+			  	  f' et {round.end_date_time.strftime("%X")}'
+			 	 )
+		else:
+			print(f'{round.name}'
+				  f' le {round.begin_date_time.strftime("%d/%m/%Y")}'
+				  f' en cours depuis {round.begin_date_time.strftime("%X")}'
+				  )
+		print("____________MATCH_____________")
+		for match in round.match:
+			display_match(match)
+		os.system("pause")
+
+	def display_match(self, match):
+		match_not_done = (match.player_1['score'] is None or
+						  match.player_2['score'] is None) 
+		
+		with match.player_1['player'] as p1, match.player_2['players'] as p2:
+			if match_not_done:
+				print(f'{p1.name} {p1.forname} ({match.player_1["color"]}) - ',
+					  f': - ({match.player_2["color"]}) {p1.name} {p1.forname}')
+			else:
+				print(f'{p1.name} {p1.forname} ({match.player_1["color"]})',
+					  f' {match.player_1["score"]} ',
+					  f': {match.player_2["score"]} ',
+					  f'({match.player_2["color"]}) {p1.name} {p1.forname}'
+					  )
+
 	def ask_to_create_tournament(self):
 		print_message("vous devez créer un nouveau tournois avant d'ajouter des joueurs")		
 
@@ -89,8 +131,9 @@ class Views:
 
 	def error_save_page(self, error = None):
 		if error != None:
-			print_message(f"Echec de la sauvegarde des données \
-			 				\n erreur rencontré : {error}")
+			print_message(f'Echec de la sauvegarde des données ',
+						  f'\n erreur rencontré : {error}'
+						  )
 		else : 
 			print_message("Echec de la sauvegarde des données")
 
@@ -98,6 +141,8 @@ class Views:
 		os.system(CLEAN_SCREEN)
 		print("Au revoir et bonne journée")
 
+def clear_screen():
+	os.system(CLEAN_SCREEN)
 
 def print_message(text):
 		os.system(CLEAN_SCREEN)

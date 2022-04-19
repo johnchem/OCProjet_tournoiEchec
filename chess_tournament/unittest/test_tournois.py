@@ -92,7 +92,7 @@ def test_start_new_round():
 
 def test_generation_pairs_players_round_1():
 	#get testing data
-	tournament = copy.deepcopy(tournament_1)
+	tournament = copy.deepcopy(tournament_3)
 
 	#initialize data
 	tournament.current_round = 1
