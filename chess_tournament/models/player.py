@@ -1,6 +1,7 @@
 from chess_tournament.models.property import Property
 from chess_tournament.models.date_property import DateProperty
 from chess_tournament.models.gender_property import GenderProperty
+import copy
 
 class Player:
 	""" gere le tranfert et le controle des valeurs au modele
@@ -30,6 +31,7 @@ class Player:
 		self.birth_date = birth_date.value
 		self.gender = gender.value
 		self.rank = rank.value
+		self.id = None
 
 	def add_opponent(self, player):
 		self.opponent.append(player)
@@ -38,9 +40,11 @@ class Player:
 		return player in self.opponent
 
 	def serialize(self):
-		serialized_player = vars(self)
+		print(f"self : {id(self)}")
+		serialized_player = copy.deepcopy(vars(self))
+		print(f"serialized_player : {id(serialized_player)}")
 		serialized_player["birth_date"] = serialized_player["birth_date"].strftime("%d/%m/%Y")
-		return vars(self)
+		return serialized_player
 
 	def __repr__(self):
 		return (f'{self.forname} {self.name} ({self.gender})'
@@ -57,6 +61,12 @@ class Player:
 						self.birth_date != other.birth_date]
 		# return false if any difference exist
 		return not any(list_compare)
+
+	def __enter__(self):
+		return self
+
+	def __exit__(self, *err):
+		self.close()
 		
 
 if __name__ == "__main__":

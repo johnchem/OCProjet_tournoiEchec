@@ -45,6 +45,9 @@ def deserialize_tournament(**kwargs):
 	tournament.current_round = kwargs["current_round"]
 	tournament.rounds = [deserialize_round(**x) for x in kwargs["rounds"]]
 	tournament.players = [deserialize_player(**x) for x in kwargs["players"]]
+
+	if "id" in kwargs:
+		tournament.id = kwargs["id"]
 	
 	return tournament
 
@@ -65,6 +68,9 @@ def deserialize_player(**kwargs):
 	rank.set_value(kwargs["rank"])
 	
 	player = Player(name, forname, birth_date, gender, rank)
+
+	if "id" in kwargs:
+		player.id = kwargs["id"]
 	
 	return player
 

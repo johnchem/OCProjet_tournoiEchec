@@ -1,6 +1,8 @@
 # importation des modules
 import os
 import pathlib
+import copy
+from tinydb import TinyDB
 
 # importation des modeles
 from chess_tournament.models.player import Player
@@ -13,6 +15,8 @@ from chess_tournament.models.gender_property import GenderProperty
 #importation du controlleur
 from chess_tournament.controller.db_manager import save_player_data, \
 		save_tournament_data, load_tournament_data, load_player_data
+from chess_tournament.controller.deserializer import deserialize_tournament, \
+													 deserialize_player
 
 #import data for testing
 from chess_tournament.unittest.test_data import *
@@ -27,12 +31,45 @@ def test_save_tournament(tournament, db_file):
 		return err
 
 def test_save_player(player, db_file):
-	players_serialized = []
-	for player in players:
-		players_serialized.append(player.serialize())
-	print(players_serialized)
-	save_player_data(players_serialized, db_file)
+	player_serialized = player.serialize()
+	save_player_data(player_serialized, db_file)
+	print("sauvegarde reussi")
 
+def test_update_player(player, db_file, parameter_modifier, text = ""):
+	'''
+	player : Player
+	db_file : Path
+	parameter_modifier : list[tupple]
+	text = str
+	'''
+	print(text)
+	#import testing data
+	modified_player = copy.deepcopy(player)
+	original_player = copy.deepcopy(player)
+
+	#setting the parameter
+	print("1er save du joueur")
+	print(id(modified_player))
+	save_player_data(modified_player.serialize(), db_file)
+	
+	print("modification")
+	for key, new_value in parameter_modifier:
+		setattr(modified_player, key, new_value)
+	print("2nd sauvegarde")
+	_, modified_player.id = save_player_data(modified_player.serialize(), db_file)
+	
+	print("récupération du joueur via son id")
+	db = TinyDB(db_file)
+	players_table = db.table('players')
+	modified_player
+	print(f'id = {modified_player.id}')
+	imported_player = players_table.get(doc_id = modified_player.id)
+	imported_player = deserialize_player(**imported_player)
+
+	#contrôle
+	assert imported_player == modified_player, print(f'{imported_player} {modified_player}')
+	for key, new_value in parameter_modifier:
+		assert getattr(imported_player, key) != getattr(original_player, key)
 
 def test_read_tournament_data(db_file):
 	list_tournament = load_tournament_data(db_file)
@@ -99,6 +136,9 @@ def create_dummy_player():
 
 if __name__ == "__main__":
 	DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath("DB_unitest.json") # absolule path
-	#test_save_players(create_dummy_player(), DB_ADDRESS)
 	#test_save_tournament(create_dummy_tournament(), DB_ADDRESS)
-	test_read_tournament_data(DB_ADDRESS)
+	#test_read_tournament_data(DB_ADDRESS)
+	test_update_player(player_1, DB_ADDRESS, [("name", "roger"),
+											  ("forname", "paul"),
+											  ("rank", "12")],
+											  "test update")

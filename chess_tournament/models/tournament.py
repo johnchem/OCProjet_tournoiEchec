@@ -1,5 +1,6 @@
 from math import trunc
 import datetime
+
 TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
 
 class Tournament():
@@ -8,11 +9,19 @@ class Tournament():
 	name.value : str
 	location.value : str
 	date.value : datetime
-	players.value : [persone]
+	duration.value : int
+	number_of_round.value : int
+	time_control.value : str
 	rounds : [round]
-	time_control.value : ["bullet", "blitz", "coup rapide"]
+	players : [player]
 	number_of_round.value : int
 	description.value : str
+	current_round = 0
+	dict_opponent = {}
+	dict_score = {}
+	id = None
+
+
 	'''
 	def __init__(self, *, name, location, 
 						date,
@@ -32,6 +41,7 @@ class Tournament():
 		self.current_round = 0
 		self.dict_opponent = {}
 		self.dict_score = {}
+		self.id = None #generated and handle with db
 
 	def add_player(self, player):
 		"""add a new player in the tournament"""
@@ -85,6 +95,7 @@ class Tournament():
 	
 	def serialize(self):
 		serialized_tournament = vars(self)
+		del serialized_tournament["id"]
 		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
 		serialized_tournament["players"] = [x.serialize for x in self.players]
 		return serialized_tournament
