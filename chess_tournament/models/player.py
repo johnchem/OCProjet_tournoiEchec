@@ -31,7 +31,7 @@ class Player:
 		self.birth_date = birth_date.value
 		self.gender = gender.value
 		self.rank = rank.value
-		self.id = None
+		self.id = ""
 
 	def add_opponent(self, player):
 		self.opponent.append(player)

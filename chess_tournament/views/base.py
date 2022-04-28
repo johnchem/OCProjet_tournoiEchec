@@ -107,8 +107,18 @@ class Views:
 					  f'({match.player_2["color"]}) {p1.name} {p1.forname}'
 					  )
 
+	def ask_match_result(self, match):
+		pass
+
+	def recap_score_round(self, round):
+		pass
+	
 	def ask_to_create_tournament(self):
 		print_message("vous devez créer un nouveau tournois avant d'ajouter des joueurs")		
+
+	def error_input_match_result(self):
+		print_message(f"le score introduit ne correspond pas au résultats valide",
+					  f"gagnant : 1  perdant : 0 nul : 0.5 pour les 2 joueurs")
 
 	def not_implemented(self):
 		print_message("cette fonction n'est pas encore implementée")
@@ -129,6 +139,9 @@ class Views:
 	def save_performed_page(self):
 		print_message("Données sauvegardé")
 
+	def new_screen(self):
+		os.system(CLEAN_SCREEN)
+
 	def error_save_page(self, error = None):
 		if error != None:
 			print_message(f'Echec de la sauvegarde des données ',
@@ -144,7 +157,7 @@ class Views:
 def clear_screen():
 	os.system(CLEAN_SCREEN)
 
-def print_message(text):
+def print_message(*text):
 		os.system(CLEAN_SCREEN)
 		print(text)
 		os.system("pause")

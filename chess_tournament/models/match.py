@@ -22,6 +22,10 @@ class Match():
 		else:
 			self.player_2["color"] = "white"
 
+	def set_result(score_player_1, score_player_2):
+		self.player_1["score"] = score_player_1
+		self.player_2["score"] = score_player_2
+		
 	def result(self):
 		return ([self.joueur_1, self.joueur_1["score"]],
 				[self.joueur_2, self.joueur_2["score"]])

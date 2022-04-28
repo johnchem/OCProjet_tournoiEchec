@@ -19,9 +19,7 @@ class Tournament():
 	current_round = 0
 	dict_opponent = {}
 	dict_score = {}
-	id = None
-
-
+	id = int
 	'''
 	def __init__(self, *, name, location, 
 						date,
@@ -161,8 +159,40 @@ class TournamentSwiss(Tournament):
 
 				return zip(upper_half, bottom_half)
 			else:
-				sort_function = lambda x : x.rank
-				pass
+				#create a list to sort player 
+				list_player_sorted = []
+				for player in self.players:
+					list_players_sorted.append((player,
+												self.dict_score[player.name],
+												player.rank))
+				sort_function = lambda x : (x[1], x[2])
+				#sort the players by score then rank
+				list_players_sorted.sort(key=sort_function)
+				#define the middle of the list, which also the number of matches
+				nbr_match = trunc(len(list_players_sorted)/2)
+				#split the list in two
+				upper_half = list_players_sorted[:nbr_match]
+				bottom_half = list_players_sorted[nbr_match:]
+				
+				return players_already_faced(upper_half, 
+											 bottom_half, 
+											 self.dict_opponent)
+
+def players_already_faced(list_1, list_2, comparison_dict):
+	for index, player in enumerate(list_1):
+		player2 = list_2(index)
+		
+		while comparison_dict[player1.name] == player2.name :
+			tmp_index = index+1
+			if tmp_index < len(list_2):
+				player2 = list_2(tmp_index)
+		else:
+			#add the next available player
+			list_2.insert(index, list_2[tmp_index])
+			#remove it from its original place
+			list_2.pop(tmp_index+1)
+
+	return zip(list_1, list_2)
 
 
 if __name__ == "__main__":
