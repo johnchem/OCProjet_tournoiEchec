@@ -39,7 +39,7 @@ class Controller:
 			save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
 		
 		MENU_ITEM_DICT = {
-			"Cloture du tour actuel" : self.views.not_implemented,
+			"Cloture du tour actuel" : self.stop_current_round,
 			"Commencer un nouveau tour" : self.start_new_round,
 			"Creation d'un nouveau tournois" : self.start_new_tournament,
 			"Ajout d'un nouveau joueur" : self.add_player,
@@ -127,11 +127,11 @@ class Controller:
 		self.views.tournament_created(self.tournament)
 		
 		""" sauvegarde du tournois"""
-		save_result = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
+		save_result, *err = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
 		if save_result:
 			self.views.save_performed_page()
 		else :
-			self.views.error_save_page(save_result)
+			self.views.error_save_page(err)
 		self.main_menu()
 
 	def add_player(self):
@@ -172,8 +172,12 @@ class Controller:
 				self.tournament.addPlayer(newPlayer)
 
 				""" sauvegarde du joueur dans la db joueur"""
-				if save_player_data(newPlayer.serialize, self.DB_ADDRESS):
-					print("joueur sauvegardé")
+				save_result, *err = save_player_data(newPlayer.serialize, self.DB_ADDRESS)
+				if save_result:
+					self.views.save_performed_page()
+				else :
+					self.views.error_save_page(err)
+				
 				self.main_menu()
 		else:
 			self.views.ask_to_create_tournament()
@@ -181,44 +185,60 @@ class Controller:
 		
 	def load_tournament(self):
 		# controle la présence d'une base de données
-		if self.DB_ADDRESS.exists():
-			# chargement de l'ensemble des tournois enregistré
-			history_tournament = load_tournament_data(self.DB_ADDRESS)
-			# gestion de la reception d'erreur lors de l'importation de la db
-			if isinstance(history_tournament, list):
-				# mise en forme et affichage les tournois sauvegardés
-				tournament_name_formated = self.tournament_historic(history_tournament)
-				#reception du choix de l'utilisateur
-				user_choices = self.views.load_tournament_page(tournament_name_formated)
-				# importation des données
-				chosen_tournament = history_tournament[user_choices-1]
-				print(chosen_tournament)
-				self.tournament = deserialize_tournament(**chosen_tournament)
-			else :
-				self.views.issues_database(history_tournament)
-		else : 
+		if not self.DB_ADDRESS.exists():
 			self.views.database_not_found()
+			self.main_menu()
+		
+		# chargement de l'ensemble des tournois enregistré
+		history_tournament = load_tournament_data(self.DB_ADDRESS)
+		
+		# gestion de la reception d'erreur lors de l'importation de la db
+		if not isinstance(history_tournament, list):
+			self.views.issues_database(history_tournament)
+			self.main_menu()
+
+		if len(history_tournament) == 0:
+			self.views.no_data_in_db("tournois")
+			self.main_menu()
+
+		# mise en forme et affichage les tournois sauvegardés
+		tournament_name_formated = self.tournament_historic(history_tournament)
+		#reception du choix de l'utilisateur
+		user_choices = self.views.load_tournament_page(tournament_name_formated)
+		# importation des données
+		chosen_tournament = history_tournament[user_choices-1]
+		print(chosen_tournament)
+		self.tournament = deserialize_tournament(**chosen_tournament)	
+			
 		self.main_menu()
 
 	def load_player(self):
 		# controle la présence d'une base de données
-		if self.DB_ADDRESS.exists():
-			# chargement de l'ensemble des joueurs enregistré
-			history_players = load_player_data(self.DB_ADDRESS)
-			# gestion de la reception d'erreur lors de l'importation de la db
-			if isinstance(history_players, list):
-				# mise en forme et affichage des joueurs sauvegardés
-				player_name_formated = self.players_historic(history_players)
-				#reception du choix de l'utilisateur
-				user_choices = self.views.load_player_page(player_name_formated)
-				# importation des données
-				chosen_player = history_players[user_choices-1]
-				print(chosen_player)
-				self.tournament.add_player(deserialize_player(**chosen_player))
-			else :
-				self.views.issues_database(history_players)
-		else : 
+		if not self.DB_ADDRESS.exists():
 			self.views.database_not_found()
+			self.main_menu()
+
+		# chargement de l'ensemble des joueurs enregistré
+		history_players = load_player_data(self.DB_ADDRESS)
+		
+		# gestion de la reception d'erreur lors de l'importation de la db
+		if not isinstance(history_players, list):
+			self.views.issues_database(history_players)
+			self.main_menu()
+
+		if len(history_tournament) == 0:
+			self.views.no_data_in_db("joueur")
+			self.main_menu()
+
+		# mise en forme et affichage des joueurs sauvegardés
+		player_name_formated = self.players_historic(history_players)
+		#reception du choix de l'utilisateur
+		user_choices = self.views.load_player_page(player_name_formated)
+		# importation des données
+		chosen_player = history_players[user_choices-1]
+		print(chosen_player)
+		self.tournament.add_player(deserialize_player(**chosen_player))
+		
 		self.main_menu()
 
 	def start_new_round(self):
@@ -234,7 +254,22 @@ class Controller:
 				next_round.add_match(new_match)
 			self.tournament.rounds.append(next_round)
 			self.views.round_recap(next_round)
-		#self.main_menu()
+		self.main_menu()
+
+	def stop_current_round(self):
+		self.tournament.end_round()
+		self.views.new_screen()
+
+		for match in self.tournament.rounds[-1].match:
+			result = []
+			result = self.views.ask_match_result(match)
+			
+			while not sum(result) == 1:
+				self.views.error_input_match_result()
+				result = self.views.ask_match_result(match)
+
+			match.set_result(*result)
+		self.view.round_recap(tournament.rounds[-1])			
 
 	def tournament_historic(self, tournament_list):
 		output_list = []

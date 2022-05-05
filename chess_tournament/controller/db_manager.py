@@ -12,7 +12,7 @@ def save_player_data(player, db_file):
 		players_table = db.table('players')
 		#players_table.truncate()	# clear the table first
 		print("local 1")
-		if player["id"] is "":
+		if player["id"] == "":
 			print("local 2")
 			print(f'player : \n {player}')
 			id_number =players_table.insert(player)
@@ -21,7 +21,7 @@ def save_player_data(player, db_file):
 			print("local 3")
 			return (True, id_number)
 		else:
-			players_table.update(player, doc_id = player["id"])
+			players_table.update(player, doc_id = int(player["id"]))
 		return (True, player["id"])
 	except BaseException as err:
 		print(f'error save : {err}')
@@ -40,7 +40,7 @@ def save_tournament_data(tournament, db_file):
 	try : 
 		db = TinyDB(db_file)
 		tournament_table = db.table('tournament')
-		if tournament["id"] is "":
+		if tournament["id"] == "":
 			id_number = tournament_table.insert(tournament)
 			tournament["id"] = id_number
 		else:
@@ -48,7 +48,7 @@ def save_tournament_data(tournament, db_file):
 		return True
 	except BaseException as err:
 		print(err)
-		return False
+		return False, err
 
 def load_tournament_data(db_file):
 	try :

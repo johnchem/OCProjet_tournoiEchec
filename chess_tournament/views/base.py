@@ -95,24 +95,26 @@ class Views:
 	def display_match(self, match):
 		match_not_done = (match.player_1['score'] is None or
 						  match.player_2['score'] is None) 
+		p1, p2 = match.player_1["player"], match.player_2["player"]
 		
-		with match.player_1['player'] as p1, match.player_2['players'] as p2:
-			if match_not_done:
-				print(f'{p1.name} {p1.forname} ({match.player_1["color"]}) - ',
-					  f': - ({match.player_2["color"]}) {p1.name} {p1.forname}')
-			else:
-				print(f'{p1.name} {p1.forname} ({match.player_1["color"]})',
-					  f' {match.player_1["score"]} ',
-					  f': {match.player_2["score"]} ',
-					  f'({match.player_2["color"]}) {p1.name} {p1.forname}'
-					  )
+		if match_not_done:
+			print(f'{p1.name} {p1.forname} ({match.player_1["color"]}) - ',
+				  f': - ({match.player_2["color"]}) {p1.name} {p1.forname}')
+		else:
+			print(f'{p1.name} {p1.forname} ({match.player_1["color"]})',
+				  f' {match.player_1["score"]} ',
+				  f': {match.player_2["score"]} ',
+				  f'({match.player_2["color"]}) {p1.name} {p1.forname}'
+				  )
 
 	def ask_match_result(self, match):
-		pass
+		p1, p2 = match.player_1["player"], match.player_2["player"]
+		
+		print_message(f'{p1.name} {p1.forname} vs {p2.name} {p2.forname}')
+		score_p1 = input(f'{p1.name} : ')
+		score_p2 = input(f'{p2.name} : ')
+		return (score_p1, score_p2)
 
-	def recap_score_round(self, round):
-		pass
-	
 	def ask_to_create_tournament(self):
 		print_message("vous devez créer un nouveau tournois avant d'ajouter des joueurs")		
 
@@ -129,10 +131,13 @@ class Views:
 	def database_not_found(self):
 		print_message("aucune base de donnée trouvée")
 
+	def no_data_in_db(self, object):
+		print_message(f"pas de {object} disponible")
+
 	def issues_database(self, error = None):
 		if error != None:
-			print_message(f"Problème lors de l'importation de la base de donnée \
-			 				\n erreur rencontré : {error}")
+			print_message(f"Problème lors de l'importation de la base de donnée\n",
+			 			  f"erreur rencontré : {error}")
 		else:
 			print_message("Problème lors de l'importation de la base de donnée")
 
@@ -159,7 +164,7 @@ def clear_screen():
 
 def print_message(*text):
 		os.system(CLEAN_SCREEN)
-		print(text)
+		print(*text)
 		os.system("pause")
 
 

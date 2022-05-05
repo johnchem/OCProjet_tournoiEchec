@@ -8,6 +8,8 @@ authors = ["jonathan payssan"]
 python = "^3.9"
 DateTime = "^4.4"
 tinydb = "^4.7.0"
+pdbpp = "^0.10.3"
+pytest = "^7.1.2"
 
 [tool.poetry.dev-dependencies]
 
