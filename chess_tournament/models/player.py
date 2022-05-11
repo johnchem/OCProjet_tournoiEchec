@@ -40,9 +40,7 @@ class Player:
 		return player in self.opponent
 
 	def serialize(self):
-		print(f"self : {id(self)}")
 		serialized_player = copy.deepcopy(vars(self))
-		print(f"serialized_player : {id(serialized_player)}")
 		serialized_player["birth_date"] = serialized_player["birth_date"].strftime("%d/%m/%Y")
 		return serialized_player
 

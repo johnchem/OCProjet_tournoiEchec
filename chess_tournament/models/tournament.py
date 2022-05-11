@@ -1,4 +1,5 @@
 from math import trunc
+import copy
 import datetime
 
 TIME_CONTROLE_STANDARD = ["bullet", "blitz", "coup rapide"]
@@ -39,7 +40,7 @@ class Tournament():
 		self.current_round = 0
 		self.dict_opponent = {}
 		self.dict_score = {}
-		self.id = None #generated and handle with db
+		self.id = "" #generated and handle with db
 
 	def add_player(self, player):
 		"""add a new player in the tournament"""
@@ -92,9 +93,9 @@ class Tournament():
 				self.dict_score[player.name] = score
 	
 	def serialize(self):
-		serialized_tournament = vars(self)
+		serialized_tournament = copy.deepcopy(vars(self))
 		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
-		serialized_tournament["players"] = [x.serialize for x in self.players]
+		serialized_tournament["players"] = [x.serialize() for x in self.players]
 		return serialized_tournament
 
 	def __str__(self):
@@ -159,7 +160,7 @@ class TournamentSwiss(Tournament):
 				return zip(upper_half, bottom_half)
 			else:
 				#create a list to sort player 
-				list_player_sorted = []
+				list_players_sorted = []
 				for player in self.players:
 					list_players_sorted.append((player,
 												self.dict_score[player.name],
@@ -181,7 +182,7 @@ def players_already_faced(list_1, list_2, comparison_dict):
 	for index, player in enumerate(list_1):
 		player2 = list_2(index)
 		
-		while comparison_dict[player1.name] == player2.name :
+		while comparison_dict[player.name] == player2.name :
 			tmp_index = index+1
 			if tmp_index < len(list_2):
 				player2 = list_2(tmp_index)

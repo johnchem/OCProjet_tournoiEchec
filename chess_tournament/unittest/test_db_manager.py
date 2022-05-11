@@ -66,7 +66,6 @@ def test_update_player(player, db_file, parameter_modifier, text = ""):
 	db = TinyDB(db_file)
 	players_table = db.table('players')
 	print(f'id = {modified_player.id}')
-	breakpoint()
 	imported_player = players_table.get(doc_id = int(modified_player.id))
 	print(imported_player)
 	if isinstance(imported_player, Player):

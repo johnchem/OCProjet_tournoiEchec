@@ -1,4 +1,5 @@
 
+from multiprocessing.dummy import current_process
 from chess_tournament.models.player import Player
 from chess_tournament.models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
 from chess_tournament.models.round import Round
@@ -31,13 +32,16 @@ class Controller:
 		self.DB_ADDRESS = pathlib.Path(__file__).parent.absolute().joinpath(database_name) # absolule path
 
 	def welcome_page(self):
-		print("welcome page")
 		self.views.welcome_page()
 
 	def main_menu(self):
 		if self.tournament is not None:
-			save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
-		
+			save_result, data = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
+			if save_result:
+				self.tournament.id=data
+			else :
+				self.views.error_save_page(data)
+
 		MENU_ITEM_DICT = {
 			"Cloture du tour actuel" : self.stop_current_round,
 			"Commencer un nouveau tour" : self.start_new_round,
@@ -69,12 +73,17 @@ class Controller:
 
 		#get the answer from the user
 		if self.tournament:
+			current_round_name = None
+			if not len(self.tournament.rounds) == 0:
+				current_round_name = self.tournament.rounds[-1].name
+			
 			user_answer = self.views.main_menu_page(menu_item_list, 
-				tournament_name = self.tournament.name)-1
+				tournament_name = self.tournament.name,
+				player_nb = len(self.tournament.players),
+				current_round_name=current_round_name
+				)-1
 		else:	
 			user_answer = self.views.main_menu_page(menu_item_list)-1
-		print(user_answer)
-		print(menu_item_list)
 		# convert the answer to the function 
 		function_called_by_user = MENU_ITEM_DICT[menu_item_list[user_answer]]
 		# Call the function
@@ -92,7 +101,7 @@ class Controller:
 		
 		date = DateProperty()
 		date.set_message("Date (JJ/MM/YYYY): ")
-		
+
 		duration = Property()
 		duration.set_message("Durée : ")
 		duration.set_control(lambda x: x.isnumeric(),
@@ -127,7 +136,7 @@ class Controller:
 		self.views.tournament_created(self.tournament)
 		
 		""" sauvegarde du tournois"""
-		save_result, *err = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
+		save_result, err = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
 		if save_result:
 			self.views.save_performed_page()
 		else :
@@ -168,15 +177,16 @@ class Controller:
 				}
 				player_data = self.views.new_player_page(parameter_dict)
 				""" creation du nouveau joueur"""
-				newPlayer = Player(**player_data)
-				self.tournament.addPlayer(newPlayer)
+				new_player = Player(**player_data)
+				self.tournament.add_player(new_player)
 
 				""" sauvegarde du joueur dans la db joueur"""
-				save_result, *err = save_player_data(newPlayer.serialize, self.DB_ADDRESS)
+				save_result, data = save_player_data(new_player.serialize(), self.DB_ADDRESS)
 				if save_result:
+					new_player.id = data
 					self.views.save_performed_page()
 				else :
-					self.views.error_save_page(err)
+					self.views.error_save_page(data)
 				
 				self.main_menu()
 		else:
@@ -207,9 +217,7 @@ class Controller:
 		user_choices = self.views.load_tournament_page(tournament_name_formated)
 		# importation des données
 		chosen_tournament = history_tournament[user_choices-1]
-		print(chosen_tournament)
-		self.tournament = deserialize_tournament(**chosen_tournament)	
-			
+		self.tournament = deserialize_tournament(**chosen_tournament)		
 		self.main_menu()
 
 	def load_player(self):
@@ -226,7 +234,7 @@ class Controller:
 			self.views.issues_database(history_players)
 			self.main_menu()
 
-		if len(history_tournament) == 0:
+		if len(history_players) == 0:
 			self.views.no_data_in_db("joueur")
 			self.main_menu()
 
@@ -236,7 +244,6 @@ class Controller:
 		user_choices = self.views.load_player_page(player_name_formated)
 		# importation des données
 		chosen_player = history_players[user_choices-1]
-		print(chosen_player)
 		self.tournament.add_player(deserialize_player(**chosen_player))
 		
 		self.main_menu()
@@ -254,6 +261,8 @@ class Controller:
 				next_round.add_match(new_match)
 			self.tournament.rounds.append(next_round)
 			self.views.round_recap(next_round)
+		else:
+			self.views.general_error_message(player_pairs)
 		self.main_menu()
 
 	def stop_current_round(self):
@@ -269,7 +278,7 @@ class Controller:
 				result = self.views.ask_match_result(match)
 
 			match.set_result(*result)
-		self.view.round_recap(tournament.rounds[-1])			
+		self.view.round_recap(self.tournament.rounds[-1])			
 
 	def tournament_historic(self, tournament_list):
 		output_list = []

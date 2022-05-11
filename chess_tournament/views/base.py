@@ -15,11 +15,15 @@ class Views:
 		print("Bienvenue dans Chess Manager")
 		os.system("pause")
 
-	def main_menu_page(self, menu_item_list, tournament_name = None):
+	def main_menu_page(self, menu_item_list, tournament_name = None,
+											 player_nb = None,
+											 current_round_name = None):
 		i = 1
 		os.system(CLEAN_SCREEN)
 		if tournament_name:
 			print(f"tournois actuel : {tournament_name}")
+			print(f"nnombre de joueurs en lice : {player_nb}")
+			print(f"round actuel : {current_round_name}")
 		print("________MENU PRINCIPAL________")
 		for menu_item in menu_item_list:
 			print(f"{i} : {menu_item}")
@@ -140,7 +144,7 @@ class Views:
 			 			  f"erreur rencontré : {error}")
 		else:
 			print_message("Problème lors de l'importation de la base de donnée")
-
+	
 	def save_performed_page(self):
 		print_message("Données sauvegardé")
 
@@ -150,10 +154,14 @@ class Views:
 	def error_save_page(self, error = None):
 		if error != None:
 			print_message(f'Echec de la sauvegarde des données ',
-						  f'\n erreur rencontré : {error}'
+						  f'\nerreur rencontré : {error}'
 						  )
 		else : 
 			print_message("Echec de la sauvegarde des données")
+	
+	def general_error_message(self, error):
+		print_message('erreur :',
+					  f'{error}')
 
 	def exit_message(self):
 		os.system(CLEAN_SCREEN)
