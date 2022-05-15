@@ -1,4 +1,5 @@
 from datetime import datetime
+import copy
 
 class Round():
 	'''
@@ -51,10 +52,13 @@ class Round():
 		return score_player
 
 	def serialize(self):
-		serialized_round = vars(self)
+		serialized_round = copy.deepcopy(vars(self))
 		serialized_round["begin_date_time"] = serialized_round["begin_date_time"].strftime("%d/%m/%Y %X")
-		serialized_round["end_date_time"] = serialized_round["end_date_time"].strftime("%d/%m/%Y %X")
-		serialized_round["match"] = [x.serialize for x in self.match]
+		if self.end_date_time:
+			serialized_round["end_date_time"] = serialized_round["end_date_time"].strftime("%d/%m/%Y %X")
+		else:
+			del serialized_round["end_date_time"]
+		serialized_round["match"] = [x.serialize() for x in self.match]
 		return serialized_round
 	
 	def __repr__(self):

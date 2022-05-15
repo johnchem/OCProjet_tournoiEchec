@@ -1,5 +1,6 @@
 
 import os
+from types import new_class
 from chess_tournament.models.tournament import TIME_CONTROLE_STANDARD
 """ terminal commandes """
 CLEAN_SCREEN = "CLS"
@@ -22,8 +23,11 @@ class Views:
 		os.system(CLEAN_SCREEN)
 		if tournament_name:
 			print(f"tournois actuel : {tournament_name}")
+		if player_nb:
 			print(f"nnombre de joueurs en lice : {player_nb}")
+		if current_round_name:
 			print(f"round actuel : {current_round_name}")
+		
 		print("________MENU PRINCIPAL________")
 		for menu_item in menu_item_list:
 			print(f"{i} : {menu_item}")
@@ -93,7 +97,7 @@ class Views:
 				  )
 		print("____________MATCH_____________")
 		for match in round.match:
-			display_match(match)
+			self.display_match(match)
 		os.system("pause")
 
 	def display_match(self, match):
@@ -103,7 +107,7 @@ class Views:
 		
 		if match_not_done:
 			print(f'{p1.name} {p1.forname} ({match.player_1["color"]}) - ',
-				  f': - ({match.player_2["color"]}) {p1.name} {p1.forname}')
+				  f': - ({match.player_2["color"]}) {p2.name} {p2.forname}')
 		else:
 			print(f'{p1.name} {p1.forname} ({match.player_1["color"]})',
 				  f' {match.player_1["score"]} ',
@@ -114,9 +118,10 @@ class Views:
 	def ask_match_result(self, match):
 		p1, p2 = match.player_1["player"], match.player_2["player"]
 		
-		print_message(f'{p1.name} {p1.forname} vs {p2.name} {p2.forname}')
-		score_p1 = input(f'{p1.name} : ')
-		score_p2 = input(f'{p2.name} : ')
+		clear_screen()
+		print(f'{p1.name} {p1.forname} vs {p2.name} {p2.forname}')
+		score_p1 = float(input(f'{p1.name} : '))
+		score_p2 = float(input(f'{p2.name} : '))
 		return (score_p1, score_p2)
 
 	def ask_to_create_tournament(self):
@@ -148,9 +153,6 @@ class Views:
 	def save_performed_page(self):
 		print_message("Données sauvegardé")
 
-	def new_screen(self):
-		os.system(CLEAN_SCREEN)
-
 	def error_save_page(self, error = None):
 		if error != None:
 			print_message(f'Echec de la sauvegarde des données ',
@@ -166,6 +168,9 @@ class Views:
 	def exit_message(self):
 		os.system(CLEAN_SCREEN)
 		print("Au revoir et bonne journée")
+
+	def clear_screen(self):
+		clear_screen()
 
 def clear_screen():
 	os.system(CLEAN_SCREEN)

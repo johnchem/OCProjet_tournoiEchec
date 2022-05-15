@@ -61,10 +61,10 @@ class Tournament():
 		return self.player_group_generation()
 
 	def end_round(self):
-		self.rounds[self.current_round].end_round()
+		self.rounds[self.current_round-1].end_round()
 
 	def set_result(self):
-		self.rounds[self.current_round].set_result()
+		self.rounds[self.current_round-1].set_result()
 
 	def player_group_generation(self):
 		""" not implemented from standart tournament"""
@@ -96,6 +96,7 @@ class Tournament():
 		serialized_tournament = copy.deepcopy(vars(self))
 		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
 		serialized_tournament["players"] = [x.serialize() for x in self.players]
+		serialized_tournament["rounds"] = [x.serialize() for x in self.rounds]
 		return serialized_tournament
 
 	def __str__(self):
@@ -145,38 +146,47 @@ class TournamentSwiss(Tournament):
 	""" tournament with the swiss systeme """
 	
 	def player_group_generation(self):
+		#catch if not enough players in the game
 		if len(self.players) < 8:
 			return None
-		else: 
-			if self.current_round == 1:
-				#sort the player
-				list_players_sorted = sorted(self.players, key=lambda x : x.rank)
-				#define the middle of the list, which also the number of matches
-				nbr_match = trunc(len(list_players_sorted)/2)
-				#split the list in two
-				upper_half = list_players_sorted[:nbr_match]
-				bottom_half = list_players_sorted[nbr_match:]
 
-				return zip(upper_half, bottom_half)
-			else:
-				#create a list to sort player 
-				list_players_sorted = []
-				for player in self.players:
-					list_players_sorted.append((player,
-												self.dict_score[player.name],
-												player.rank))
-				sort_function = lambda x : (x[1], x[2])
-				#sort the players by score then rank
-				list_players_sorted.sort(key=sort_function)
-				#define the middle of the list, which also the number of matches
-				nbr_match = trunc(len(list_players_sorted)/2)
-				#split the list in two
-				upper_half = list_players_sorted[:nbr_match]
-				bottom_half = list_players_sorted[nbr_match:]
-				
-				return players_already_faced(upper_half, 
-											 bottom_half, 
-											 self.dict_opponent)
+		#catch 1st tournament round
+		if self.current_round == 1:
+			#sort the player
+			list_players_sorted = sorted(self.players, key=lambda x : int(x.rank))
+			#define the middle of the list, which also the number of matches
+			nbr_match = trunc(len(list_players_sorted)/2)
+			#split the list in two
+			upper_half = list_players_sorted[:nbr_match]
+			bottom_half = list_players_sorted[nbr_match:]
+
+			return zip(upper_half, bottom_half)
+
+		#catch error if round >1 but no score recorded or no round history
+		if len(self.dict_score) == 0 or len(self.dict_opponent) == 0:
+			return None
+
+		#process for any round >1
+		
+		#create a list to sort player 
+		list_players_sorted = []
+		for player in self.players:
+			list_players_sorted.append((player,
+										self.dict_score[player.name],
+										int(player.rank)))
+		sort_function = lambda x : (x[1], x[2])
+		#sort the players by score then rank
+		list_players_sorted.sort(key=sort_function)
+		#define the middle of the list, which also the number of matches
+		nbr_match = trunc(len(list_players_sorted)/2)
+		#split the list in two
+		upper_half = list_players_sorted[:nbr_match]
+		bottom_half = list_players_sorted[nbr_match:]
+		
+		return players_already_faced(upper_half, 
+									bottom_half, 
+									self.dict_opponent)
+			
 
 def players_already_faced(list_1, list_2, comparison_dict):
 	for index, player in enumerate(list_1):

@@ -1,5 +1,3 @@
-from chess_tournament.models.player import Player
-from chess_tournament.models.tournament import TournamentSwiss
 from tinydb import TinyDB
 
 def save_player_data(player, db_file):

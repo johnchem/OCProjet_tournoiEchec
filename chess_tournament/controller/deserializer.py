@@ -1,4 +1,5 @@
 #import modole
+from binascii import a2b_hex
 from datetime import datetime
 
 from chess_tournament.models.property import Property
@@ -82,8 +83,9 @@ def deserialize_round(**kwargs):
 	begin_date_time = datetime.strptime(kwargs["begin_date_time"], "%d/%m/%Y %X")
 	restored_round.begin_date_time = begin_date_time 
 
-	end_date_time = datetime.strptime(kwargs["end_date_time"], "%d/%m/%Y %X")
-	restored_round.end_date_time = end_date_time
+	if "end_date_time" in kwargs:
+		end_date_time = datetime.strptime(kwargs["end_date_time"], "%d/%m/%Y %X")
+		restored_round.end_date_time = end_date_time
 
 	round_is_done = kwargs["is_done"]
 	restored_round.is_done = round_is_done

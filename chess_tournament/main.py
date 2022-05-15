@@ -2,10 +2,7 @@
 from chess_tournament.views.base import Views
 
 """ modeles """
-from chess_tournament.models.player import Player
 from chess_tournament.models.tournament import TournamentSwiss
-from chess_tournament.models.round import Round
-from chess_tournament.models.match import Match
 
 """ controller """
 from chess_tournament.controller.controller import Controller

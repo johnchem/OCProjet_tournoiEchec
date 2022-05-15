@@ -1,4 +1,5 @@
 import random
+import copy
 
 class Match():
 	'''
@@ -15,14 +16,14 @@ class Match():
 		self.set_color()
 		
 	def set_color(self):
-		pick_color = random.choices(["white", "black"])
+		pick_color = "".join(random.choices(["white", "black"]))
 		self.player_1["color"] = pick_color
 		if pick_color == "white":
 			self.player_2["color"] = "black"
 		else:
 			self.player_2["color"] = "white"
 
-	def set_result(score_player_1, score_player_2):
+	def set_result(self, score_player_1, score_player_2):
 		self.player_1["score"] = score_player_1
 		self.player_2["score"] = score_player_2
 		
@@ -31,11 +32,11 @@ class Match():
 				[self.joueur_2, self.joueur_2["score"]])
 
 	def serialize(self):
-		player_1 = self.player_1
-		player_1["player"] = self.player_1["player"].serialize
+		player_1 = copy.deepcopy(self.player_1)
+		player_1["player"] = self.player_1["player"].serialize()
 		
-		player_2 = self.player_2
-		player_2["player"] = self.player_2["player"].serialize
+		player_2 = copy.deepcopy(self.player_2)
+		player_2["player"] = self.player_2["player"].serialize()
 
 		return {"player_1": player_1,
 				"player_2": player_2}

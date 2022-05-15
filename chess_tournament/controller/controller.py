@@ -1,7 +1,6 @@
 
-from multiprocessing.dummy import current_process
 from chess_tournament.models.player import Player
-from chess_tournament.models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
+from chess_tournament.models.tournament import TIME_CONTROLE_STANDARD
 from chess_tournament.models.round import Round
 from chess_tournament.models.match import Match
 from chess_tournament.models.property import Property
@@ -17,7 +16,6 @@ from chess_tournament.controller.deserializer import deserialize_tournament, \
 
 from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
-import os
 import pathlib
 
 STRING_TESTING = ascii_lowercase + ascii_uppercase + " -_"
@@ -65,7 +63,7 @@ class Controller:
 			
 			if len(self.tournament.rounds) == 0:
 				del MENU_ITEM_DICT["Cloture du tour actuel"]
-			elif not self.tournament.rounds[-1].is_done:
+			elif self.tournament.rounds[-1].is_done:
 				del MENU_ITEM_DICT["Cloture du tour actuel"]
 
 		#get the list of item for the main menu
@@ -267,7 +265,7 @@ class Controller:
 
 	def stop_current_round(self):
 		self.tournament.end_round()
-		self.views.new_screen()
+		self.views.clear_screen()
 
 		for match in self.tournament.rounds[-1].match:
 			result = []
@@ -278,7 +276,8 @@ class Controller:
 				result = self.views.ask_match_result(match)
 
 			match.set_result(*result)
-		self.view.round_recap(self.tournament.rounds[-1])			
+		self.views.round_recap(self.tournament.rounds[-1])
+		self.main_menu()			
 
 	def tournament_historic(self, tournament_list):
 		output_list = []
