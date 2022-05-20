@@ -82,6 +82,14 @@ class Views:
 			i +=1
 		return user_choices("indiquer votre choix : ", range(1,i+1))
 
+	def update_player(self, player, item):
+		print(f'classement actuel du joueur : {player.rank}')
+		
+		""" demande à l'utilisateur la valeur tant que 
+		celle-ci n'est pas conforme """
+		while not item.set_value(input(item.message)): pass
+		return item
+	
 	def round_recap(self, round):
 		clear_screen()
 		if round.is_done:
@@ -114,6 +122,31 @@ class Views:
 				  f': {match.player_2["score"]} ',
 				  f'({match.player_2["color"]}) {p1.name} {p1.forname}'
 				  )
+
+	def grille_americaine(self, tournament):
+		list_players = [[x] for x in tournament.players]
+		
+		for ronde in tournament.rounds:
+			for match in ronde.match:
+				p1, p2 = match.player_1, match.player_2
+				resultat_p1, resultat_p2 = resultat_match(p1, p2)
+				list_players[list_players.index(p1["player"])].append(resultat_p1)
+				list_players[list_players.index(p2["player"])].append(resultat_p2)
+		for item in list_players:
+			score = tournament.dict_score[item[0].name]
+			list_players[list_players.index(item[0])].append(score)
+		list_players.sort(key=lambda x : x[-1])
+
+		clear_screen()
+		title_list = ['joueur', 'rank'] + [f'R{x}' for x in range(1, tournament.number_of_round+1)] + ['score']
+		title = '{:<15}|{:4}|{:4}|{:4}|{:4}|{:4}|{:4}'.format(title_list)
+		print('title')
+		for item in list_players:
+			print('{:<15}|{:4}|{:4}|{:4}|{:4}|{:4}|{:4}').format(
+				f'{item[0].name} {item[0].forname}',
+				item[1:])
+
+		os.system("pause")
 
 	def ask_match_result(self, match):
 		p1, p2 = match.player_1["player"], match.player_2["player"]
@@ -179,6 +212,20 @@ def print_message(*text):
 		os.system(CLEAN_SCREEN)
 		print(*text)
 		os.system("pause")
+
+def resultat_match(player_1, player_2):
+	score_p1, score_p2 = "", ""
+	if player_1["score"] == 0:
+		score_p1, score_p2 = "-", "+"
+	elif player_1["score"] == 1:
+		score_p1, score_p2 = "+","-"
+	else:
+		score_p1, score_p2 = "=", "="
+	
+	score_p1 += f'{player_2["player"].rank}{player_1["color"]}'
+	score_p2 += f'{player_1["player"].rank}{player_2["color"]}'
+	
+	return score_p1, score_p2
 
 
 def user_choices(text, range):

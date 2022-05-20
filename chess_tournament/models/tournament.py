@@ -37,7 +37,7 @@ class Tournament():
 		self.rounds = []
 		self.players = []
 		self.description = description.value
-		self.current_round = 0
+		self._current_round = 0
 		self.dict_opponent = {}
 		self.dict_score = {}
 		self.id = "" #generated and handle with db
@@ -57,7 +57,6 @@ class Tournament():
 			return False
 
 	def start_new_round(self):
-		self.current_round += 1
 		return self.player_group_generation()
 
 	def end_round(self):
@@ -77,13 +76,13 @@ class Tournament():
 
 		for player, opponent in tmp_list:
 			if player.name in self.dict_opponent:
-				self.dict_opponent[player.name].append(opponent)
+				self.dict_opponent[player.name].append(opponent.name)
 			else :
-				self.dict_opponent[player.name] = [opponent]
+				self.dict_opponent[player.name] = [opponent.name]
 
 	def get_players_score(self):
 		tmp_list = []
-		for round_played in self.round:
+		for round_played in self.rounds:
 			tmp_list += round_played.get_players_score()
 
 		for player, score in tmp_list:
@@ -94,6 +93,8 @@ class Tournament():
 	
 	def serialize(self):
 		serialized_tournament = copy.deepcopy(vars(self))
+		del serialized_tournament["dict_opponent"]
+		del serialized_tournament["dict_score"]
 		serialized_tournament["date"] = serialized_tournament["date"].strftime("%d/%m/%Y")
 		serialized_tournament["players"] = [x.serialize() for x in self.players]
 		serialized_tournament["rounds"] = [x.serialize() for x in self.rounds]
@@ -142,6 +143,14 @@ class Tournament():
 		# return False if any difference exist between self and other
 		return not any(list_compare)
 
+	def get_current_round(self):
+		return len(self.rounds)
+
+	def set_current_round(self, value):
+		self._current_round = value
+
+	current_round = property(get_current_round, set_current_round)
+
 class TournamentSwiss(Tournament):
 	""" tournament with the swiss systeme """
 	
@@ -151,7 +160,7 @@ class TournamentSwiss(Tournament):
 			return None
 
 		#catch 1st tournament round
-		if self.current_round == 1:
+		if self.current_round == 0:
 			#sort the player
 			list_players_sorted = sorted(self.players, key=lambda x : int(x.rank))
 			#define the middle of the list, which also the number of matches
@@ -177,6 +186,8 @@ class TournamentSwiss(Tournament):
 		sort_function = lambda x : (x[1], x[2])
 		#sort the players by score then rank
 		list_players_sorted.sort(key=sort_function)
+		#remove the filtering part
+		list_players_sorted = [x[0] for x in list_players_sorted]
 		#define the middle of the list, which also the number of matches
 		nbr_match = trunc(len(list_players_sorted)/2)
 		#split the list in two
@@ -190,17 +201,17 @@ class TournamentSwiss(Tournament):
 
 def players_already_faced(list_1, list_2, comparison_dict):
 	for index, player in enumerate(list_1):
-		player2 = list_2(index)
+		player2 = list_2[index]
 		
 		while comparison_dict[player.name] == player2.name :
 			tmp_index = index+1
 			if tmp_index < len(list_2):
-				player2 = list_2(tmp_index)
-		else:
-			#add the next available player
-			list_2.insert(index, list_2[tmp_index])
-			#remove it from its original place
-			list_2.pop(tmp_index+1)
+				player2 = list_2[tmp_index]
+			else:
+				#add the next available player
+				list_2.insert(index, list_2[tmp_index])
+				#remove it from its original place
+				list_2.pop(tmp_index+1)
 
 	return zip(list_1, list_2)
 

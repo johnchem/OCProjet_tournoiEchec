@@ -40,15 +40,17 @@ class Round():
 		for match in self.match:
 			list_opponent.append((match.player_1["player"],
 								  match.player_2["player"]))
+			list_opponent.append((match.player_2["player"],
+								  match.player_1["player"]))
 		return list_opponent
 
 	def get_players_score(self):
 		score_player = []
 		for match in self.match:
-			score_player.append(match.player_1["player"],
-								match.player_1["player"].score)
-			score_player.append(match.player_2["player"],
-								match.player_2["player"].score)
+			score_player.append((match.player_1["player"],
+								match.player_1["score"]))
+			score_player.append((match.player_2["player"],
+								match.player_2["score"]))
 		return score_player
 
 	def serialize(self):

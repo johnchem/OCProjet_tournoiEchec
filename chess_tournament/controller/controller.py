@@ -34,17 +34,23 @@ class Controller:
 
 	def main_menu(self):
 		if self.tournament is not None:
-			save_result, data = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
+			save_result, data, player_id = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
 			if save_result:
 				self.tournament.id=data
 			else :
 				self.views.error_save_page(data)
+			
+			if player_id:
+				for player, value in zip(self.tournament.players, player_id):
+					player.id = value
 
 		MENU_ITEM_DICT = {
 			"Cloture du tour actuel" : self.stop_current_round,
+			"Cloture du tournois" : self.tournament_closure,
 			"Commencer un nouveau tour" : self.start_new_round,
 			"Creation d'un nouveau tournois" : self.start_new_tournament,
 			"Ajout d'un nouveau joueur" : self.add_player,
+			"Modification classement d'un joueur" : self.change_player_rank,
 			"Charger un tournois précedent" : self.load_tournament,
 			"Importer un joueur" : self.load_player,
 			"Quitter" : self.quit
@@ -52,19 +58,28 @@ class Controller:
 
 		#remove forbidden element
 		if self.tournament is None:
-			del MENU_ITEM_DICT["Cloture du tour actuel"]
-			del MENU_ITEM_DICT["Commencer un nouveau tour"]
-			del MENU_ITEM_DICT["Ajout d'un nouveau joueur"]
-			del MENU_ITEM_DICT["Importer un joueur"]
-		else:
+			MENU_ITEM_DICT.pop("Cloture du tour actuel", None)
+			MENU_ITEM_DICT.pop("Cloture du tournois", None)
+			MENU_ITEM_DICT.pop("Commencer un nouveau tour", None)
+			MENU_ITEM_DICT.pop("Ajout d'un nouveau joueur", None)
+			MENU_ITEM_DICT.pop("Importer un joueur",None)
+			MENU_ITEM_DICT.pop("Modification classement d'un joueur", None)
+		else:			
 			if self.tournament.is_full():
-				del MENU_ITEM_DICT["Ajout d'un nouveau joueur"]
-				del MENU_ITEM_DICT["Importer un joueur"]
-			
+				MENU_ITEM_DICT.pop("Ajout d'un nouveau joueur", None)
+				MENU_ITEM_DICT.pop("Importer un joueur",None)
+
+			if self.tournament.current_round < self.tournament.number_of_round:
+				MENU_ITEM_DICT.pop("Cloture du tournois", None)
+			else :
+				MENU_ITEM_DICT.pop("Commencer un nouveau tour", None)
+				
 			if len(self.tournament.rounds) == 0:
-				del MENU_ITEM_DICT["Cloture du tour actuel"]
+				MENU_ITEM_DICT.pop("Cloture du tour actuel", None)
 			elif self.tournament.rounds[-1].is_done:
-				del MENU_ITEM_DICT["Cloture du tour actuel"]
+				MENU_ITEM_DICT.pop("Cloture du tour actuel", None)
+			else:
+				MENU_ITEM_DICT.pop("Cloture du tournois", None)
 
 		#get the list of item for the main menu
 		menu_item_list = [x for x in MENU_ITEM_DICT.keys()]
@@ -134,11 +149,14 @@ class Controller:
 		self.views.tournament_created(self.tournament)
 		
 		""" sauvegarde du tournois"""
-		save_result, err = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
+		save_result, err, _ = save_tournament_data(self.tournament.serialize(), self.DB_ADDRESS)
 		if save_result:
 			self.views.save_performed_page()
 		else :
 			self.views.error_save_page(err)
+
+	def tournament_closure(self):
+		self.views.grille_americaine(self.tournament)
 		self.main_menu()
 
 	def add_player(self):
@@ -191,6 +209,32 @@ class Controller:
 			self.views.ask_to_create_tournament()
 			self.main_menu()
 		
+	def change_player_rank(self):
+		# mise en forme et affichage des joueurs sauvegardés
+		player_name_formated = []
+		for player in self.tournament.players:
+			player_name_formated.append(f"{player.forname} {player.name}")
+		
+		#reception du choix de l'utilisateur
+		user_choices = self.views.load_player_page(player_name_formated)
+		chosen_player = self.tournament.players[user_choices-1]
+		
+		# modification des données
+		rank = Property()
+		rank.set_message("Nouveau classement :")
+		rank.set_defaut_value(int(chosen_player.rank))
+		chosen_player.rank = self.views.update_player(chosen_player, rank)
+
+		""" sauvegarde du joueur dans la db joueur"""
+		save_result, data = save_player_data(chosen_player.serialize(), self.DB_ADDRESS)
+		if save_result:
+			chosen_player.id = data
+			self.views.save_performed_page()
+		else :
+			self.views.error_save_page(data)
+		
+		self.main_menu()
+	
 	def load_tournament(self):
 		# controle la présence d'une base de données
 		if not self.DB_ADDRESS.exists():
@@ -215,7 +259,9 @@ class Controller:
 		user_choices = self.views.load_tournament_page(tournament_name_formated)
 		# importation des données
 		chosen_tournament = history_tournament[user_choices-1]
-		self.tournament = deserialize_tournament(**chosen_tournament)		
+		self.tournament = deserialize_tournament(**chosen_tournament)
+		self.tournament.get_players_opponent()
+		self.tournament.get_players_score()
 		self.main_menu()
 
 	def load_player(self):
@@ -250,8 +296,8 @@ class Controller:
 		player_pairs = self.tournament.start_new_round()
 		if player_pairs:
 			#definition du nom du round et creation
-			current_round = self.tournament.current_round
-			next_round_name = f'name{current_round}'
+			current_round = self.tournament.current_round+1
+			next_round_name = f'Tour_{current_round}'
 			next_round = Round(next_round_name)
 			#creation des match et ajout au round
 			for x, y in player_pairs:
@@ -276,8 +322,10 @@ class Controller:
 				result = self.views.ask_match_result(match)
 
 			match.set_result(*result)
+		self.tournament.get_players_opponent()
+		self.tournament.get_players_score()
 		self.views.round_recap(self.tournament.rounds[-1])
-		self.main_menu()			
+		self.main_menu()
 
 	def tournament_historic(self, tournament_list):
 		output_list = []

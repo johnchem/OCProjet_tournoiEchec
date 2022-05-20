@@ -27,7 +27,7 @@ def deserialize_tournament(**kwargs):
 	duration.set_value(kwargs["duration"])
 	
 	number_of_round = Property()
-	number_of_round.set_value(kwargs["number_of_round"])
+	number_of_round.set_value(int(kwargs["number_of_round"]))
 
 	time_control = MultipleChoicesProperty()
 	time_control._set_value(kwargs["time_control"])
@@ -43,7 +43,7 @@ def deserialize_tournament(**kwargs):
 			location = location,
 			time_control = time_control)
 
-	tournament.current_round = kwargs["current_round"]
+	tournament.current_round = int(kwargs["current_round"])
 	tournament.rounds = [deserialize_round(**x) for x in kwargs["rounds"]]
 	tournament.players = [deserialize_player(**x) for x in kwargs["players"]]
 
