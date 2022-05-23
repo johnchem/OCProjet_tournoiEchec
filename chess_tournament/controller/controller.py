@@ -16,7 +16,6 @@ from chess_tournament.controller.deserializer import deserialize_tournament, \
 
 from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
-from operator import itemgetter
 import pathlib
 
 STRING_TESTING = ascii_lowercase + ascii_uppercase + " -_"
@@ -264,8 +263,8 @@ class Controller:
 			self.views.error_save_page(data)
 		
 		self.main_menu()
-	
-	def load_tournament(self):
+
+	def select_tournament(self):
 		# controle la présence d'une base de données
 		if not self.DB_ADDRESS.exists():
 			self.views.database_not_found()
@@ -287,8 +286,12 @@ class Controller:
 		tournament_name_formated = self.tournament_historic(history_tournament)
 		#reception du choix de l'utilisateur
 		user_choices = self.views.load_tournament_page(tournament_name_formated)
+		return history_tournament[user_choices-1]
+	
+	def load_tournament(self):
+		chosen_tournament = self.select_tournament()
+
 		# importation des données
-		chosen_tournament = history_tournament[user_choices-1]
 		self.tournament = deserialize_tournament(**chosen_tournament)
 		self.tournament.get_players_opponent()
 		self.tournament.get_players_score()
@@ -360,10 +363,10 @@ class Controller:
 	def report_menu(self):
 		MENU_ITEM_DICT = {
 			"Liste des joueurs" : self.report_all_players,
-			"Liste des joueurs d'un tournois" : self.views.not_implemented,
-			"Liste de tous les tournois" : self.views.not_implemented,
-			"Liste de tous les tours d'un tournois" : self.views.not_implemented,
-			"Liste de tous les matchs d'un tournois " : self.views.not_implemented,
+			"Liste des joueurs d'un tournois" : self.report_all_players_in_tourn,
+			"Liste de tous les tournois" : self.report_all_tourns,
+			"Liste de tous les tours d'un tournois" : self.report_all_rounds_in_tourn,
+			"Liste de tous les matchs d'un tournois " : self.report_all_matchs_in_tourn,
 			"Retour" : self.main_menu
 			}
 
@@ -412,16 +415,73 @@ class Controller:
 		self.main_menu()
 
 	def report_all_players_in_tourn(self):
-		pass
+		selected_tourn = self.select_tournament()
+		
+		# mise en forme et affichage des joueurs sauvegardés
+		players_in_tourn = [list(p.values()) for p in selected_tourn["players"]]
+		filter_function = lambda x : (int(x[4]), x[0])
+		players_in_tourn.sort(key=filter_function, reverse=False)
+		
+		list_player_formated = []
+		# player field : ['name', 'forname', 'birth_date', 'gender', 'rank', 'id']
+		for p in players_in_tourn:
+			p_full_name = f'{p[0].upper()} {p[1]}'
+			list_player_formated.append([p_full_name, p[3], p[2], p[4]])
+
+		self.views.report_player_in_tourn(selected_tourn["name"], list_player_formated)
+		self.main_menu()
 
 	def report_all_tourns(self):
 		pass
 
 	def report_all_rounds_in_tourn(self):
-		pass
+		selected_tourn = self.select_tournament()
+			
+		list_round_formated = []
+		# player field : [name', 'begin_date_time', 'end_date_time', 'match', 'is_done']
+		for r in selected_tourn["rounds"]:
+			date = r["begin_date_time"][:10]
+			begin_hour = r["begin_date_time"][11:]
+			if r['is_done']:
+				end_hour = r["begin_date_time"][11:]
+			else:
+				end_hour = " "
+			status_round = "Oui" if r["is_done"] else "Non"
+			list_round_formated.append([r["name"], date, begin_hour, end_hour, status_round])
+
+		self.views.report_round_in_tourn(selected_tourn["name"], list_round_formated)
+		self.main_menu()
 
 	def report_all_matchs_in_tourn(self):
-		pass
+		selected_tourn = self.select_tournament()
+
+		''' self.player_1 = {"player", "score", "color"}
+		self.player_2 = {"player", "score", "color"}
+		'''
+		list_match = [y for x in selected_tourn["rounds"] for y in x["match"]]
+		list_match_formated = []
+		for m in list_match:
+			p1, p2 = m["player_1"], m["player_2"]
+			
+			p1_full_name = f'{p1["player"]["name"].upper()} {p1["player"]["forname"]}'
+			p1_rank = f'{p1["player"]["rank"]}'
+			
+			p2_full_name = f'{p2["player"]["name"].upper()} {p2["player"]["forname"]}'
+			p2_rank = f'{p2["player"]["rank"]}'
+
+			played_match = lambda x : "-" if x["score"] is None else x["score"]
+			p1_score = played_match(p1)
+			p2_score = played_match(p2)
+
+			player_color = lambda x : "Blanc" if x == "white" else "Noir"
+			p1_color = player_color(p1["color"])
+			p2_color = player_color(p2["color"])
+			
+			list_match_formated.append([p1_full_name, p1_rank, p1_color, p1_score, 
+										p2_score, p2_color, p2_rank, p2_full_name])
+
+		self.views.report_match_in_tourn(selected_tourn["name"], list_match_formated)
+		self.main_menu()
 
 	def tournament_historic(self, tournament_list):
 		output_list = []

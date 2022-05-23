@@ -147,8 +147,41 @@ class Views:
 			print('{:<25}|{:^4}|{:^17}|{:^4}'.format(*player))
 		os.system("pause")
 
-	def report_player_in_tourn(self, player_list):
-		pass
+	def report_player_in_tourn(self, tourn_name, player_list):
+		clear_screen()
+		print(f'Joueurs présents au tournois : {tourn_name}')
+		title_list = ['Joueur', 'Sexe', 'Date de naissance', 'Rang']
+		title = '{:<25}|{:^4}|{:^17}|{:^4}'.format(*title_list)
+		print(title)
+		print('_'*53)
+		for player in player_list:
+			print('{:<25}|{:^4}|{:^17}|{:^4}'.format(*player))
+		os.system("pause")
+
+	def report_round_in_tourn(self, tourn_name, round_list):
+		clear_screen()
+		template = '{:<10}|{:^12}|{:^12}|{:^12}|{:^4}'
+		print(f'Rondes pour le tournois : {tourn_name}')
+		title_list = ['Nom', 'Date', 'Heure début', 'Heure fin', 'Termine']
+		title = template.format(*title_list)
+		print(title)
+		print('_'*57)
+		for round in round_list:
+			print(template.format(*round))
+		os.system("pause")
+
+	def report_match_in_tourn(self, tourn_name, match_list):
+		clear_screen()
+		template = '{:<25}|{:^4}|{:^7}|{:^5}|{:^5}|{:^7}|{:^4}|{:>25}'
+		print(f'Match pour le tournois : {tourn_name}')
+		title_list = ['Joueur 1', 'rank', 'Couleur', 'Score', 
+					'Score', 'Couleur', 'rank', 'Joueur 2']
+		title = template.format(*title_list)
+		print(title)
+		print('_'*89)
+		for round in match_list:
+			print(template.format(*round))
+		os.system("pause")
 
 	def grille_americaine(self, tournament):
 		list_players = [[x] for x in tournament.players]
