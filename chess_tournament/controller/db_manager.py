@@ -1,4 +1,5 @@
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
+import pathlib
 
 def save_player_data(player, db_file):
 	'''
@@ -10,10 +11,12 @@ def save_player_data(player, db_file):
 		players_table = db.table('players')
 		#players_table.truncate()	# clear the table first
 		if player["id"] == "":
-			id_number=players_table.insert(player)
+			#filter = where("name") == player["name"] and where("forname") == player("forname") 
+			filter = Query()
+			id_number=players_table.upsert(player, filter.name == player["name"])
 			return True, id_number
 		else:
-			players_table.update(player, doc_ids = [player["id"]])
+			players_table.update(player, doc_ids = [int(player["id"])])
 		return True, player["id"]
 	except BaseException as err:
 		print(f'error save : {err}')
@@ -39,7 +42,7 @@ def save_tournament_data(tournament, db_file):
 			tournament["id"] = id_number
 		else :
 			id_number = tournament["id"]
-			tournament_table.update(tournament, doc_ids=[id_number])
+			tournament_table.update(tournament, doc_ids=[int(id_number)])
 		
 		#sauvegarde des joueurs present dans la partie
 		list_id_player = []

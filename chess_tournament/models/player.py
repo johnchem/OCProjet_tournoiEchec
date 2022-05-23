@@ -30,7 +30,7 @@ class Player:
 		self.forname = forname.value
 		self.birth_date = birth_date.value
 		self.gender = gender.value
-		self.rank = rank.value
+		self.rank = int(rank.value)
 		self.id = ""
 
 	def add_opponent(self, player):

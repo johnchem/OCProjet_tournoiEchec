@@ -56,7 +56,7 @@ class Property:
 				self.value = value
 				return True
 			# test si une valeur par defaut existe et que la chaine est vide
-			elif not self._defaut_value and value == "":
+			elif self._defaut_value != None and value == "":
 				self.value = self._defaut_value
 				print(f"{self.value} appliqué par défaut")
 				return True
@@ -65,7 +65,7 @@ class Property:
 				print(self.error_message)
 				return False
 		# test si une valeur par defaut existe
-		elif not self._defaut_value and value == "":
+		elif self._defaut_value != None and value == "":
 			self.value = self._defaut_value
 			print(f"{self.value} appliqué par défaut")
 			return True

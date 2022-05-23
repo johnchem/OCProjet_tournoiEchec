@@ -43,7 +43,7 @@ def deserialize_tournament(**kwargs):
 			location = location,
 			time_control = time_control)
 
-	tournament.current_round = int(kwargs["current_round"])
+	tournament.current_round = int(kwargs["_current_round"])
 	tournament.rounds = [deserialize_round(**x) for x in kwargs["rounds"]]
 	tournament.players = [deserialize_player(**x) for x in kwargs["players"]]
 

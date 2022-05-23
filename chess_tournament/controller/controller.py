@@ -16,6 +16,7 @@ from chess_tournament.controller.deserializer import deserialize_tournament, \
 
 from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
+from operator import itemgetter
 import pathlib
 
 STRING_TESTING = ascii_lowercase + ascii_uppercase + " -_"
@@ -53,6 +54,7 @@ class Controller:
 			"Modification classement d'un joueur" : self.change_player_rank,
 			"Charger un tournois précedent" : self.load_tournament,
 			"Importer un joueur" : self.load_player,
+			"Rapports" : self.report_menu,
 			"Quitter" : self.quit
 			}
 
@@ -65,9 +67,14 @@ class Controller:
 			MENU_ITEM_DICT.pop("Importer un joueur",None)
 			MENU_ITEM_DICT.pop("Modification classement d'un joueur", None)
 		else:			
+			if len(self.tournament.players) == 0:
+				MENU_ITEM_DICT.pop("Modification classement d'un joueur", None)
+			
 			if self.tournament.is_full():
 				MENU_ITEM_DICT.pop("Ajout d'un nouveau joueur", None)
 				MENU_ITEM_DICT.pop("Importer un joueur",None)
+			else:
+				MENU_ITEM_DICT.pop("Commencer un nouveau tour", None)
 
 			if self.tournament.current_round < self.tournament.number_of_round:
 				MENU_ITEM_DICT.pop("Cloture du tournois", None)
@@ -155,8 +162,30 @@ class Controller:
 		else :
 			self.views.error_save_page(err)
 
+		self.main_menu()
+
 	def tournament_closure(self):
+		#affichage 
 		self.views.grille_americaine(self.tournament)
+
+		#update du classement des joueurs
+		# mise en forme du nom du joueur sauvegardés
+		for player in self.tournament.players:
+			# modification des données
+			rank = Property()
+			rank.set_message("Nouveau classement :")
+			rank.set_defaut_value(int(player.rank))
+			updated_rank = self.views.update_player(player, rank)
+			player.rank = updated_rank.value
+
+			""" sauvegarde du joueur dans la db joueur"""
+			save_result, data = save_player_data(player.serialize(), self.DB_ADDRESS)
+			if save_result:
+				player.id = data
+				self.views.save_performed_message()
+			else :
+				self.views.error_save_page(data)
+
 		self.main_menu()
 
 	def add_player(self):
@@ -223,7 +252,8 @@ class Controller:
 		rank = Property()
 		rank.set_message("Nouveau classement :")
 		rank.set_defaut_value(int(chosen_player.rank))
-		chosen_player.rank = self.views.update_player(chosen_player, rank)
+		updated_rank = self.views.update_player(chosen_player, rank)
+		chosen_player.rank = updated_rank.value
 
 		""" sauvegarde du joueur dans la db joueur"""
 		save_result, data = save_player_data(chosen_player.serialize(), self.DB_ADDRESS)
@@ -326,6 +356,72 @@ class Controller:
 		self.tournament.get_players_score()
 		self.views.round_recap(self.tournament.rounds[-1])
 		self.main_menu()
+	
+	def report_menu(self):
+		MENU_ITEM_DICT = {
+			"Liste des joueurs" : self.report_all_players,
+			"Liste des joueurs d'un tournois" : self.views.not_implemented,
+			"Liste de tous les tournois" : self.views.not_implemented,
+			"Liste de tous les tours d'un tournois" : self.views.not_implemented,
+			"Liste de tous les matchs d'un tournois " : self.views.not_implemented,
+			"Retour" : self.main_menu
+			}
+
+		#get the list of item for the main menu
+		menu_item_list = [x for x in MENU_ITEM_DICT.keys()]
+
+		#get the answer from the user
+		user_answer = self.views.report_menu_page(menu_item_list)-1
+		
+		# convert the answer to the function 
+		function_called_by_user = MENU_ITEM_DICT[menu_item_list[user_answer]]
+		# Call the function
+		function_called_by_user()
+		self.main_menu()
+
+	def report_all_players(self):
+		# controle la présence d'une base de données
+		if not self.DB_ADDRESS.exists():
+			self.views.database_not_found()
+			self.main_menu()
+
+		# chargement de l'ensemble des joueurs enregistré
+		history_players = load_player_data(self.DB_ADDRESS)
+		
+		# gestion de la reception d'erreur lors de l'importation de la db
+		if not isinstance(history_players, list):
+			self.views.issues_database(history_players)
+			self.main_menu()
+
+		if len(history_players) == 0:
+			self.views.no_data_in_db("joueur")
+			self.main_menu()
+
+		# mise en forme et affichage des joueurs sauvegardés
+		history_players = [list(x.values()) for x in history_players]
+		filter_function = lambda x : (int(x[4]), x[0])
+		history_players.sort(key=filter_function, reverse=False)
+		
+		list_player_formated = []
+		# player field : ['name', 'forname', 'birth_date', 'gender', 'rank', 'id']
+		for p in history_players:
+			p_full_name = f'{p[0].upper()} {p[1]}'
+			list_player_formated.append([p_full_name, p[3], p[2], p[4]])
+
+		self.views.report_all_players(list_player_formated)
+		self.main_menu()
+
+	def report_all_players_in_tourn(self):
+		pass
+
+	def report_all_tourns(self):
+		pass
+
+	def report_all_rounds_in_tourn(self):
+		pass
+
+	def report_all_matchs_in_tourn(self):
+		pass
 
 	def tournament_historic(self, tournament_list):
 		output_list = []
@@ -341,10 +437,6 @@ class Controller:
 
 	def group_generation(self):
 		self.tournament.player_group_generation()
-
-	def end_round(self):
-		#self.tournament
-		pass
 
 	def quit(self):
 		self.views.exit_message()

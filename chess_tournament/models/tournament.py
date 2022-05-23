@@ -81,9 +81,8 @@ class Tournament():
 				self.dict_opponent[player.name] = [opponent.name]
 
 	def get_players_score(self):
-		tmp_list = []
-		for round_played in self.rounds:
-			tmp_list += round_played.get_players_score()
+		tmp_list = [match for x in self.rounds if x.is_done 
+					for match in x.get_players_score()]
 
 		for player, score in tmp_list:
 			if player.name in self.dict_score:

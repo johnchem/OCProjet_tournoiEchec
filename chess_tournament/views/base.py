@@ -1,6 +1,8 @@
 
 import os
 from types import new_class
+
+from sqlalchemy import true
 from chess_tournament.models.tournament import TIME_CONTROLE_STANDARD
 """ terminal commandes """
 CLEAN_SCREEN = "CLS"
@@ -24,11 +26,20 @@ class Views:
 		if tournament_name:
 			print(f"tournois actuel : {tournament_name}")
 		if player_nb:
-			print(f"nnombre de joueurs en lice : {player_nb}")
+			print(f"nombre de joueurs en lice : {player_nb}")
 		if current_round_name:
 			print(f"round actuel : {current_round_name}")
 		
 		print("________MENU PRINCIPAL________")
+		for menu_item in menu_item_list:
+			print(f"{i} : {menu_item}")
+			i += 1
+		return user_choices("indiquer votre choix : ", range(1,i+1))
+
+	def report_menu_page(self, menu_item_list):
+		i = 1
+		os.system(CLEAN_SCREEN)
+		print("________RAPPORTS________")
 		for menu_item in menu_item_list:
 			print(f"{i} : {menu_item}")
 			i += 1
@@ -83,7 +94,9 @@ class Views:
 		return user_choices("indiquer votre choix : ", range(1,i+1))
 
 	def update_player(self, player, item):
-		print(f'classement actuel du joueur : {player.rank}')
+		print(f'classement actuel de',
+			  f'{player.forname} {player.name}',
+			  f': {player.rank}')
 		
 		""" demande à l'utilisateur la valeur tant que 
 		celle-ci n'est pas conforme """
@@ -112,39 +125,58 @@ class Views:
 		match_not_done = (match.player_1['score'] is None or
 						  match.player_2['score'] is None) 
 		p1, p2 = match.player_1["player"], match.player_2["player"]
+		p1_full_name = f'{p1.name} {p1.forname}'
+		p2_full_name = f'{p2.name} {p2.forname}'
 		
 		if match_not_done:
-			print(f'{p1.name} {p1.forname} ({match.player_1["color"]}) - ',
-				  f': - ({match.player_2["color"]}) {p2.name} {p2.forname}')
+			print(f'{p1_full_name:>25} ({match.player_1["color"]}) - ',
+				  f': - ({match.player_2["color"]}) {p2_full_name:<25}')
 		else:
-			print(f'{p1.name} {p1.forname} ({match.player_1["color"]})',
+			print(f'{p1_full_name:>20} ({match.player_1["color"]})',
 				  f' {match.player_1["score"]} ',
 				  f': {match.player_2["score"]} ',
-				  f'({match.player_2["color"]}) {p1.name} {p1.forname}'
+				  f'({match.player_2["color"]}) {p2_full_name:<25}'
 				  )
+	def report_all_players(self, player_list):
+		clear_screen()
+		title_list = ['Joueur', 'Sexe', 'Date de naissance', 'Rang']
+		title = '{:<25}|{:^4}|{:^17}|{:^4}'.format(*title_list)
+		print(title)
+		print('_'*53)
+		for player in player_list:
+			print('{:<25}|{:^4}|{:^17}|{:^4}'.format(*player))
+		os.system("pause")
+
+	def report_player_in_tourn(self, player_list):
+		pass
 
 	def grille_americaine(self, tournament):
 		list_players = [[x] for x in tournament.players]
+		list_match = [y for x in tournament.rounds for y in x.match]
+
+		for match in list_match:
+			p1, p2 = match.player_1, match.player_2
+			resultat_p1, resultat_p2 = resultat_match(p1, p2)
+			for item in list_players:
+				if item[0] == p1["player"]: item.append(resultat_p1)
+				if item[0] == p2["player"]: item.append(resultat_p2)
 		
-		for ronde in tournament.rounds:
-			for match in ronde.match:
-				p1, p2 = match.player_1, match.player_2
-				resultat_p1, resultat_p2 = resultat_match(p1, p2)
-				list_players[list_players.index(p1["player"])].append(resultat_p1)
-				list_players[list_players.index(p2["player"])].append(resultat_p2)
 		for item in list_players:
 			score = tournament.dict_score[item[0].name]
-			list_players[list_players.index(item[0])].append(score)
-		list_players.sort(key=lambda x : x[-1])
+			item.append(score)
+		list_players.sort(key=lambda x : x[-1], reverse=True)
 
 		clear_screen()
 		title_list = ['joueur', 'rank'] + [f'R{x}' for x in range(1, tournament.number_of_round+1)] + ['score']
-		title = '{:<15}|{:4}|{:4}|{:4}|{:4}|{:4}|{:4}'.format(title_list)
-		print('title')
+		title = '{:<25}|{:^5}|{:^5}|{:^5}|{:^5}|{:^5}|{:5}'.format(*title_list)
+		print(title)
+		print('_'*60)
 		for item in list_players:
-			print('{:<15}|{:4}|{:4}|{:4}|{:4}|{:4}|{:4}').format(
+			print('{:<25}|{:^5}|{:^5}|{:^5}|{:^5}|{:^5}|{:^5}'.format(
 				f'{item[0].name} {item[0].forname}',
-				item[1:])
+				f'{item[0].rank}',
+				*item[1:])
+				)
 
 		os.system("pause")
 
@@ -184,7 +216,10 @@ class Views:
 			print_message("Problème lors de l'importation de la base de donnée")
 	
 	def save_performed_page(self):
-		print_message("Données sauvegardé")
+		print_message("Données sauvegardé \n")
+	
+	def save_performed_message(self):
+		print("Données sauvegardé")
 
 	def error_save_page(self, error = None):
 		if error != None:
@@ -222,8 +257,15 @@ def resultat_match(player_1, player_2):
 	else:
 		score_p1, score_p2 = "=", "="
 	
-	score_p1 += f'{player_2["player"].rank}{player_1["color"]}'
-	score_p2 += f'{player_1["player"].rank}{player_2["color"]}'
+	score_p1 += f'{player_2["player"].rank}'
+	score_p2 += f'{player_1["player"].rank}'
+
+	if player_1['color'] == 'black':
+		score_p1 += 'B'
+		score_p2 += 'W'
+	else:
+		score_p1 += 'W'
+		score_p2 += 'B'
 	
 	return score_p1, score_p2
 
