@@ -432,7 +432,29 @@ class Controller:
 		self.main_menu()
 
 	def report_all_tourns(self):
-		pass
+		# controle la présence d'une base de données
+		if not self.DB_ADDRESS.exists():
+			self.views.database_not_found()
+			self.main_menu()
+		
+		# chargement de l'ensemble des tournois enregistré
+		history_tournament = load_tournament_data(self.DB_ADDRESS)
+		list_tourn = []
+		for tourn in history_tournament:
+			tourn_name = tourn["name"]
+			tourn_location = tourn["location"]
+			tourn_date = tourn["date"]
+			tourn_duration = tourn["duration"]
+			tourn_time_control = tourn["time_control"]
+			tourn_nb_player = len(tourn["players"])
+			status_match = [x["is_done"] for x in tourn["rounds"]]
+			tourn_ended = "Oui" if any(status_match) else "Non"
+
+			list_tourn.append([tourn_name, tourn_location, tourn_date, tourn_duration,
+					tourn_time_control, tourn_nb_player, tourn_ended])
+
+		self.views.report_all_tourn(list_tourn)
+		self.main_menu()
 
 	def report_all_rounds_in_tourn(self):
 		selected_tourn = self.select_tournament()

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: chess_tournament\unittest\test_deserializer.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="chess_tournament.unittest.test_deserializer.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               chess_tournament\unittest\test_deserializer.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F405">
+               <span class="count sev-1">
+                  36
+               </span>
+               <strong>F405:</strong> 'serialized_player_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data
+               
+                  (and 35 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'player_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l50">
+                  <tt><i>50</i> 	<span class="n">list_test_player</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_player_1</span><span class="p">,</span> <span class="n">player_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l50">
+                  <tt><i>50</i> 	<span class="n">list_test_player</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_player_1</span><span class="p">,</span> <span class="n">player_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l51">
+                  <tt><i>51</i> 						<span class="p">(</span><span class="n">serialized_player_2</span><span class="p">,</span> <span class="n">player_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l51">
+                  <tt><i>51</i> 						<span class="p">(</span><span class="n">serialized_player_2</span><span class="p">,</span> <span class="n">player_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_3' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l52">
+                  <tt><i>52</i> 						<span class="p">(</span><span class="n">serialized_player_3</span><span class="p">,</span> <span class="n">player_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_3' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l52">
+                  <tt><i>52</i> 						<span class="p">(</span><span class="n">serialized_player_3</span><span class="p">,</span> <span class="n">player_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_4' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l53">
+                  <tt><i>53</i> 						<span class="p">(</span><span class="n">serialized_player_4</span><span class="p">,</span> <span class="n">player_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_4' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l53">
+                  <tt><i>53</i> 						<span class="p">(</span><span class="n">serialized_player_4</span><span class="p">,</span> <span class="n">player_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_5' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l54">
+                  <tt><i>54</i> 						<span class="p">(</span><span class="n">serialized_player_5</span><span class="p">,</span> <span class="n">player_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_5' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l54">
+                  <tt><i>54</i> 						<span class="p">(</span><span class="n">serialized_player_5</span><span class="p">,</span> <span class="n">player_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_6' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l55">
+                  <tt><i>55</i> 						<span class="p">(</span><span class="n">serialized_player_6</span><span class="p">,</span> <span class="n">player_6</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_6' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l55">
+                  <tt><i>55</i> 						<span class="p">(</span><span class="n">serialized_player_6</span><span class="p">,</span> <span class="n">player_6</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_7' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l56">
+                  <tt><i>56</i> 						<span class="p">(</span><span class="n">serialized_player_7</span><span class="p">,</span> <span class="n">player_7</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_7' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l56">
+                  <tt><i>56</i> 						<span class="p">(</span><span class="n">serialized_player_7</span><span class="p">,</span> <span class="n">player_7</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'player_8' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l57">
+                  <tt><i>57</i> 						<span class="p">(</span><span class="n">serialized_player_8</span><span class="p">,</span> <span class="n">player_8</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_player_8' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l57">
+                  <tt><i>57</i> 						<span class="p">(</span><span class="n">serialized_player_8</span><span class="p">,</span> <span class="n">player_8</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'match_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l59">
+                  <tt><i>59</i> 	<span class="n">list_test_match</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_match_1</span><span class="p">,</span> <span class="n">match_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_match_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l59">
+                  <tt><i>59</i> 	<span class="n">list_test_match</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_match_1</span><span class="p">,</span> <span class="n">match_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'match_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l60">
+                  <tt><i>60</i> 					   <span class="p">(</span><span class="n">serialized_match_2</span><span class="p">,</span> <span class="n">match_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_match_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l60">
+                  <tt><i>60</i> 					   <span class="p">(</span><span class="n">serialized_match_2</span><span class="p">,</span> <span class="n">match_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'match_3' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l61">
+                  <tt><i>61</i> 					   <span class="p">(</span><span class="n">serialized_match_3</span><span class="p">,</span> <span class="n">match_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_match_3' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l61">
+                  <tt><i>61</i> 					   <span class="p">(</span><span class="n">serialized_match_3</span><span class="p">,</span> <span class="n">match_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'match_4' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l62">
+                  <tt><i>62</i> 					   <span class="p">(</span><span class="n">serialized_match_4</span><span class="p">,</span> <span class="n">match_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_match_4' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l62">
+                  <tt><i>62</i> 					   <span class="p">(</span><span class="n">serialized_match_4</span><span class="p">,</span> <span class="n">match_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'match_5' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l63">
+                  <tt><i>63</i> 					   <span class="p">(</span><span class="n">serialized_match_5</span><span class="p">,</span> <span class="n">match_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_match_5' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l63">
+                  <tt><i>63</i> 					   <span class="p">(</span><span class="n">serialized_match_5</span><span class="p">,</span> <span class="n">match_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'match_6' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l64">
+                  <tt><i>64</i> 					   <span class="p">(</span><span class="n">serialized_match_6</span><span class="p">,</span> <span class="n">match_6</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_match_6' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l64">
+                  <tt><i>64</i> 					   <span class="p">(</span><span class="n">serialized_match_6</span><span class="p">,</span> <span class="n">match_6</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'round_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l66">
+                  <tt><i>66</i> 	<span class="n">list_test_round</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_round_1</span><span class="p">,</span> <span class="n">round_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_round_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l66">
+                  <tt><i>66</i> 	<span class="n">list_test_round</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_round_1</span><span class="p">,</span> <span class="n">round_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'round_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l67">
+                  <tt><i>67</i> 					   <span class="p">(</span><span class="n">serialized_round_2</span><span class="p">,</span> <span class="n">round_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialized_round_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l67">
+                  <tt><i>67</i> 					   <span class="p">(</span><span class="n">serialized_round_2</span><span class="p">,</span> <span class="n">round_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialised_tournament_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l69">
+                  <tt><i>69</i> 	<span class="n">list_test_tournament</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialised_tournament_1</span><span class="p">,</span> <span class="n">tournament_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'tournament_1' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l69">
+                  <tt><i>69</i> 	<span class="n">list_test_tournament</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialised_tournament_1</span><span class="p">,</span> <span class="n">tournament_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'serialised_tournament_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l70">
+                  <tt><i>70</i> 							<span class="p">(</span><span class="n">serialised_tournament_2</span><span class="p">,</span> <span class="n">tournament_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'tournament_2' may be undefined, or defined from star imports: chess_tournament.unittest.test_data:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l70">
+                  <tt><i>70</i> 							<span class="p">(</span><span class="n">serialised_tournament_2</span><span class="p">,</span> <span class="n">tournament_2</span><span class="p">)]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  9
+               </span>
+               <strong>F401:</strong> 'chess_tournament.models.date_property.DateProperty' imported but unused
+               
+                  (and 8 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'chess_tournament.models.date_property.DateProperty' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l8">
+                  <tt><i>8</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.date_property</span> <span class="kn">import</span> <span class="n">DateProperty</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.gender_property.GenderProperty' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l9">
+                  <tt><i>9</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.gender_property</span> <span class="kn">import</span> <span class="n">GenderProperty</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.property.Property' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l10">
+                  <tt><i>10</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.property</span> <span class="kn">import</span> <span class="n">Property</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.multiple_choices_property.MultipleChoicesProperty' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l11">
+                  <tt><i>11</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.multiple_choices_property</span> <span class="kn">import</span> <span class="n">MultipleChoicesProperty</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.tournament.Tournament' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l12">
+                  <tt><i>12</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.tournament</span> <span class="kn">import</span> <span class="n">Tournament</span><span class="p">,</span> <span class="n">TournamentSwiss</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.tournament.TournamentSwiss' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l12">
+                  <tt><i>12</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.tournament</span> <span class="kn">import</span> <span class="n">Tournament</span><span class="p">,</span> <span class="n">TournamentSwiss</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.player.Player' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l13">
+                  <tt><i>13</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.player</span> <span class="kn">import</span> <span class="n">Player</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.round.Round' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l14">
+                  <tt><i>14</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.round</span> <span class="kn">import</span> <span class="n">Round</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'chess_tournament.models.match.Match' imported but unused:</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l15">
+                  <tt><i>15</i> <span class="kn">from</span> <span class="nn">chess_tournament.models.match</span> <span class="kn">import</span> <span class="n">Match</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F403">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F403:</strong> 'from chess_tournament.unittest.test_data import *' used; unable to detect undefined names
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l18">
+                  <tt><i>18</i> <span class="kn">from</span> <span class="nn">chess_tournament.unittest.test_data</span> <span class="kn">import</span> <span class="o">*</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W191">
+               <span class="count sev-2">
+                  60
+               </span>
+               <strong>W191:</strong> indentation contains tabs
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l21">
+                  <tt><i>21</i> 	<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l22">
+                  <tt><i>22</i> 	<span class="n">players_serialized</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">players_serialized</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l23">
+                  <tt><i>23</i> 	<span class="n">output</span> <span class="o">=</span> <span class="n">deserialize_player</span><span class="p">(</span><span class="o">**</span><span class="n">players_serialized</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l24">
+                  <tt><i>24</i> 	<span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">player</span><span class="p">,</span> \</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l25">
+                  <tt><i>25</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un joueur </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">player</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l28">
+                  <tt><i>28</i> 	<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l29">
+                  <tt><i>29</i> 	<span class="n">match_serialized</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">match_serialized</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l30">
+                  <tt><i>30</i> 	<span class="n">output</span> <span class="o">=</span> <span class="n">deserialize_match</span><span class="p">(</span><span class="o">**</span><span class="n">match_serialized</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l31">
+                  <tt><i>31</i> 	<span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">match</span><span class="p">,</span> \</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l32">
+                  <tt><i>32</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un match </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l35">
+                  <tt><i>35</i> 	<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l36">
+                  <tt><i>36</i> 	<span class="n">round_serialized</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">round_serialized</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l37">
+                  <tt><i>37</i> 	<span class="n">output</span> <span class="o">=</span> <span class="n">deserialize_round</span><span class="p">(</span><span class="o">**</span><span class="n">round_serialized</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l38">
+                  <tt><i>38</i> 	<span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="nb">round</span><span class="p">,</span> \</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l39">
+                  <tt><i>39</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un round </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>	</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l42">
+                  <tt><i>42</i> 	<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l43">
+                  <tt><i>43</i> 	<span class="n">tournament_serialised</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tournament_serialised</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l44">
+                  <tt><i>44</i> 	<span class="n">output</span> <span class="o">=</span> <span class="n">deserialize_tournament</span><span class="p">(</span><span class="o">**</span><span class="n">tournament_serialised</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l45">
+                  <tt><i>45</i> 	<span class="k">assert</span> <span class="n">output</span> <span class="o">==</span> <span class="n">tournament</span><span class="p">,</span> \</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l46">
+                  <tt><i>46</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un tournois </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">tournament</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l50">
+                  <tt><i>50</i> 	<span class="n">list_test_player</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_player_1</span><span class="p">,</span> <span class="n">player_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l51">
+                  <tt><i>51</i> 						<span class="p">(</span><span class="n">serialized_player_2</span><span class="p">,</span> <span class="n">player_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l52">
+                  <tt><i>52</i> 						<span class="p">(</span><span class="n">serialized_player_3</span><span class="p">,</span> <span class="n">player_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l53">
+                  <tt><i>53</i> 						<span class="p">(</span><span class="n">serialized_player_4</span><span class="p">,</span> <span class="n">player_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l54">
+                  <tt><i>54</i> 						<span class="p">(</span><span class="n">serialized_player_5</span><span class="p">,</span> <span class="n">player_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l55">
+                  <tt><i>55</i> 						<span class="p">(</span><span class="n">serialized_player_6</span><span class="p">,</span> <span class="n">player_6</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l56">
+                  <tt><i>56</i> 						<span class="p">(</span><span class="n">serialized_player_7</span><span class="p">,</span> <span class="n">player_7</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l57">
+                  <tt><i>57</i> 						<span class="p">(</span><span class="n">serialized_player_8</span><span class="p">,</span> <span class="n">player_8</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l59">
+                  <tt><i>59</i> 	<span class="n">list_test_match</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_match_1</span><span class="p">,</span> <span class="n">match_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l60">
+                  <tt><i>60</i> 					   <span class="p">(</span><span class="n">serialized_match_2</span><span class="p">,</span> <span class="n">match_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l61">
+                  <tt><i>61</i> 					   <span class="p">(</span><span class="n">serialized_match_3</span><span class="p">,</span> <span class="n">match_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l62">
+                  <tt><i>62</i> 					   <span class="p">(</span><span class="n">serialized_match_4</span><span class="p">,</span> <span class="n">match_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l63">
+                  <tt><i>63</i> 					   <span class="p">(</span><span class="n">serialized_match_5</span><span class="p">,</span> <span class="n">match_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l64">
+                  <tt><i>64</i> 					   <span class="p">(</span><span class="n">serialized_match_6</span><span class="p">,</span> <span class="n">match_6</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l66">
+                  <tt><i>66</i> 	<span class="n">list_test_round</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialized_round_1</span><span class="p">,</span> <span class="n">round_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l67">
+                  <tt><i>67</i> 					   <span class="p">(</span><span class="n">serialized_round_2</span><span class="p">,</span> <span class="n">round_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l69">
+                  <tt><i>69</i> 	<span class="n">list_test_tournament</span> <span class="o">=</span> <span class="p">[(</span><span class="n">serialised_tournament_1</span><span class="p">,</span> <span class="n">tournament_1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l70">
+                  <tt><i>70</i> 							<span class="p">(</span><span class="n">serialised_tournament_2</span><span class="p">,</span> <span class="n">tournament_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l72">
+                  <tt><i>72</i> 	<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l73">
+                  <tt><i>73</i> 	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_____test_deserialize_player______&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l74">
+                  <tt><i>74</i> 	<span class="k">for</span> <span class="n">ser_player</span><span class="p">,</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">list_test_player</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l75">
+                  <tt><i>75</i> 		<span class="n">test_deserialize_player</span><span class="p">(</span><span class="n">ser_player</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;player </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l76">
+                  <tt><i>76</i> 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l77">
+                  <tt><i>77</i> 	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l79">
+                  <tt><i>79</i> 	<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l80">
+                  <tt><i>80</i> 	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_____test_deserialize_match______&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l81">
+                  <tt><i>81</i> 	<span class="k">for</span> <span class="n">ser_match</span><span class="p">,</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">list_test_match</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l82">
+                  <tt><i>82</i> 		<span class="n">test_deserialize_match</span><span class="p">(</span><span class="n">ser_match</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;match </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l83">
+                  <tt><i>83</i> 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l85">
+                  <tt><i>85</i> 	<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l86">
+                  <tt><i>86</i> 	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_____test_deserialize_round______&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l87">
+                  <tt><i>87</i> 	<span class="k">for</span> <span class="n">ser_round</span><span class="p">,</span> <span class="n">rnd</span> <span class="ow">in</span> <span class="n">list_test_round</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l88">
+                  <tt><i>88</i> 		<span class="n">test_deserialize_round</span><span class="p">(</span><span class="n">ser_round</span><span class="p">,</span> <span class="n">rnd</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;round </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l89">
+                  <tt><i>89</i> 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l91">
+                  <tt><i>91</i> 	<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l92">
+                  <tt><i>92</i> 	<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_____test_deserialize_tournament______&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l93">
+                  <tt><i>93</i> 	<span class="k">for</span> <span class="n">ser_tournament</span><span class="p">,</span> <span class="n">tournament</span> <span class="ow">in</span> <span class="n">list_test_tournament</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l94">
+                  <tt><i>94</i> 		<span class="n">test_deserialize_tournament</span><span class="p">(</span><span class="n">ser_tournament</span><span class="p">,</span> <span class="n">tournament</span><span class="p">,</span> </tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l95">
+                  <tt><i>95</i> 			<span class="sa">f</span><span class="s2">&quot;tournament </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l96">
+                  <tt><i>96</i> 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E251">
+               <span class="count sev-2">
+                  8
+               </span>
+               <strong>E251:</strong> unexpected spaces around keyword / parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l20">
+                  <tt><i>20</i> <span class="k">def</span> <span class="nf">test_deserialize_player</span><span class="p">(</span><span class="n">players_serialized</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l27">
+                  <tt><i>27</i> <span class="k">def</span> <span class="nf">test_deserialize_match</span><span class="p">(</span><span class="n">match_serialized</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l34">
+                  <tt><i>34</i> <span class="k">def</span> <span class="nf">test_deserialize_round</span><span class="p">(</span><span class="n">round_serialized</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l41">
+                  <tt><i>41</i> <span class="k">def</span> <span class="nf">test_deserialize_tournament</span><span class="p">(</span><span class="n">tournament_serialised</span><span class="p">,</span> <span class="n">tournament</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E101">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E101:</strong> indentation contains mixed spaces and tabs
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l60">
+                  <tt><i>60</i> 					   <span class="p">(</span><span class="n">serialized_match_2</span><span class="p">,</span> <span class="n">match_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l61">
+                  <tt><i>61</i> 					   <span class="p">(</span><span class="n">serialized_match_3</span><span class="p">,</span> <span class="n">match_3</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l62">
+                  <tt><i>62</i> 					   <span class="p">(</span><span class="n">serialized_match_4</span><span class="p">,</span> <span class="n">match_4</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l63">
+                  <tt><i>63</i> 					   <span class="p">(</span><span class="n">serialized_match_5</span><span class="p">,</span> <span class="n">match_5</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l64">
+                  <tt><i>64</i> 					   <span class="p">(</span><span class="n">serialized_match_6</span><span class="p">,</span> <span class="n">match_6</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l67">
+                  <tt><i>67</i> 					   <span class="p">(</span><span class="n">serialized_round_2</span><span class="p">,</span> <span class="n">round_2</span><span class="p">)]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E265">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E265:</strong> block comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l3">
+                  <tt><i>3</i> <span class="c1">#import function to test</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l7">
+                  <tt><i>7</i> <span class="c1">#import model</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l17">
+                  <tt><i>17</i> <span class="c1">#import data for testing</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l49">
+                  <tt><i>49</i> <span class="c1">#def run_test_deserializer():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l98">
+                  <tt><i>98</i> <span class="c1">#if __name__ == &quot;__main__&quot;:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l99">
+                  <tt><i>99</i> <span class="c1">#	run_test_deserializer()</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E122">
+               <span class="count sev-2">
+                  5
+               </span>
+               <strong>E122:</strong> continuation line missing indentation or outdented
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l5">
+                  <tt><i>5</i> <span class="n">deserialize_player</span><span class="p">,</span> <span class="n">deserialize_round</span><span class="p">,</span> <span class="n">deserialize_match</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l25">
+                  <tt><i>25</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un joueur </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">player</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l32">
+                  <tt><i>32</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un match </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l39">
+                  <tt><i>39</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un round </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>	</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l46">
+                  <tt><i>46</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un tournois </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">tournament</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  5
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l51">
+                  <tt><i>51</i> 						<span class="p">(</span><span class="n">serialized_player_2</span><span class="p">,</span> <span class="n">player_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l60">
+                  <tt><i>60</i> 					   <span class="p">(</span><span class="n">serialized_match_2</span><span class="p">,</span> <span class="n">match_2</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l67">
+                  <tt><i>67</i> 					   <span class="p">(</span><span class="n">serialized_round_2</span><span class="p">,</span> <span class="n">round_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l70">
+                  <tt><i>70</i> 							<span class="p">(</span><span class="n">serialised_tournament_2</span><span class="p">,</span> <span class="n">tournament_2</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l95">
+                  <tt><i>95</i> 			<span class="sa">f</span><span class="s2">&quot;tournament </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l20">
+                  <tt><i>20</i> <span class="k">def</span> <span class="nf">test_deserialize_player</span><span class="p">(</span><span class="n">players_serialized</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l27">
+                  <tt><i>27</i> <span class="k">def</span> <span class="nf">test_deserialize_match</span><span class="p">(</span><span class="n">match_serialized</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l34">
+                  <tt><i>34</i> <span class="k">def</span> <span class="nf">test_deserialize_round</span><span class="p">(</span><span class="n">round_serialized</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l41">
+                  <tt><i>41</i> <span class="k">def</span> <span class="nf">test_deserialize_tournament</span><span class="p">(</span><span class="n">tournament_serialised</span><span class="p">,</span> <span class="n">tournament</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l39">
+                  <tt><i>39</i> 	<span class="sa">f</span><span class="s2">&quot;erreur lors de l&#39;import d&#39;un round </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">vars</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>	</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l94">
+                  <tt><i>94</i> 		<span class="n">test_deserialize_tournament</span><span class="p">(</span><span class="n">ser_tournament</span><span class="p">,</span> <span class="n">tournament</span><span class="p">,</span> </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E115">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E115:</strong> expected an indented block (comment)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l49">
+                  <tt><i>49</i> <span class="c1">#def run_test_deserializer():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E261">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E261:</strong> at least two spaces before inline comment
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l1">
+                  <tt><i>1</i> <span class="kn">import</span> <span class="nn">copy</span> <span class="c1"># module to avoid modify the original testing data</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E305:</strong> expected 2 blank lines after class or function definition, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l48">
+                  <tt><i>48</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W391">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W391:</strong> blank line at end of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.unittest.test_deserializer.source.html#l101">
+                  <tt><i>101</i> &nbsp;</tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

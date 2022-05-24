@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: chess_tournament\models\date_property.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="chess_tournament.models.date_property.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               chess_tournament\models\date_property.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F821">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F821:</strong> undefined name 'self'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l35">
+                  <tt><i>35</i> 		<span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W191">
+               <span class="count sev-2">
+                  27
+               </span>
+               <strong>W191:</strong> indentation contains tabs
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l7">
+                  <tt><i>7</i> <span class="sd">	gere le tranfert et le controle des valeurs de date au modele	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l9">
+                  <tt><i>9</i> <span class="sd">	Attribut</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l10">
+                  <tt><i>10</i> <span class="sd">	----------- 	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l11">
+                  <tt><i>11</i> <span class="sd">	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l12">
+                  <tt><i>12</i> <span class="sd">	Methodes</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l13">
+                  <tt><i>13</i> <span class="sd">	-----------</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l14">
+                  <tt><i>14</i> <span class="sd">	set_value(value, format = &quot;%d/%m/%Y&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l15">
+                  <tt><i>15</i> <span class="sd">		validation de la valeur et enregistre si conforme	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l16">
+                  <tt><i>16</i> <span class="sd">	&quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l17">
+                  <tt><i>17</i> 	<span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l18">
+                  <tt><i>18</i> 		<span class="k">try</span> <span class="p">:</span> </tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l19">
+                  <tt><i>19</i> 			<span class="n">value</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">format</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l20">
+                  <tt><i>20</i> 			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_control_function</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l21">
+                  <tt><i>21</i> 				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_control_function</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l22">
+                  <tt><i>22</i> 					<span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l23">
+                  <tt><i>23</i> 					<span class="k">return</span> <span class="kc">True</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l24">
+                  <tt><i>24</i> 				<span class="k">else</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l25">
+                  <tt><i>25</i> 					<span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_message</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l26">
+                  <tt><i>26</i> 					<span class="k">return</span> <span class="kc">False</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l27">
+                  <tt><i>27</i> 			<span class="k">else</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l28">
+                  <tt><i>28</i> 				<span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l29">
+                  <tt><i>29</i> 				<span class="k">return</span> <span class="kc">True</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l30">
+                  <tt><i>30</i> 		<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l31">
+                  <tt><i>31</i> 			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;la date n&#39;est pas correcte </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l32">
+                  <tt><i>32</i> 			<span class="k">return</span> <span class="kc">False</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l34">
+                  <tt><i>34</i> 	<span class="k">def</span> <span class="fm">__str__</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l35">
+                  <tt><i>35</i> 		<span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l7">
+                  <tt><i>7</i> <span class="sd">	gere le tranfert et le controle des valeurs de date au modele	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l10">
+                  <tt><i>10</i> <span class="sd">	----------- 	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l15">
+                  <tt><i>15</i> <span class="sd">		validation de la valeur et enregistre si conforme	</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l18">
+                  <tt><i>18</i> 		<span class="k">try</span> <span class="p">:</span> </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E251">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E251:</strong> unexpected spaces around keyword / parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="chess_tournament.models.date_property.source.html#l17">
+                  <tt><i>17</i> 	<span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E203">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E203:</strong> whitespace before ':'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l18">
+                  <tt><i>18</i> 		<span class="k">try</span> <span class="p">:</span> </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W293">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W293:</strong> blank line contains whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.date_property.source.html#l11">
+                  <tt><i>11</i> <span class="sd">	</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

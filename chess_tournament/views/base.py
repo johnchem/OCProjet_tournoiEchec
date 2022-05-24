@@ -139,12 +139,25 @@ class Views:
 				  )
 	def report_all_players(self, player_list):
 		clear_screen()
+		template = '{:<25}|{:^4}|{:^17}|{:^4}'
 		title_list = ['Joueur', 'Sexe', 'Date de naissance', 'Rang']
-		title = '{:<25}|{:^4}|{:^17}|{:^4}'.format(*title_list)
+		title = template.format(*title_list)
 		print(title)
 		print('_'*53)
 		for player in player_list:
-			print('{:<25}|{:^4}|{:^17}|{:^4}'.format(*player))
+			print(template.format(*player))
+		os.system("pause")
+
+	def report_all_tourn(self, tourn_list):
+		clear_screen()
+		template = '{:<25}|{:^10}|{:^10}|{:^5}|{:^17}|{:^12}|{:^7}'
+		title_list = ['Nom', 'Lieu', 'Date', 'Durée', 
+					'Contrôle du temps', 'Nb de joueur', 'Terminé']
+		title = template.format(*title_list)
+		print(title)
+		print('_'*90)
+		for tourn in tourn_list:
+			print('{:<25}|{:^10}|{:^10}|{:^5}|{:^17}|{:^12}|{:^7}'.format(*tourn))
 		os.system("pause")
 
 	def report_player_in_tourn(self, tourn_name, player_list):

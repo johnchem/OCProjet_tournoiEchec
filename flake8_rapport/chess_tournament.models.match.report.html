@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: chess_tournament\models\match.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="chess_tournament.models.match.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               chess_tournament\models\match.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="W191">
+               <span class="count sev-2">
+                  69
+               </span>
+               <strong>W191:</strong> indentation contains tabs
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l6">
+                  <tt><i>6</i> <span class="sd">	_________________________</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l7">
+                  <tt><i>7</i> <span class="sd">	score : ([joueur, int], [joueur, int])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l8">
+                  <tt><i>8</i> <span class="sd">	&#39;&#39;&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l9">
+                  <tt><i>9</i> 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_1</span><span class="p">,</span> <span class="n">player_2</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l10">
+                  <tt><i>10</i> 		<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="n">player_1</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l11">
+                  <tt><i>11</i> 						<span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l12">
+                  <tt><i>12</i> 						<span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l13">
+                  <tt><i>13</i> 		<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="n">player_2</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l14">
+                  <tt><i>14</i> 						<span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l15">
+                  <tt><i>15</i> 						<span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l16">
+                  <tt><i>16</i> 		<span class="bp">self</span><span class="o">.</span><span class="n">set_color</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l17">
+                  <tt><i>17</i> 		</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l18">
+                  <tt><i>18</i> 	<span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l19">
+                  <tt><i>19</i> 		<span class="n">pick_color</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">]))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l20">
+                  <tt><i>20</i> 		<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pick_color</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l21">
+                  <tt><i>21</i> 		<span class="k">if</span> <span class="n">pick_color</span> <span class="o">==</span> <span class="s2">&quot;white&quot;</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l22">
+                  <tt><i>22</i> 			<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l23">
+                  <tt><i>23</i> 		<span class="k">else</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l24">
+                  <tt><i>24</i> 			<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l26">
+                  <tt><i>26</i> 	<span class="k">def</span> <span class="nf">set_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score_player_1</span><span class="p">,</span> <span class="n">score_player_2</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l27">
+                  <tt><i>27</i> 		<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">score_player_1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l28">
+                  <tt><i>28</i> 		<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">score_player_2</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l29">
+                  <tt><i>29</i> 		</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l30">
+                  <tt><i>30</i> 	<span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l31">
+                  <tt><i>31</i> 		<span class="k">return</span> <span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">joueur_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">joueur_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l32">
+                  <tt><i>32</i> 				<span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joueur_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">joueur_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l34">
+                  <tt><i>34</i> 	<span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l35">
+                  <tt><i>35</i> 		<span class="n">player_1</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l36">
+                  <tt><i>36</i> 		<span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l37">
+                  <tt><i>37</i> 		</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l38">
+                  <tt><i>38</i> 		<span class="n">player_2</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l39">
+                  <tt><i>39</i> 		<span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l41">
+                  <tt><i>41</i> 		<span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player_1&quot;</span><span class="p">:</span> <span class="n">player_1</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l42">
+                  <tt><i>42</i> 				<span class="s2">&quot;player_2&quot;</span><span class="p">:</span> <span class="n">player_2</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l44">
+                  <tt><i>44</i> 	<span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l45">
+                  <tt><i>45</i> 		<span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> : &#39;</span><span class="o">+</span>\</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l46">
+                  <tt><i>46</i> 			   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l48">
+                  <tt><i>48</i> 	<span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l49">
+                  <tt><i>49</i> 		<span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> : &#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l50">
+                  <tt><i>50</i> 			   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l51">
+                  <tt><i>51</i> 			   <span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l52">
+                  <tt><i>52</i> 	</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l53">
+                  <tt><i>53</i> 	<span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l54">
+                  <tt><i>54</i> 		<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Match</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l55">
+                  <tt><i>55</i> 			<span class="c1"># don&#39;t attempt to compare against unrelated types</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l56">
+                  <tt><i>56</i> 			<span class="k">return</span> <span class="bp">NotImplemented</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l57">
+                  <tt><i>57</i> 		<span class="c1"># compare player instance between them.</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l58">
+                  <tt><i>58</i> 		<span class="n">player_1_eq_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l59">
+                  <tt><i>59</i> 		<span class="n">player_1_eq_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l60">
+                  <tt><i>60</i> 		<span class="n">player_2_eq_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l61">
+                  <tt><i>61</i> 		<span class="n">player_2_eq_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l63">
+                  <tt><i>63</i> 		<span class="k">if</span> <span class="n">player_1_eq_1</span> <span class="ow">and</span> <span class="n">player_2_eq_2</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l65">
+                  <tt><i>65</i> <span class="sd">			self_player_2 with other_player_2</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l66">
+                  <tt><i>66</i> <span class="sd">			&#39;&#39;&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l67">
+                  <tt><i>67</i> 			<span class="n">list_compare</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l68">
+                  <tt><i>68</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l69">
+                  <tt><i>69</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l70">
+                  <tt><i>70</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l71">
+                  <tt><i>71</i> 		<span class="k">elif</span> <span class="n">player_1_eq_2</span> <span class="ow">and</span> <span class="n">player_2_eq_1</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l73">
+                  <tt><i>73</i> <span class="sd">			self_player_2 with other_player_1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l74">
+                  <tt><i>74</i> <span class="sd">			&#39;&#39;&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l75">
+                  <tt><i>75</i> 			<span class="n">list_compare</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l76">
+                  <tt><i>76</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l77">
+                  <tt><i>77</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l78">
+                  <tt><i>78</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l79">
+                  <tt><i>79</i> 		<span class="k">else</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l80">
+                  <tt><i>80</i> 			<span class="k">return</span> <span class="kc">False</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l81">
+                  <tt><i>81</i> 		<span class="c1"># return false if any difference exist</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l82">
+                  <tt><i>82</i> 		<span class="k">return</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">list_compare</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  13
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l11">
+                  <tt><i>11</i> 						<span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l12">
+                  <tt><i>12</i> 						<span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l14">
+                  <tt><i>14</i> 						<span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l15">
+                  <tt><i>15</i> 						<span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l32">
+                  <tt><i>32</i> 				<span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joueur_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">joueur_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l42">
+                  <tt><i>42</i> 				<span class="s2">&quot;player_2&quot;</span><span class="p">:</span> <span class="n">player_2</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l50">
+                  <tt><i>50</i> 			   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l68">
+                  <tt><i>68</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l69">
+                  <tt><i>69</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l70">
+                  <tt><i>70</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l76">
+                  <tt><i>76</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l77">
+                  <tt><i>77</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l78">
+                  <tt><i>78</i> 							<span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E231:</strong> missing whitespace after ':'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l11">
+                  <tt><i>11</i> 						<span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l12">
+                  <tt><i>12</i> 						<span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l14">
+                  <tt><i>14</i> 						<span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l15">
+                  <tt><i>15</i> 						<span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W293">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>W293:</strong> blank line contains whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l17">
+                  <tt><i>17</i> 		</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l29">
+                  <tt><i>29</i> 		</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l37">
+                  <tt><i>37</i> 		</tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l52">
+                  <tt><i>52</i> 	</tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E101">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E101:</strong> indentation contains mixed spaces and tabs
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l46">
+                  <tt><i>46</i> 			   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l50">
+                  <tt><i>50</i> 			   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_2</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l51">
+                  <tt><i>51</i> 			   <span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l64">
+                  <tt><i>64</i> 			<span class="sd">&#39;&#39;&#39; compare self_player_1 with other_player_1 and  </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="chess_tournament.models.match.source.html#l72">
+                  <tt><i>72</i> 			<span class="sd">&#39;&#39;&#39; compare self_player_1 with other_player_2 and  </span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E124">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E124:</strong> closing bracket does not match visual indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l51">
+                  <tt><i>51</i> 			   <span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l45">
+                  <tt><i>45</i> 		<span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_1</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> : &#39;</span><span class="o">+</span>\</tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l4">
+                  <tt><i>4</i> <span class="k">class</span> <span class="nc">Match</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W292">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W292:</strong> no newline at end of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="chess_tournament.models.match.source.html#l82">
+                  <tt><i>82</i> 		<span class="k">return</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">list_compare</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>
