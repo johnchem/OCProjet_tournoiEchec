@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python : test_fonctionnel",
+            "type": "python",
+            "request": "launch",
+            "module": "chess_tournament.unittest.test_fonctionnel",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}\\..",
+        },
+        {
             "name": "Python: Module",
             "type": "python",
             "request": "launch",

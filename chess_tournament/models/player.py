@@ -1,6 +1,3 @@
-from chess_tournament.models.property import Property
-from chess_tournament.models.date_property import DateProperty
-from chess_tournament.models.gender_property import GenderProperty
 import copy
 
 
@@ -21,10 +18,19 @@ class Player:
             sexe du joueur
     rank : int
             classement du joueur
+    id : int
+            identifiant du joueur sur la base de donnée
 
     Methodes
     -----------
-
+    .__init__(name, forname, birth_date, gender, rank) -> Player
+    .add_opponent(player)
+    .is_opponent_already_faced(player):
+    .serialize():
+    .__repr__():
+    .__eq__(other):
+    .__enter__():
+    .__exit__(*err):
     """
 
     def __init__(self, name, forname, birth_date, gender, rank):
@@ -75,17 +81,4 @@ class Player:
 
 
 if __name__ == "__main__":
-
-    name = Property("name")
-    name.set_value("paul")
-    forname = Property("forname")
-    forname.set_value("michel")
-    birth_date = DateProperty("birth_date")
-    birth_date.set_value("01/01/2001")
-    gender = GenderProperty("gender")
-    gender.set_value("H")
-    rank = Property("rank")
-    rank.set_value(0)
-
-    joueur = Player(name, forname, birth_date, gender, rank)
-    print(vars(joueur))
+    pass

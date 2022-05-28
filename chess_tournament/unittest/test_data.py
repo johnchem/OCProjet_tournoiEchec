@@ -1,6 +1,4 @@
 # importation des modules
-import os
-import pathlib
 from datetime import datetime
 
 # importation des modeles
@@ -27,7 +25,7 @@ match_7 : player_4 vs player_2
 name = Property()
 forname = Property()
 birth_date = DateProperty()
-gender = Property()
+gender = GenderProperty()
 rank = Property()
 
 # _________PLAYER 1___________
@@ -37,6 +35,7 @@ serialized_player_1 = {
     "birth_date": "01/01/2001",
     "gender": "H",
     "rank": 0,
+    "id": 1
 }
 name.set_value("paul")
 forname.set_value("michel")
@@ -55,6 +54,7 @@ serialized_player_2 = {
     "birth_date": "10/05/1995",
     "gender": "H",
     "rank": 10,
+    "id": 2
 }
 name.set_value("george")
 forname.set_value("louis")
@@ -73,6 +73,7 @@ serialized_player_3 = {
     "birth_date": "15/11/1955",
     "gender": "F",
     "rank": 100,
+    "id": 3
 }
 name.set_value("paulette")
 forname.set_value("vuiton")
@@ -92,6 +93,7 @@ serialized_player_4 = {
     "birth_date": "11/12/1977",
     "gender": "F",
     "rank": 12,
+    "id": 4
 }
 name.set_value("despins")
 forname.set_value("Amedee")
@@ -110,6 +112,7 @@ serialized_player_5 = {
     "birth_date": "28/08/1988",
     "gender": "H",
     "rank": 26,
+    "id": 5
 }
 name.set_value("baupré")
 forname.set_value("dominic")
@@ -128,6 +131,7 @@ serialized_player_6 = {
     "birth_date": "12/08/1977",
     "gender": "H",
     "rank": 56,
+    "id": 6
 }
 name.set_value("deserres")
 forname.set_value("arthur")
@@ -146,6 +150,7 @@ serialized_player_7 = {
     "birth_date": "01/10/2002",
     "gender": "F",
     "rank": 5,
+    "id": 7
 }
 name.set_value("gosselin")
 forname.set_value("jessamine")
@@ -164,6 +169,7 @@ serialized_player_8 = {
     "birth_date": "22/06/1994",
     "gender": "F",
     "rank": 59,
+    "id": 8
 }
 name.set_value("guernon")
 forname.set_value("alice")
@@ -521,7 +527,8 @@ serialised_tournament_1 = {
         serialized_player_8,
     ],
     "description": "truc machin",
-    "current_round": 1,
+    "_current_round": 1,
+    "id": 1,
 }
 
 name.set_value("test1")
@@ -574,7 +581,8 @@ serialised_tournament_2 = {
         serialized_player_8,
     ],
     "description": "bazar",
-    "current_round": 1,
+    "_current_round": 1,
+    "id": 2,
 }
 
 name.set_value("test2")
@@ -632,7 +640,8 @@ serialised_tournament_3 = {
         serialized_player_8,
     ],
     "description": "bazar",
-    "current_round": 1,
+    "_current_round": 4,
+    "id": 3,
 }
 
 name.set_value("test3")
@@ -643,7 +652,7 @@ number_of_round.set_value(4)
 time_control.set_value("1")
 description.set_value("bazar")
 
-tournament_2 = TournamentSwiss(
+tournament_3 = TournamentSwiss(
     name=name,
     location=location,
     date=date,
@@ -652,8 +661,8 @@ tournament_2 = TournamentSwiss(
     time_control=time_control,
     description=description,
 )
-tournament_2.rounds = [round_1, round_3, round_4, round_5]
-tournament_2.players = [
+tournament_3.rounds = [round_1, round_3, round_4, round_5]
+tournament_3.players = [
     player_1,
     player_2,
     player_3,
@@ -663,4 +672,4 @@ tournament_2.players = [
     player_7,
     player_8,
 ]
-tournament_2.current_round = 4
+tournament_3.current_round = 4

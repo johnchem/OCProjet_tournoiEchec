@@ -38,7 +38,7 @@ class Tournament:
         self.location = location.value
         self.date = date.value
         self.duration = duration.value
-        self.number_of_round = number_of_round.value
+        self.number_of_round = int(number_of_round.value)
         self.time_control = time_control.value
         self.rounds = []
         self.players = []
@@ -76,6 +76,8 @@ class Tournament:
         pass
 
     def get_players_opponent(self):
+        # reset dict_opponent
+        self.dict_opponent = {key: list() for key in self.dict_opponent.keys()}
         tmp_list = []
         # list of all the match
         for round_played in self.rounds:
@@ -89,6 +91,9 @@ class Tournament:
                 self.dict_opponent[player.name] = [opponent.name]
 
     def get_players_score(self):
+        # reset dict_score
+        self.dict_score = dict.fromkeys(self.dict_score, 0)
+        # list of player and score for all the played match
         tmp_list = [
             match for x in self.rounds if x.is_done for match in x.get_players_score()
         ]
@@ -125,7 +130,7 @@ class Tournament:
             return NotImplemented
 
         """
-        compare the rounda, as there are ordered,
+        compare the round, as there are ordered,
         they can be compare side to side
         """
         for x, y in zip(self.rounds, other.rounds):
@@ -153,7 +158,7 @@ class Tournament:
             self.time_control != other.time_control,
             *player_compare,
             self.description != other.description,
-            self.current_round != other.current_round,
+            self._current_round != other._current_round,
         ]
         # return False if any difference exist between self and other
         return not any(list_compare)
@@ -200,33 +205,38 @@ class TournamentSwiss(Tournament):
                 (player, self.dict_score[player.name], int(player.rank))
             )
 
-        def sort_function(x): return (x[1], x[2])
+        def sort_by_score(x): return (x[1])
+        def sort_by_rank(x): return (x[2])
         # sort the players by score then rank
-        list_players_sorted.sort(key=sort_function)
-        # remove the filtering part
+        list_players_sorted.sort(key=sort_by_rank, reverse=False)
+        list_players_sorted.sort(key=sort_by_score, reverse=True)
+        # remove the values used for the sorting
         list_players_sorted = [x[0] for x in list_players_sorted]
-        # define the middle of the list, which also the number of matches
-        nbr_match = trunc(len(list_players_sorted) / 2)
-        # split the list in two
-        upper_half = list_players_sorted[:nbr_match]
-        bottom_half = list_players_sorted[nbr_match:]
+        print(list_players_sorted)
 
-        return players_already_faced(upper_half, bottom_half, self.dict_opponent)
+        return players_already_faced(list_players_sorted, self.dict_opponent)
 
 
-def players_already_faced(list_1, list_2, comparison_dict):
-    for index, player in enumerate(list_1):
-        player2 = list_2[index]
+def players_already_faced(sorted_players, comparison_dict):
+    list_1, list_2 = [], []
+    for player in sorted_players:
+        if player in list_1 or player in list_2:
+            continue
 
-        while comparison_dict[player.name] == player2.name:
-            tmp_index = index + 1
-            if tmp_index < len(list_2):
-                player2 = list_2[tmp_index]
-            else:
-                # add the next available player
-                list_2.insert(index, list_2[tmp_index])
-                # remove it from its original place
-                list_2.pop(tmp_index + 1)
+        # list of the remaining adversaire sorted
+        def available(adv, player):
+            test_1 = adv.name not in comparison_dict[player.name]
+            test_2 = adv not in list_1 + list_2
+            test_3 = adv != player
+            return test_1 and test_2 and test_3
+        player_available = [p for p in sorted_players if available(p, player)]
+
+        # 1st player go to 1st list
+        list_1.append(player)
+
+        # adversaire go to the 2nd list
+        first_available_player = player_available[0]
+        list_2.append(first_available_player)
 
     return zip(list_1, list_2)
 

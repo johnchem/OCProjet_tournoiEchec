@@ -1,23 +1,17 @@
 # importation des modules
-import os
 import pathlib
 import copy
 from tinydb import TinyDB
 
 # importation des modeles
 from chess_tournament.models.player import Player
-from chess_tournament.models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
-from chess_tournament.models.property import Property
 from chess_tournament.models.date_property import DateProperty
-from chess_tournament.models.multiple_choices_property import MultipleChoicesProperty
-from chess_tournament.models.gender_property import GenderProperty
 
 # importation du controlleur
 from chess_tournament.controller.db_manager import (
     save_player_data,
     save_tournament_data,
     load_tournament_data,
-    load_player_data,
 )
 from chess_tournament.controller.deserializer import (
     deserialize_tournament,
@@ -25,7 +19,7 @@ from chess_tournament.controller.deserializer import (
 )
 
 # import data for testing
-from chess_tournament.unittest.test_data import *
+import chess_tournament.unittest.test_data as test_data
 
 
 def test_save_tournament(tournament, db_file):
@@ -142,11 +136,11 @@ if __name__ == "__main__":
     # test_save_tournament(create_dummy_tournament(), DB_ADDRESS)
     # test_read_tournament_data(DB_ADDRESS)
     print("\n _____test_save_tournament______")
-    test_save_tournament(tournament_2, DB_ADDRESS)
+    test_save_tournament(test_data.tournament_2, DB_ADDRESS)
 
     print("\n _____test_update_player______")
     test_update_player(
-        player_1,
+        test_data.player_1,
         DB_ADDRESS,
         [("name", "roger"), ("forname", "paul"), ("rank", "12")],
         "test update",
@@ -156,5 +150,5 @@ if __name__ == "__main__":
     date = DateProperty("24/03/2022")
     text = "orem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit ultrices scelerisque."
     test_update_tournament(
-        tournament_1, [("name", "tutu"), ("date", date), ("description", text)]
+        test_data.tournament_1, [("name", "tutu"), ("date", date), ("description", text)]
     )

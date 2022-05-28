@@ -24,7 +24,6 @@ def test_list_tournament(DB_ADDRESS):
 def tournament_historic(tournament_list):
     output_list = []
     for tournament in tournament_list:
-        name = tournament["name"]
         output_list.append(f'{tournament["name"]}')
     return output_list
 

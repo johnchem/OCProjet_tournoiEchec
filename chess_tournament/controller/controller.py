@@ -18,7 +18,6 @@ from chess_tournament.controller.deserializer import (
     deserialize_player,
 )
 
-
 from datetime import datetime as dt
 from string import ascii_lowercase, ascii_uppercase
 import pathlib

@@ -5,16 +5,20 @@ import copy
 class Round:
     """
     _________________________
-    nom : str
+    name : str
     begin_date_time : datetime
     end_date_time : datetime
     match : [match]
     is_done = bool
-
     -------------------------
-    .addMatch(match) -> None
-    .end_round() -> None
-    .get_match_list() -> none
+    .__init__(name: str) -> Match
+    .add_match(match)
+    .end_round()
+    .get_players_opponent()
+    .get_players_score()
+    .serialize()
+    .__repr__()
+    .__eq__(other)
     """
 
     def __init__(self, name: str):
@@ -30,12 +34,6 @@ class Round:
     def end_round(self):
         self.end_date_time = datetime.now()
         self.is_done = True
-
-    def get_match_list(self):
-        pass
-
-    def set_result(self):
-        pass
 
     def get_players_opponent(self):
         list_opponent = []
@@ -96,8 +94,8 @@ class Round:
 
         list_compare = [
             self.name != other.name,
-            self.begin_date_time != other.begin_date_time,
-            self.end_date_time != other.end_date_time,
+            self.begin_date_time.strftime("%d/%m/%Y %X") != other.begin_date_time.strftime("%d/%m/%Y %X"),
+            self.end_date_time.strftime("%d/%m/%Y %X") != other.end_date_time.strftime("%d/%m/%Y %X"),
             *match_compare,
         ]
         # return false if any difference exist between self and other

@@ -1,5 +1,4 @@
-from chess_tournament.models.tournament import Tournament
-from player import Player
+from chess_tournament.models.player import Player
 
 
 def test_joueur():
@@ -14,7 +13,7 @@ def test_joueur():
         ("Burroughs", "Eric", "03/09/1967", "M"),
     ]
     for nom, prenom, date_de_naissance, sexe in nvxJoueur:
-        test = joueur.joueur(nom, prenom, date_de_naissance, sexe)
+        test = Player(nom, prenom, date_de_naissance, sexe)
         print(test)
     return None
 

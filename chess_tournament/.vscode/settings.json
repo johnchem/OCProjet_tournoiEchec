@@ -9,5 +9,8 @@
         "__pycache__"
     ],
     "python.linting.maxNumberOfProblems": 1000,
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}\\..",
+    ]
 }

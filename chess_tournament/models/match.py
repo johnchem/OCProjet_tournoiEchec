@@ -4,8 +4,21 @@ import copy
 
 class Match:
     """
+    player_1 : {"player": Player,
+                "score" : str,
+                "color" : str}
+    player_2 : {"player": Player,
+                "score" : str,
+                "color" : str}
     _________________________
-    score : ([joueur, int], [joueur, int])
+    .__init__(player_1, player_2)
+    .set_color()
+    .set_result()
+    .result()
+    .serialize()
+    .__str__()
+    .__repr__()
+    .__eq__(other)
     """
 
     def __init__(self, player_1, player_2):

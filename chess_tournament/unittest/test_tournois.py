@@ -1,13 +1,13 @@
 import copy
-import random
+from datetime import datetime
 
 from chess_tournament.models.tournament import TournamentSwiss, TIME_CONTROLE_STANDARD
-
+from chess_tournament.models.round import Round
 from chess_tournament.models.property import Property
 from chess_tournament.models.date_property import DateProperty
 from chess_tournament.models.multiple_choices_property import MultipleChoicesProperty
 
-from chess_tournament.unittest.test_data import *
+import chess_tournament.unittest.test_data as test_data
 
 
 def test_create_tournament():
@@ -50,8 +50,8 @@ def test_create_tournament():
 
 def test_add_player():
     # get testing data
-    tournament == copy.deepcopy(tournament_1)
-    player == copy.deepcopy(player_1)
+    tournament = copy.deepcopy(test_data.tournament_1)
+    player = copy.deepcopy(test_data.player_1)
 
     # initialise and control the initial setup
     tournament.players = []
@@ -65,8 +65,8 @@ def test_add_player():
 
 def test_if_tournament_is_full():
     # get testing data
-    tournament == copy.deepcopy(tournament_1)
-    player == copy.deepcopy(player_1)
+    tournament = copy.deepcopy(test_data.tournament_1)
+    player = copy.deepcopy(test_data.player_1)
 
     # initialise and control the initial setup
     assert len(tournament.players) == 8
@@ -79,17 +79,19 @@ def test_if_tournament_is_full():
 
 def test_start_new_round():
     # get testing data
-    tournament == copy.deepcopy(tournament_1)
+    tournament = copy.deepcopy(test_data.tournament_1)
 
     # initialize data
     tournament.current_round = 1
     tournament.rounds = []
     name_round = f"round{tournament.current_round}"
     round = Round(name_round)
+    tournament.add_round(round)
 
     # testing
     tournament.start_new_tournament(round)
-    assert tournament[-1].name == "round1"
+    assert name_round == "round1"
+    assert tournament[-1].name == name_round
     assert (datetime.now - tournament.begin_date_time).seconds < 10
     assert tournament.end_date_time is None
     assert len(tournament.match) == 0
@@ -98,13 +100,11 @@ def test_start_new_round():
 
 def test_generation_pairs_players_round_1():
     # get testing data
-    tournament = copy.deepcopy(tournament_3)
+    tournament = copy.deepcopy(test_data.tournament_3)
 
     # initialize data
     tournament.current_round = 1
     tournament.rounds = []
-    name_round = f"round{tournament.current_round}"
-    round = Round(name_round)
 
     # testing
     player_list = tournament.player_group_generation()
@@ -114,7 +114,7 @@ def test_generation_pairs_players_round_1():
 
 def test_get_players_opponent():
     # get testing data
-    tournament = copy.deepcopy(tournament_1)
+    tournament = copy.deepcopy(test_data.tournament_1)
 
     # testing
     tournament.get_players_opponent()
@@ -124,12 +124,11 @@ def test_get_players_opponent():
 
 def test_end_a_round():
     # get testing data
-    tournament == copy.deepcopy(tournament_1)
+    tournament = copy.deepcopy(test_data.tournament_1)
 
     # initialize data
     tournament.current_round = 1
     tournament.rounds = []
-    name_round = f"round{tournament.current_round}"
     round = Round  # (name_round)
     tournament.start_new_tournament(round)
 
@@ -141,7 +140,7 @@ def test_end_a_round():
 
 def test_set_result_round():
     # get testing data
-    tournament == copy.deepcopy(tournament_1)
+    tournament = copy.deepcopy(test_data.tournament_1)
 
     # initialize data
     tournament.current_round = 1
@@ -157,7 +156,6 @@ def test_set_result_round():
 
 
 def test_add_round():
-    # get
     pass
 
 
@@ -168,56 +166,9 @@ def test_create_round(tournament, round_nb):
         print(match)
 
 
-def test_match(liste_joueur):
-    liste_match = []
-    liste_score = [0, 1, 0.5]
-    for i in range(1, 9):
-        (joueur1, joueur2) = random.choices(liste_joueur, k=2)
-        (score1, score2) = random.choices(liste_score, k=2)
-        liste_match.append(tournois.match(joueur1, score1, joueur2, score2))
-    [print(x) for x in liste_match]
+def test_match():
     pass
 
 
 if __name__ == "__main__":
-    test_get_players_opponent()
-
-"""
-    nvxJoueur = [("Tardiff", "Stephanie", "26/09/1967", "F", 15),
-                ("Connie", "Lam", "10/06/1986", "F", 12),
-                ("Cleveland","Noon","03/11/1938","M", 5),
-                ("Disalvo","Aaron","13/09/1967","M", 65),
-                ("Digiacomo","David","13/09/1944","M", 41),
-                ("Adela","Scanlon","10/01/1951","F", 11),
-                ("Galbraith","Rosemary","03/11/1970","F", 8),
-                ("Burroughs","Eric","03/09/1967","M",3)]
-
-    name = Property()
-    forname = Property()
-    birth_date = DateProperty()
-    gender = GenderProperty()
-    rank = Property()
-
-    liste_joueur = []
-    for nom, prenom, date_de_naissance, sexe, classement in nvxJoueur:
-
-        name.set_value(nom)
-        forname.set_value(prenom)
-        birth_date.set_value(date_de_naissance)
-        gender.set_value(sexe)
-        rank.set_value(classement)
-
-        liste_joueur.append(
-            Player(name, forname, birth_date, gender, rank)
-        )
-
-    list_players_sorted = sorted(liste_joueur, key=lambda x : x.rank)
-
-    for player in liste_joueur:
-        print(f"joueur : {player.name} classement : {player.rank}")
-
-    print("\n")
-
-    for player in list_players_sorted:
-        print(f"joueur : {player.name} classement : {player.rank}")
-"""
+    pass
