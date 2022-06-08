@@ -21,6 +21,7 @@ class Tournament:
     dict_opponent = {}
     dict_score = {}
     id = int
+    
     """
 
     def __init__(

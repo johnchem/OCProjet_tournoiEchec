@@ -13,7 +13,7 @@ def save_player_data(player, db_file):
         if player["id"] == "":
             filter = Query()
             id_number = players_table.upsert(player, filter.name == player["name"])
-            return True, id_number
+            return True, id_number[0]
         else:
             players_table.update(player, doc_ids=[int(player["id"])])
         return True, player["id"]
@@ -40,7 +40,7 @@ def save_tournament_data(tournament, db_file):
         # sauvegarde du tournois
         if tournament["id"] == "":
             filter = Query()
-            id_number = tournament_table.upsert(tournament, filter.name == tournament["name"])
+            id_number = tournament_table.upsert(tournament, filter.name == tournament["name"])[0]
             tournament["id"] = id_number
         else:
             id_number = tournament["id"]
